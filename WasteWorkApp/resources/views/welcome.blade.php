@@ -25,6 +25,7 @@
                     <li><a href="#news">Berita</a></li>
                     <li><a href="#testimonials">Ulasan</a></li>
                     <li><a href="#contact">Kontak</a></li>
+                    <li><a href="/login">Login</a></li>
                 </ul>
             </nav>
         </div>
