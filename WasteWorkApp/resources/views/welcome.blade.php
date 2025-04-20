@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoRecycle - Solusi Daur Ulang untuk Masa Depan Lebih Hijau</title>
+    <title>Trash 2 Move- Solusi Daur Ulang untuk Masa Depan Lebih Hijau</title>
 
 </head>
 <body>
