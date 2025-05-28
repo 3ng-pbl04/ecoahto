@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- Header & Navigation -->
-    <header>
+      <header>
         <div class="container header-container">
             <div class="logo">
                 <img src="images/LOGO.png" alt="EcoRecycle Logo">
@@ -25,7 +25,7 @@
                     <li><a href="#news">Berita</a></li>
                     <li><a href="#testimonials">Ulasan</a></li>
                     <li><a href="#contact">Kontak</a></li>
-                    <li><a href="#login">Login</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
                 </ul>
             </nav>
         </div>
