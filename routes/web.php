@@ -13,5 +13,7 @@ Route::resource('pengaduan', PengaduanController::class);
 Route::resource('volunteer', VolunteerController::class);
 
 
-
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
 
