@@ -214,11 +214,16 @@
                 </div>
             </div>
         </div>
-        
+        <div class="mt-4 w-64 mx-auto text-center">
+            <a href="/" class="block bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-xl text-center transition-colors duration-200">
+                Kembali ke Dashboard
+            </a>
+        </div>
+
         <!-- Footer -->
         <div class="text-center mt-12">
             <p class="text-white text-opacity-70 text-sm">
-                © 2024 Premium Dashboard System. Secure & Reliable.
+                © 2025 WasteWork - All rights reserved.
             </p>
         </div>
     </div>

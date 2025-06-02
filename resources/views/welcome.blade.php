@@ -45,6 +45,7 @@
                     <button class="btn btn-info" onclick="openModal('location-modal')">
                       Jadi Volunteer
                     </button>
+                </a>
             </div>
         </div>
     </section>
