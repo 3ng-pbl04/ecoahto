@@ -41,9 +41,10 @@
                     <button class="btn btn-primary" onclick="openModal('location-modal')">
                       Ajukan Lokasi Aksi
                     </button>
-                  </a>
-                  
-                <button class="btn btn-secondary" onclick="openModal('volunteer-modal')">Jadi Volunteer</button>
+                  <a href="/volunteer/create">
+                    <button class="btn btn-info" onclick="openModal('location-modal')">
+                      Jadi Volunteer
+                    </button>
             </div>
         </div>
     </section>
