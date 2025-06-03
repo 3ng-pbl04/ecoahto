@@ -23,6 +23,7 @@ class ProdukResource extends Resource
     protected static ?string $navigationLabel = 'Produk';
     protected static ?string $pluralModelLabel = 'Produk';
 
+
     public static function form(Form $form): Form
     {
         return $form

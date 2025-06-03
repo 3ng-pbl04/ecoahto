@@ -17,6 +17,7 @@ class PostinganResource extends Resource
     protected static ?string $navigationLabel = 'Postingan';
     protected static ?string $pluralModelLabel = 'Postingan';
 
+
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form

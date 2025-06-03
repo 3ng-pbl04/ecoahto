@@ -20,6 +20,8 @@ class VolunteerResource extends Resource
     protected static ?string $navigationLabel = 'Volunteer';
     protected static ?string $pluralModelLabel = 'Volunteer';
     protected static ?string $model = Volunteer::class;
+    
+
 
     public static function form(Form $form): Form
     {

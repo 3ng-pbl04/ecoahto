@@ -19,6 +19,7 @@ class UlasanResource extends Resource
     protected static ?string $pluralModelLabel = 'Ulasan';
     protected static ?string $navigationGroup = 'Konten';
 
+
     public static function form(Form $form): Form
     {
         return $form
