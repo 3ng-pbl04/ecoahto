@@ -17,6 +17,7 @@ use App\Filament\Resources\Trash2Move\PageSettingResource\Pages\EditPageSetting;
 use Filament\Tables\Table;
 
 
+
 class PageSettingResource extends Resource
 {
     protected static ?string $model = PageSetting::class;
