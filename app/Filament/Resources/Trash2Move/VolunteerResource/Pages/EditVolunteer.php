@@ -16,4 +16,9 @@ class EditVolunteer extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+    protected function getRedirectUrl(): string
+    {
+        // Langsung redirect ke index setelah create
+        return $this->getResource()::getUrl('index');
+    }
 }

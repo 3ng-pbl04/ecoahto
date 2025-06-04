@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateVolunteer extends CreateRecord
 {
     protected static string $resource = VolunteerResource::class;
+    protected function getRedirectUrl(): string
+    {
+        // Langsung redirect ke index setelah create
+        return $this->getResource()::getUrl('index');
+    }
 }

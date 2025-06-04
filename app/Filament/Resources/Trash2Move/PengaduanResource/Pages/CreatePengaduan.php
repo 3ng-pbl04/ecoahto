@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreatePengaduan extends CreateRecord
 {
     protected static string $resource = PengaduanResource::class;
+    protected function getRedirectUrl(): string
+    {
+        // Langsung redirect ke index setelah create
+        return $this->getResource()::getUrl('index');
+    }
 }

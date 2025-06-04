@@ -5,8 +5,8 @@ use App\Filament\Resources\Trash2Move\AnggotaResource\Pages;
 use App\Models\Anggota;
 use Filament\Forms;
 use Filament\Tables;
+use Filament\Tables\Actions\CreateAction;
 use Filament\Resources\Resource;
-use Illuminate\Database\Eloquent\Builder;
 
 class AnggotaResource extends Resource
 {
@@ -18,26 +18,25 @@ class AnggotaResource extends Resource
 
     public static function form(Forms\Form $form): Forms\Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('nama')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->required()
-                    ->email()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('no_telp')
-                    ->label('No. Telepon')
-                    ->required()
-                    ->maxLength(20),
-                Forms\Components\Textarea::make('alamat')
-                    ->required()
-                    ->rows(3),
-                Forms\Components\DatePicker::make('tanggal_bergabung')
-                    ->required()
-                    ->label('Tanggal Bergabung'),
-            ]);
+        return $form->schema([
+            Forms\Components\TextInput::make('nama')
+                ->required()
+                ->maxLength(255),
+            Forms\Components\TextInput::make('email')
+                ->required()
+                ->email()
+                ->maxLength(255),
+            Forms\Components\TextInput::make('no_telp')
+                ->label('No. Telepon')
+                ->required()
+                ->maxLength(20),
+            Forms\Components\DatePicker::make('tanggal_bergabung')
+                ->required()
+                ->label('Tanggal Bergabung'),
+            Forms\Components\Textarea::make('alamat')
+                ->required()
+                ->rows(3),
+        ]);
     }
 
     public static function table(Tables\Table $table): Tables\Table
@@ -64,6 +63,16 @@ class AnggotaResource extends Resource
             'index' => Pages\ListAnggotas::route('/'),
             'create' => Pages\CreateAnggota::route('/create'),
             'edit' => Pages\EditAnggota::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getActions(): array
+    {
+        return [
+            CreateAction::make()
+                ->afterCreate(function () {
+                    redirect(static::getUrl('index'))->send();
+                }),
         ];
     }
 }

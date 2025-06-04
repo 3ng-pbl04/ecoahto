@@ -25,6 +25,7 @@ class PostinganResource extends Resource
                     ->required()
                     ->maxLength(255),
 
+
                 Forms\Components\FileUpload::make('gambar')
                     ->image()
                     ->directory('postingans') // disimpan di storage/app/public/postingans
