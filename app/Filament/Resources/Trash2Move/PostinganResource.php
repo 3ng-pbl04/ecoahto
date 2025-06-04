@@ -26,10 +26,7 @@ class PostinganResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-             
-
                
-
                 Forms\Components\TextInput::make('link_produk')
                     ->label('Link Produk')
                     ->url()

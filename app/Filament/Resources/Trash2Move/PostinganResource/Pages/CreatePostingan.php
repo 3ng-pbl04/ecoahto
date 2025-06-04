@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreatePostingan extends CreateRecord
 {
     protected static string $resource = PostinganResource::class;
+    protected function getRedirectUrl(): string
+    {
+        // Langsung redirect ke index setelah create
+        return $this->getResource()::getUrl('index');
+    }
 }

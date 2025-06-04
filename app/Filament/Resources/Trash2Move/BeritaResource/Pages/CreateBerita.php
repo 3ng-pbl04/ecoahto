@@ -17,4 +17,10 @@ class CreateBerita extends CreateRecord
     $data['admin_id'] = Auth::id(); // otomatis isi dari admin yang login
     return $data;
 }
+
+ protected function getRedirectUrl(): string
+    {
+        // Langsung redirect ke index setelah create
+        return $this->getResource()::getUrl('index');
+    }
 }

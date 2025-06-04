@@ -13,4 +13,5 @@ class EditPageSetting extends EditRecord
     {
         return []; // Hilangkan tombol delete
     }
+    
 }
