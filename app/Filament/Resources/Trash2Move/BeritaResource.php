@@ -24,11 +24,12 @@ class BeritaResource extends Resource
                 Forms\Components\TextInput::make('judul')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('deskripsi')
-                    ->required()
-                    ->rows(6),
+               
                 Forms\Components\DatePicker::make('tanggal')
                     ->required(),
+                 Forms\Components\Textarea::make('deskripsi')
+                    ->required()
+                    ->rows(6),
                 Forms\Components\FileUpload::make('gambar')
                     ->image()
                     ->directory('berita')

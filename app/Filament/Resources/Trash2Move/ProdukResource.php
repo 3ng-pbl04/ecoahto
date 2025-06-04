@@ -32,9 +32,7 @@ class ProdukResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                Forms\Components\Textarea::make('deskripsi')
-                    ->required()
-                    ->rows(4),
+               
 
                 Forms\Components\TextInput::make('jenis_produk')
                     ->required()
@@ -45,10 +43,16 @@ class ProdukResource extends Resource
                     ->numeric()
                     ->prefix('Rp'),
 
+                
+
                 Forms\Components\TextInput::make('stok')
                     ->required()
                     ->numeric()
                     ->minValue(0),
+
+                 Forms\Components\Textarea::make('deskripsi')
+                    ->required()
+                    ->rows(4),
             ]);
     }
 

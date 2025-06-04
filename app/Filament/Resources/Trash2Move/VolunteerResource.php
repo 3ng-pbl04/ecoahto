@@ -28,8 +28,9 @@ class VolunteerResource extends Resource
         return $form->schema([
             Forms\Components\TextInput::make('nama')->required(),
             Forms\Components\TextInput::make('no_telp')->required(),
-            Forms\Components\Textarea::make('alamat')->required(),
+            
             Forms\Components\TextInput::make('status_kesehatan'),
+            Forms\Components\Textarea::make('alamat')->required(),
         ]);
     }
 
