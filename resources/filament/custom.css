@@ -1,0 +1,4 @@
+/* Center tab nav di dalam form */
+.fi-tabs-header {
+    justify-content: center !important;
+}

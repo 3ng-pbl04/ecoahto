@@ -15,6 +15,12 @@ use Filament\Resources\Resource;
 use Filament\Forms\Form;
 use App\Filament\Resources\Trash2Move\PageSettingResource\Pages\EditPageSetting;
 use Filament\Tables\Table;
+use App\Filament\Resources\Trash2Move\PageSettingResource\Pages\ListPageSettings;
+use App\Filament\Resources\Trash2Move\PageSettingResource\Pages\CreatePageSetting;
+
+
+
+
 
 
 
@@ -30,44 +36,63 @@ class PageSettingResource extends Resource
 
 public static function form(Form $form): Form
 {
-    return $form
-        ->schema([
-            Tabs::make('Halaman')
-                ->tabs([
-                  Tab::make('Hero')
+   return $form
+    ->schema([
+        Tabs::make('Halaman')
+            ->extraAttributes(['class' => 'w-full max-w-4xl mx-auto']) // Ini bikin form tetap di tengah & field lebar
+            ->tabs([
+                Tab::make('Hero')
                     ->schema([
-                        TextInput::make('hero_title'),
-                        Textarea::make('hero_description'),
+                        TextInput::make('hero_title')
+                            ->columnSpan('full'),
+                        Textarea::make('hero_description')
+                            ->columnSpan('full'),
                         FileUpload::make('hero_image')
                             ->image()
-                            ->directory('page-settings/hero')
-                            ->nullable(),
-                    ]),
+                            ->disk('public') // wajib: menyimpan di storage/app/public
+                            ->directory('page-settings/hero') // ini akan otomatis buat folder jika belum ada
+                            ->visibility('public') // agar bisa diakses dari browser
+                            ->nullable()
+                            ->columnSpan('full'),
+                    ])
+                    ->columns(1),
 
                 Tab::make('Tentang Kami')
                     ->schema([
-                        TextInput::make('about_title'),
-                        RichEditor::make('about_content'),
+                        TextInput::make('about_title')
+                            ->columnSpan('full'),
+                        RichEditor::make('about_content')
+                            ->columnSpan('full'),
                         FileUpload::make('about_image')
                             ->image()
                             ->directory('page-settings/about')
-                            ->nullable(),
-                    ]),
+                            ->nullable()
+                            ->columnSpan('full'),
+                    ])
+                    ->columns(1),
 
-                    Tab::make('Footer')
-                        ->schema([
-                            TextInput::make('footer_text'),
-                            TextInput::make('footer_links'),
-                        ]),
-                    Tab::make('Ajakan')
-                        ->schema([
-                            TextInput::make('call_to_action_text'),
-                            TextInput::make('call_to_action_link')->url(),
-                        ]),
-                    // Tambah tab lain sesuai kebutuhan
-                ]),
+                Tab::make('Footer')
+                    ->schema([
+                        TextInput::make('footer_text')
+                            ->columnSpan('full'),
+                        TextInput::make('footer_links')
+                            ->columnSpan('full'),
+                    ])
+                    ->columns(1),
 
-        ]);
+                Tab::make('Ajakan')
+                    ->schema([
+                        TextInput::make('call_to_action_text')
+                            ->columnSpan('full'),
+                        TextInput::make('call_to_action_link')
+                            ->url()
+                            ->columnSpan('full'),
+                    ])
+                    ->columns(1),
+            ])
+            ->columnSpan('full')
+    ])
+    ->columns(1);
 }
 
     public static function table(Table $table): Table
