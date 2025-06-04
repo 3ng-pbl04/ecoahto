@@ -105,7 +105,6 @@ public static function form(Form $form): Form
 {
     return [
         'index' => Pages\ListPageSettings::route('/'),
-        'create' => Pages\CreatePageSetting::route('/create'),
         'edit' => Pages\EditPageSetting::route('/{record}/edit'),
     ];
 }
