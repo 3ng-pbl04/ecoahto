@@ -23,6 +23,7 @@ class PengaduanResource extends Resource
     protected static ?string $navigationLabel = 'Pengaduan';
     protected static ?string $pluralModelLabel = 'Pengaduan';
 
+
     public static function form(Form $form): Form
 
     {

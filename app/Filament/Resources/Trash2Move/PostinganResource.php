@@ -17,6 +17,7 @@ class PostinganResource extends Resource
     protected static ?string $navigationLabel = 'Postingan';
     protected static ?string $pluralModelLabel = 'Postingan';
 
+
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form
@@ -25,20 +26,19 @@ class PostinganResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-
-                Forms\Components\FileUpload::make('gambar')
-                    ->image()
-                    ->directory('postingans') // disimpan di storage/app/public/postingans
-                    ->required(),
-
-                Forms\Components\Textarea::make('deskripsi')
-                    ->required()
-                    ->rows(6),
-
                 Forms\Components\TextInput::make('link_produk')
                     ->label('Link Produk')
                     ->url()
                     ->maxLength(255),
+
+                 Forms\Components\Textarea::make('deskripsi')
+                    ->required()
+                    ->rows(6),
+
+                   Forms\Components\FileUpload::make('gambar')
+                    ->image()
+                    ->directory('postingans') // disimpan di storage/app/public/postingans
+                    ->required(),
                 
             ]);
     }
