@@ -14,8 +14,8 @@ return new class extends Migration
        Schema::create('ulasans', function (Blueprint $table) {
     $table->id();
     $table->string('nama');
-    $table->integer('rating')->check('rating >= 1 AND rating <= 5');
-    $table->text('deskripsi');
+    $table->string('peran');
+    $table->text('komentar');
     $table->timestamps();
 });
 

@@ -11,17 +11,17 @@ class Ulasan extends Model
 
     protected $fillable = [
         'nama',
-        'rating',
-        'deskripsi',
+        'peran',
+        'komentar' 
     ];
 
-    // Validasi rating jika dibutuhkan dalam model
-    public static function booted()
-    {
-        static::saving(function ($model) {
-            if ($model->rating < 1 || $model->rating > 5) {
-                throw new \InvalidArgumentException('Rating must be between 1 and 5.');
-            }
-        });
-    }
+    // Validasi peran jika dibutuhkan dalam model
+    // public static function booted()
+    // {
+    //     static::saving(function ($model) {
+    //         if ($model->peran < 1 || $model->peran > 5) {
+    //             throw new \InvalidArgumentException('Rating must be between 1 and 5.');
+    //         }
+    //     });
+    // }
 }
