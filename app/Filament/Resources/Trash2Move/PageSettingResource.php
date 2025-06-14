@@ -19,11 +19,6 @@ use App\Filament\Resources\Trash2Move\PageSettingResource\Pages\ListPageSettings
 use App\Filament\Resources\Trash2Move\PageSettingResource\Pages\CreatePageSetting;
 
 
-
-
-
-
-
 class PageSettingResource extends Resource
 {
     protected static ?string $model = PageSetting::class;

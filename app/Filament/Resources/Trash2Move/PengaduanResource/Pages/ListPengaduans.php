@@ -13,8 +13,8 @@ class ListPengaduans extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->label('+ Pengaduan'), // 👈 Ini dia custom label-nya
+           // Actions\CreateAction::make()
+              //  ->label('+ Pengaduan'), // 👈 Ini dia custom label-nya
         ];
     }
 }
