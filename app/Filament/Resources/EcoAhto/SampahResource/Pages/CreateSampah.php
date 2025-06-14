@@ -9,9 +9,4 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateSampah extends CreateRecord
 {
     protected static string $resource = SampahResource::class;
-     protected function getRedirectUrl(): string
-    {
-        // Langsung redirect ke index setelah create
-        return $this->getResource()::getUrl('index');
-    }
 }
