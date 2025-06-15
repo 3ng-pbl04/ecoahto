@@ -14,7 +14,8 @@ class ListPostingans extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label('+ Postingan'), // 👈 Ini dia custom label-nya
+                ->label('Tambah Data')
+                ->icon('heroicon-o-plus'),
         ];
     }
 }
