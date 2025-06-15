@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Filament\Resources\Trash2Move;
 
 use App\Filament\Resources\Trash2Move\PostinganResource\Pages;
@@ -17,29 +18,44 @@ class PostinganResource extends Resource
     protected static ?string $navigationLabel = 'Postingan';
     protected static ?string $pluralModelLabel = 'Postingan';
 
-
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('judul')
+                Forms\Components\TextArea::make('nama')
                     ->required()
+                    ->label('Nama Produk')
                     ->maxLength(255),
 
-                Forms\Components\TextInput::make('link_produk')
-                    ->label('Link Produk')
+                Forms\Components\Textarea::make('deskripsi')
+                    ->required()
+                    ->label('Deskripsi')
+                    ->rows(5),
+
+                Forms\Components\FileUpload::make('gambar')
+                    ->label('Gambar Produk')
+                    ->directory('postingans')
+                    ->disk('public')
+                    ->image()
+                    ->imagePreviewHeight('150')
+                    ->downloadable()
+                    ->openable()
+                    ->preserveFilenames()
+                    ->visibility('public'),
+
+
+                Forms\Components\TextInput::make('harga')
+                    ->label('Harga')
+                    ->maxLength(100),
+
+                Forms\Components\TextInput::make('rating')
+                    ->label('Rating')
+                    ->maxLength(10),
+
+                Forms\Components\TextInput::make('link')
+                    ->label('Link Beli')
                     ->url()
                     ->maxLength(255),
-
-                 Forms\Components\Textarea::make('deskripsi')
-                    ->required()
-                    ->rows(6),
-
-                   Forms\Components\FileUpload::make('gambar')
-                    ->image()
-                    ->directory('postingans') // disimpan di storage/app/public/postingans
-                    ->required(),
-                
             ]);
     }
 
@@ -47,11 +63,15 @@ class PostinganResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('judul')->sortable()->searchable(),
-                Tables\Columns\ImageColumn::make('gambar')->circular(),
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('nama')->sortable()->searchable(),
+                Tables\Columns\ImageColumn::make('gambar')->label('Gambar')->circular(),
+                Tables\Columns\TextColumn::make('harga')->sortable()->label('Harga'),
+                Tables\Columns\TextColumn::make('rating')->label('Rating'),
                 Tables\Columns\TextColumn::make('created_at')->label('Dibuat')->dateTime(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

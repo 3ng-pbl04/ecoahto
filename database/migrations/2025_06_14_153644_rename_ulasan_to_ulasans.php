@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('postingans', function (Blueprint $table) {
-    $table->id();
-    $table->string('judul');
-    $table->string('gambar');
-    $table->text('deskripsi');
-    $table->string('link_produk');
-    $table->timestamps();
-});
-
+        Schema::table('ulasans', function (Blueprint $table) {
+            Schema::rename('ulasan', 'ulasans');
+        });
     }
 
     /**
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('postingans');
+        Schema::table('ulasans', function (Blueprint $table) {
+            Schema::rename('ulasans', 'ulasan');
+        });
     }
 };

@@ -28,15 +28,9 @@ class UlasanResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                Forms\Components\Select::make('rating')
-                    ->options([
-                        1 => '★☆☆☆☆',
-                        2 => '★★☆☆☆',
-                        3 => '★★★☆☆',
-                        4 => '★★★★☆',
-                        5 => '★★★★★',
-                    ])
-                    ->required(),
+                Forms\Components\TextInput::make('peran')
+                    ->required()
+                    ->maxLength(255),
 
                 Forms\Components\Textarea::make('deskripsi')
                     ->required()
@@ -48,8 +42,9 @@ class UlasanResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('nama')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('rating')->sortable(),
+                Tables\Columns\TextColumn::make('peran')->sortable(),
                 Tables\Columns\TextColumn::make('deskripsi')->limit(50),
             ])
             ->filters([

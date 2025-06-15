@@ -47,14 +47,18 @@ class SampahResource extends Resource
                 Tables\Columns\TextColumn::make('berat')->suffix(' kg'),
                 Tables\Columns\TextColumn::make('tanggal_masuk')->date(),
                 Tables\Columns\TextColumn::make('sumber'),
-                Tables\Columns\BadgeColumn::make('status')->colors([
-                    'gray' => 'Masuk',
-                    'warning' => 'Disortir',
-                    'info' => 'Dicacah',
-                    'yellow' => 'Dikeringkan',
-                    'blue' => 'Dipilah',
-                    'success' => 'Selesai',
-                ]),
+                Tables\Columns\TextColumn::make('status')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'Masuk' => 'gray',
+                    'Disortir' => 'warning',
+                    'Dicacah' => 'info',
+                    'Dikeringkan' => 'yellow',
+                    'Dipilah' => 'blue',
+                    'Selesai' => 'success',
+                    default => 'secondary',
+    })
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

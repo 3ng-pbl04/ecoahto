@@ -15,26 +15,38 @@ class BeritaResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
     protected static ?string $navigationLabel = 'Berita';
     protected static ?string $pluralModelLabel = 'Berita';
-    
+
 
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('judul')
-                    ->required()
-                    ->maxLength(255),
-               
-                Forms\Components\DatePicker::make('tanggal')
-                    ->required(),
-                 Forms\Components\Textarea::make('deskripsi')
-                    ->required()
-                    ->rows(6),
-                Forms\Components\FileUpload::make('gambar')
-                    ->image()
-                    ->directory('berita')
-                    ->maxSize(2048),
-            ]);
+        ->schema([
+    Forms\Components\TextInput::make('judul')
+        ->required()
+        ->label('Judul Berita')
+        ->maxLength(255),
+
+    Forms\Components\DatePicker::make('tanggal')
+        ->required()
+        ->label('Tanggal Berita'),
+
+    Forms\Components\Textarea::make('deskripsi')
+        ->required()
+        ->label('Deskripsi')
+        ->rows(5),
+
+    Forms\Components\FileUpload::make('gambar')
+        ->label('Gambar Berita')
+        ->directory('berita')
+        ->disk('public')
+        ->image()
+        ->imagePreviewHeight('150')
+        ->downloadable()
+        ->openable()
+        ->preserveFilenames()
+        ->visibility('public'),
+        ]);
+
     }
 
     public static function table(Tables\Table $table): Tables\Table

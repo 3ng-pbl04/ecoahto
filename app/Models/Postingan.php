@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Postingan extends Model
 {
     protected $fillable = [
-        'judul',
-        'gambar',
-        'deskripsi',
-        'link_produk',
+    'nama', 'deskripsi', 'gambar', 'harga', 'rating', 'link'
     ];
 }

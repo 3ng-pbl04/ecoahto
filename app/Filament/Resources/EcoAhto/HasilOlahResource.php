@@ -16,7 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class HasilOlahResource extends Resource
 {
     protected static ?string $model = HasilOlah::class;
-     protected static ?string $navigationGroup = 'Manajemen';
+    protected static ?string $navigationGroup = 'Manajemen';
+    protected static ?string $navigationLabel = 'Hasil Olah';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -34,7 +35,7 @@ class HasilOlahResource extends Resource
         return $table
             ->columns([
 
-            Tables\Columns\TextColumn::make('id'),  
+            Tables\Columns\TextColumn::make('id'),
             Tables\Columns\TextColumn::make('nama'),
             Tables\Columns\TextColumn::make('bahan'),
             Tables\Columns\TextColumn::make('warna'),
