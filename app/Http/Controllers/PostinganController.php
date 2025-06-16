@@ -5,21 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Postingan;
 use App\Models\Berita;
-use App\Models\ulasan;
-
+use App\Models\Ulasan;
+use App\Models\PageSetting;
 
 class PostinganController extends Controller
 {
     // Menampilkan semua postingan ke halaman welcome.blade.php
-        public function index()
-        {
-            $postingans = Postingan::orderBy('id', 'asc')->take(6)->get();
-            $beritas = Berita::orderBy('id', 'desc')->take(3)->get(); // Atau semua berita jika ingin
-            $ulasans = Ulasan::latest()->take(5)->get();
+    public function index()
+    {
+        $postingans = Postingan::orderBy('id', 'asc')->take(6)->get();
+        $beritas = Berita::orderBy('id', 'desc')->take(3)->get();
+        $ulasans = Ulasan::latest()->take(5)->get();
+        $page_settings = PageSetting::first(); // ✅ tambahkan baris ini
 
-            return view('welcome', compact('postingans', 'beritas', 'ulasans'));
-        }
-
+        return view('welcome', compact('postingans', 'beritas', 'ulasans', 'page_settings'));
+    }
 
     // Menyimpan data postingan baru
     public function store(Request $request)

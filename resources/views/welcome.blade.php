@@ -21,8 +21,8 @@
       <header>
         <div class="container header-container">
             <div class="logo">
-                <img src="images/LOGO.png" alt="EcoRecycle Logo">
-                <h1>TRASH2MOVE</h1>
+            <img src="{{ asset('storage/' . $page_settings->company_logo) }}" alt="Hero Image">
+                <h1>{{ $page_settings->company_name ?? 'Judul Default' }}</h1>
             </div>
             <nav>
                 <ul>
@@ -39,23 +39,34 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <h2>Ubah Sampah Menjadi Solusi</h2>
-            <p>Misi kami adalah mendaur ulang limbah menjadi produk berkualitas tinggi yang tidak hanya ramah lingkungan tetapi juga fungsional dan estetis.</p>
-            <div class="cta-buttons">
-                <a href="/pengaduan/create">
-                    <button class="btn btn-primary" onclick="openModal('location-modal')">
-                      Ajukan Lokasi Aksi
-                    </button>
-                  <a href="/volunteer/create">
-                    <button class="btn btn-info" onclick="openModal('location-modal')">
-                      Jadi Volunteer
-                    </button>
-                </a>
-            </div>
+    <section id="home" class="hero"
+    style="background-image: url('{{ $page_settings->hero_image ? asset('storage/' . $page_settings->hero_image) : asset('images/sampah.jpg') }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 100px 0;
+    color: white;
+    text-align: center;
+    ">
+    <div class="container">
+        <h2>{{ $page_settings->hero_title ?? 'Judul Default' }}</h2>
+        <p>{{ $page_settings->hero_description ?? 'Deskripsi Default' }}</p>
+
+        <div class="cta-buttons mt-4">
+            <a href="/pengaduan/create">
+                <button class="btn btn-primary" onclick="openModal('location-modal')">
+                    Ajukan Lokasi Aksi
+                </button>
+            </a>
+            <a href="/volunteer/create">
+                <button class="btn btn-info" onclick="openModal('location-modal')">
+                    Jadi Volunteer
+                </button>
+            </a>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Stats Section -->
     <section class="stats">
@@ -81,33 +92,35 @@
 
     <!-- Company Profile Section -->
     <section id="company" class="company-profile">
-        <div class="container">
-            <div class="section-title">
-                <h2>Tentang Kami</h2>
-            </div>
+    <div class="container">
+        <div class="section-title">
+            <h2>{{ $page_settings->about_title ?? 'Tentang Kami' }}</h2>
+        </div>
 
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="images/team.jpg" alt="Tim EcoRecycle" style="width: 100%; border-radius: 10px;">
-                </div>
-                <div class="about-content">
-                    <h3>Visi</h3>
-                    <p>Menciptakan dunia yang lebih hijau dan berkelanjutan melalui inovasi dalam daur ulang.</p>
-                    <br>
-                    <h3>Misi</h3>
-                    <p>Mengubah limbah menjadi produk berkualitas tinggi yang ramah lingkungan, fungsional, dan estetis.</p>
-                    <br>
-                    <h3>Kenapa Kami?</h3>
-                    <ul>
-                        <li><strong>Keunikan:</strong> Produk kami dirancang dengan kreativitas dan inovasi yang tinggi.</li>
-                        <li><strong>Keberlanjutan:</strong> Kami berkomitmen untuk menjaga lingkungan dengan menggunakan bahan daur ulang.</li>
-                        <li><strong>Perawatan Rendah:</strong> Produk kami mudah dirawat dan tahan lama.</li>
-                        <li><strong>Tahan Cuaca:</strong> Dirancang untuk bertahan dalam berbagai kondisi cuaca.</li>
-                    </ul>
-                </div>
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="{{ $page_settings->about_image ? asset('storage/' . $page_settings->about_image) : asset('images/team.jpg') }}"
+                     alt="Tentang Kami"
+                     style="width: 100%; border-radius: 10px;">
+            </div>
+            <div class="about-content">
+                <h3>Visi</h3>
+                {!! $page_settings->visi ?? '<p>Tidak ada visi yang tersedia.</p>' !!}
+
+                <br>
+
+                <h3>Misi</h3>
+                {!! $page_settings->misi ?? '<p>Tidak ada misi yang tersedia.</p>' !!}
+
+                <br>
+
+                <h3>Kenapa Kami?</h3>
+                {!! $page_settings->keunggulan ?? '<p>Tidak ada keunggulan yang tersedia.</p>' !!}
+            </div>
             </div>
         </div>
     </section>
+
 
     <!-- Product Section -->
     <section id="products" class="products">
@@ -252,15 +265,41 @@
                         <img src="images/LOGO.png" alt="EcoRecycle Logo">
                         <h2>Trash2Move</h2>
                     </div>
-                    <p>Trash2Move adalah perusahaan daur ulang inovatif yang mendedikasikan diri untuk mengubah limbah menjadi produk bernilai tinggi sambil membangun komunitas yang sadar lingkungan.</p>
-           <div class="social-links">
-    <a href="#" class="fb" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-    <a href="#" class="ig" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-    <a href="#" class="tw" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-    <a href="#" class="yt" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-</div>
+                    <p>
+                        {{ $page_settings->footer_text ?? 'Trash2Move adalah perusahaan daur ulang inovatif yang mendedikasikan diri untuk mengubah limbah menjadi produk bernilai tinggi sambil membangun komunitas yang sadar lingkungan.' }}
+                    </p>
 
+                <div class="social-links">
+                    @if ($page_settings->facebook_link)
+                        <a href="{{ $page_settings->facebook_link }}" class="fb" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    @endif
 
+                    @if ($page_settings->instagram_link)
+                        <a href="{{ $page_settings->instagram_link }}" class="ig" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    @endif
+
+                    @if ($page_settings->twitter_link)
+                        <a href="{{ $page_settings->twitter_link }}" class="tw" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    @endif
+
+                    @if ($page_settings->youtube_link)
+                        <a href="{{ $page_settings->youtube_link }}" class="yt" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    @endif
+
+                    @if ($page_settings->tiktok_link)
+                        <a href="{{ $page_settings->tiktok_link }}" class="tt" target="_blank" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    @endif
+                </div>
                 </div>
 
                 <div class="footer-links-section">

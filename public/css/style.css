@@ -81,15 +81,6 @@ nav ul li a:hover {
 }
 
 /* Hero Section */
-.hero {
-    background-image: url("../images/sampah.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 100px 0;
-    color: white;
-    text-align: center;
-}
 
 .hero h2 {
     font-size: 48px;
