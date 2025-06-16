@@ -9,15 +9,27 @@ return new class extends Migration {
     {
         Schema::create('page_settings', function (Blueprint $table) {
             $table->id();
+
+            //logo section
+            $table->string('company_logo');
             $table->string('company_name');
+
+            // Hero Section
             $table->string('hero_title');
             $table->text('hero_description');
+            $table->string('hero_image')->nullable(); //
+
+            // About Section
             $table->string('about_title');
-            $table->text('about_content');
+            $table->text('visi');
+            $table->text('misi');
+            $table->text('keunggulan');
+            $table->string('about_image')->nullable();
+
+            // Footer Section
             $table->string('footer_text');
             $table->string('footer_links');
-            $table->string('call_to_action_text');
-            $table->string('call_to_action_link');
+
             $table->timestamps();
         });
     }

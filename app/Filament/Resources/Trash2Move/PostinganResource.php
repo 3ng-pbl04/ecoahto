@@ -27,21 +27,8 @@ class PostinganResource extends Resource
                     ->label('Nama Produk')
                     ->maxLength(255),
 
-                Forms\Components\Textarea::make('deskripsi')
-                    ->required()
-                    ->label('Deskripsi')
-                    ->rows(5),
 
-                Forms\Components\FileUpload::make('gambar')
-                    ->label('Gambar Produk')
-                    ->directory('postingans')
-                    ->disk('public')
-                    ->image()
-                    ->imagePreviewHeight('150')
-                    ->downloadable()
-                    ->openable()
-                    ->preserveFilenames()
-                    ->visibility('public'),
+
 
 
                 Forms\Components\TextInput::make('harga')
@@ -56,6 +43,23 @@ class PostinganResource extends Resource
                     ->label('Link Beli')
                     ->url()
                     ->maxLength(255),
+
+                  Forms\Components\FileUpload::make('gambar')
+                    ->label('Gambar Produk')
+                    ->directory('postingans')
+                    ->disk('public')
+                    ->image()
+                    ->imagePreviewHeight('150')
+                    ->downloadable()
+                    ->openable()
+                    ->preserveFilenames()
+                    ->visibility('public'),
+
+                 Forms\Components\Textarea::make('deskripsi')
+                    ->required()
+                    ->label('Deskripsi')
+                    ->rows(5),
+
             ]);
     }
 
