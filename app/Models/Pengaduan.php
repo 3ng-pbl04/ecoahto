@@ -13,8 +13,8 @@ class Pengaduan extends Model
         'nama',
         'no_telp',
         'alamat',
-        'foto',
         'keterangan',
+        'foto',
         'titik_koordinat',
         'status',
     ];

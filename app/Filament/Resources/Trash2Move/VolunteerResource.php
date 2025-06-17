@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Trash2Move;
 
 use App\Filament\Resources\Trash2Move\VolunteerResource\Pages;
-use App\Filament\Resources\Trash2Move\VolunteerResource\RelationManagers;
 use App\Models\Volunteer;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,7 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class VolunteerResource extends Resource
 {
@@ -20,15 +18,12 @@ class VolunteerResource extends Resource
     protected static ?string $navigationLabel = 'Volunteer';
     protected static ?string $pluralModelLabel = 'Volunteer';
     protected static ?string $model = Volunteer::class;
-    
-
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\TextInput::make('nama')->required(),
             Forms\Components\TextInput::make('no_telp')->required(),
-            
             Forms\Components\TextInput::make('status_kesehatan'),
             Forms\Components\Textarea::make('alamat')->required(),
         ]);
@@ -42,8 +37,15 @@ class VolunteerResource extends Resource
                 Tables\Columns\TextColumn::make('no_telp')->searchable(),
                 Tables\Columns\TextColumn::make('alamat')->searchable(),
                 Tables\Columns\TextColumn::make('status_kesehatan')->searchable(),
+            ])
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
-            
     }
 
     public static function getPages(): array

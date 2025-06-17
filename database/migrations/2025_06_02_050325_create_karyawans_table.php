@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('ulasans', function (Blueprint $table) {
-    $table->id();
-    $table->string('nama');
-    $table->integer('rating')->check('rating >= 1 AND rating <= 5');
-    $table->text('deskripsi');
-    $table->timestamps();
-});
-
+        Schema::create('karyawans', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('email');
+            $table->string('notelp', '12');
+            $table->string('alamat');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ulasans');
+        Schema::dropIfExists('karyawans');
     }
 };

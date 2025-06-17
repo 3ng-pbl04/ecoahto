@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengaduan;
+use Illuminate\Support\Facades\Storage;
 
 class PengaduanController extends Controller
 {
-
     public function create()
-{
-    return view('pengaduan.create');
-}
+    {
+        return view('pengaduan.create');
+    }
 
     public function store(Request $request)
     {
@@ -25,16 +25,18 @@ class PengaduanController extends Controller
             'longitude' => 'nullable|numeric',
         ]);
 
+        // Menyimpan file foto ke storage/app/public/pengaduan_foto
         if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $fotoName = time() . '_' . $foto->getClientOriginalName();
-            $foto->move(public_path('foto_pengaduan'), $fotoName);
-            $validatedData['foto'] = 'foto_pengaduan/' . $fotoName;
+            $validatedData['foto'] = $request->file('foto')->store('pengaduan_foto', 'public');
+        }
+
+        // Menyimpan titik koordinat jika tersedia
+        if ($request->filled('latitude') && $request->filled('longitude')) {
+            $validatedData['titik_koordinat'] = $request->latitude . ',' . $request->longitude;
         }
 
         Pengaduan::create($validatedData);
 
-        // Arahkan kembali ke halaman utama
         return redirect('/')->with('success', 'Pengaduan berhasil dikirim!');
     }
 }
