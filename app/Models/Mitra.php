@@ -16,5 +16,6 @@ class Mitra extends Model
         'email',
         'alamat',
         'status',
+        'logo_mitra',
     ];
 }

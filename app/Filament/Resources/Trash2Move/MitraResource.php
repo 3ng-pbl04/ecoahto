@@ -52,6 +52,14 @@ class MitraResource extends Resource
                     'tidak aktif' => 'Tidak Aktif',
                 ])
                 ->default('aktif'),
+
+            \Filament\Forms\Components\FileUpload::make('logo_mitra')
+                ->label('Logo Mitra')
+                ->image()
+                ->directory('mitra-logos')
+                ->maxSize(2048)
+                ->imagePreviewHeight('100')
+                ->required(false),
         ]);
     }
 
@@ -77,6 +85,12 @@ class MitraResource extends Resource
                         'tidak aktif' => 'danger',
                         default => 'gray',
                     }),
+
+                TextColumn::make('logo_mitra')
+                    ->label('Logo Mitra')
+                    ->formatStateUsing(fn ($state) => $state ? '<img src="' . asset('storage/' . $state) . '" style="height:40px;max-width:80px;object-fit:contain;border-radius:4px;" />' : '-')
+                    ->html(),
+
 
             ])
             ->defaultSort('id', 'desc')
