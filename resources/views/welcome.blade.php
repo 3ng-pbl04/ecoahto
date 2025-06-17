@@ -249,7 +249,6 @@
             font-weight: 700;
             color: #111111;
             margin-bottom: 15px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
             letter-spacing: 1px;
             position: relative;
         }
@@ -294,7 +293,7 @@
         }
 
         .section-subtitle {
-            color: rgba(255,255,255,0.9);
+            color: rgba(46, 42, 42, 0.9);
             font-size: 16px;
             font-weight: 300;
             letter-spacing: 0.5px;
@@ -359,7 +358,7 @@
                 0 8px 32px rgba(0,0,0,0.1),
                 0 2px 8px rgba(0,0,0,0.05),
                 inset 0 1px 0 rgba(255,255,255,0.8);
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(21, 129, 30, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
