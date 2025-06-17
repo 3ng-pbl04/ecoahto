@@ -19,13 +19,19 @@ use App\Exports\SampahExport;
 use App\Exports\BahanBakuExport;
 use App\Exports\HasilOlahExport;
 
+use App\Models\Mitra;
+use App\Models\PageSetting;
+use App\Models\Postingan;
+use App\Models\Ulasan;
+
+
 
 
 
 Route::resource('pengaduan', PengaduanController::class);
 Route::resource('volunteer', VolunteerController::class);
 Route::post('/', [UlasanController::class, 'store'])->name('ulasan.store');
-Route::get('/', [PostinganController::class, 'index'])->name('welcome');
+// Route::get('/', [PostinganController::class, 'index'])->name('welcome');
 
 
 
@@ -40,6 +46,18 @@ Route::get('/export-sampah-pdf', function () {
     return $pdf->download('data-sampah.pdf');
 })->name('export.sampah.pdf');
 
+
+
+
+Route::get('/', function () {
+    $page_settings = PageSetting::first(); // jika kamu pakai di view
+    $mitras = Mitra::where('status', 'aktif')->get();
+    $postingans = Postingan::latest()->get(); // untuk list produk/postingan
+    $beritas = Postingan::latest()->take(3)->get(); // untuk 3 berita terbaru
+    $ulasans = Ulasan::latest()->get();
+
+    return view('welcome', compact('page_settings', 'mitras', 'postingans', 'beritas', 'ulasans'));
+})->name('welcome');
 
 Route::get('/export-bahan-baku-excel', function () {
     return Excel::download(new BahanBakuExport, 'bahan-baku.xlsx');
