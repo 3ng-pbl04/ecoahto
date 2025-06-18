@@ -23,6 +23,7 @@ use App\Models\Mitra;
 use App\Models\PageSetting;
 use App\Models\Postingan;
 use App\Models\Ulasan;
+use App\Models\Berita;
 
 
 
@@ -53,7 +54,7 @@ Route::get('/', function () {
     $page_settings = PageSetting::first(); // jika kamu pakai di view
     $mitras = Mitra::where('status', 'aktif')->get();
     $postingans = Postingan::latest()->get(); // untuk list produk/postingan
-    $beritas = Postingan::latest()->take(3)->get(); // untuk 3 berita terbaru
+    $beritas = Berita::latest()->take(3)->get(); // untuk 3 berita terbaru
     $ulasans = Ulasan::latest()->get();
 
     return view('welcome', compact('page_settings', 'mitras', 'postingans', 'beritas', 'ulasans'));

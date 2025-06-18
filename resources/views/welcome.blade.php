@@ -366,6 +366,7 @@
             position: relative;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            aspect-ratio: 1 / 1;
         }
 
         .logo-bg {
@@ -383,13 +384,15 @@
         .mitra-logo img {
             width: 85px;
             height: 85px;
-            object-fit: contain;
+            object-fit: cover;
             border-radius: 50%;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             z-index: 2;
             filter: saturate(0.8);
+            aspect-ratio: 1 / 1;
         }
+
 
         .shine-effect {
             position: absolute;
@@ -400,6 +403,7 @@
             background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.6) 50%, transparent 70%);
             transform: rotate(45deg) translateX(-100%);
             transition: transform 0.6s ease;
+            border-radius: 50%;
         }
 
         /* Hover Effects */
