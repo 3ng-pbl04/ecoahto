@@ -32,7 +32,7 @@ class ProdukResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-               
+
 
                 Forms\Components\TextInput::make('jenis_produk')
                     ->required()
@@ -43,7 +43,7 @@ class ProdukResource extends Resource
                     ->numeric()
                     ->prefix('Rp'),
 
-                
+
 
                 Forms\Components\TextInput::make('stok')
                     ->required()
@@ -58,10 +58,11 @@ class ProdukResource extends Resource
 
     public static function table(Table $table): Table
     {
-       
+
 
     return $table
         ->columns([
+            Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
             Tables\Columns\TextColumn::make('nama')->sortable()->searchable(),
             Tables\Columns\TextColumn::make('jenis_produk'),
             Tables\Columns\TextColumn::make('harga')

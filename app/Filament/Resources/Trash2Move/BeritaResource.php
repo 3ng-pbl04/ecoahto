@@ -53,9 +53,10 @@ class BeritaResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('judul')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('tanggal')->date(),
-                Tables\Columns\ImageColumn::make('gambar'),
+                Tables\Columns\ImageColumn::make('gambar')->label('Gambar')->circular(),
                  Tables\Columns\TextColumn::make('admin.name')  // ini yang tampilkan username admin
                 ->label('Admin Pembuat')
                 ->sortable()

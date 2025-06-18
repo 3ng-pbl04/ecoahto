@@ -395,6 +395,11 @@
 
             <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"
+    async defer
+></script>
+
 
 
     <script>
@@ -407,6 +412,16 @@
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev"
+
+        document.querySelector('form').addEventListener('submit', function (e) {
+    const lat = document.getElementById('latitude').value;
+    const lng = document.getElementById('longitude').value;
+    if (!lat || !lng) {
+        e.preventDefault();
+        alert('Silakan pilih titik koordinat di peta terlebih dahulu.');
+    }
+});
+
       },
       // breakpoints dihapus agar tetap 1 ulasan di semua ukuran layar
     });
