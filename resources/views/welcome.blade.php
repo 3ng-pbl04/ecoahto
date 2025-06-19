@@ -11,7 +11,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -181,7 +181,7 @@
                 @endforeach
             </div>
         </div>
-        
+
         <!-- Floating particles background -->
         <div class="particles-container">
             <div class="particle"></div>
@@ -217,7 +217,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
                 radial-gradient(circle at 40% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
@@ -282,11 +282,11 @@
         }
 
         @keyframes underlineGlow {
-            0% { 
+            0% {
                 box-shadow: 0 2px 10px rgba(255,107,107,0.5);
                 transform: scaleX(1);
             }
-            100% { 
+            100% {
                 box-shadow: 0 4px 20px rgba(255,107,107,0.8);
                 transform: scaleX(1.1);
             }
@@ -354,7 +354,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 50%;
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0,0,0,0.1),
                 0 2px 8px rgba(0,0,0,0.05),
                 inset 0 1px 0 rgba(255,255,255,0.8);
@@ -366,6 +366,7 @@
             position: relative;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            aspect-ratio: 1 / 1;
         }
 
         .logo-bg {
@@ -383,13 +384,15 @@
         .mitra-logo img {
             width: 85px;
             height: 85px;
-            object-fit: contain;
+            object-fit: cover;
             border-radius: 50%;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             z-index: 2;
             filter: saturate(0.8);
+            aspect-ratio: 1 / 1;
         }
+
 
         .shine-effect {
             position: absolute;
@@ -400,12 +403,13 @@
             background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.6) 50%, transparent 70%);
             transform: rotate(45deg) translateX(-100%);
             transition: transform 0.6s ease;
+            border-radius: 50%;
         }
 
         /* Hover Effects */
         .mitra-logo:hover {
             transform: translateY(-10px) scale(1.05);
-            box-shadow: 
+            box-shadow:
                 0 20px 40px rgba(0,0,0,0.15),
                 0 5px 15px rgba(0,0,0,0.1),
                 inset 0 1px 0 rgba(255,255,255,0.9);
@@ -494,17 +498,17 @@
             #mitra {
                 padding: 60px 0;
             }
-            
+
             .mitra-logo {
                 width: 100px;
                 height: 100px;
             }
-            
+
             .mitra-logo img {
                 width: 70px;
                 height: 70px;
             }
-            
+
             .mitra-swiper .swiper-slide {
                 width: 120px !important;
             }
@@ -533,7 +537,7 @@
         }
     </style>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Initialize Swiper with smooth animations
@@ -606,7 +610,7 @@
                 const scrolled = window.pageYOffset;
                 const section = document.querySelector('#mitra');
                 const rect = section.getBoundingClientRect();
-                
+
                 if (rect.top < window.innerHeight && rect.bottom > 0) {
                     const particles = document.querySelectorAll('.particle');
                     particles.forEach((particle, index) => {
@@ -621,12 +625,12 @@
                 logo.addEventListener('click', function(e) {
                     const ripple = document.createElement('div');
                     ripple.classList.add('ripple');
-                    
+
                     const rect = this.getBoundingClientRect();
                     const size = Math.max(rect.width, rect.height);
                     const x = e.clientX - rect.left - size / 2;
                     const y = e.clientY - rect.top - size / 2;
-                    
+
                     ripple.style.cssText = `
                         position: absolute;
                         width: ${size}px;
@@ -639,9 +643,9 @@
                         animation: ripple 0.6s ease-out;
                         pointer-events: none;
                     `;
-                    
+
                     this.appendChild(ripple);
-                    
+
                     setTimeout(() => {
                         ripple.remove();
                     }, 600);
@@ -662,10 +666,7 @@
         });
     </script>
 
-
-
-
-    <!-- News Section - Added new section -->
+ <!-- News Section - Added new section -->
     <section id="news" class="news">
         <div class="container">
             <div class="section-title">
@@ -673,27 +674,28 @@
             </div>
 
             <div class="news-grid">
-        @foreach ($beritas as $berita)
-            <div class="news-card">
-                <div class="news-image">
-                    <img src="{{ Storage::url($berita->gambar) }}" alt="{{ $berita->judul }}">
-                    <div class="news-date">{{ \Carbon\Carbon::parse($berita->tanggal)->format('d F Y') }}</div>
-                </div>
-                <div class="news-content">
-                    <div class="news-category">Program</div>
-                    <h3 class="news-title">{{ $berita->judul }}</h3>
-                    <p class="news-excerpt">{{ Str::limit($berita->deskripsi, 150) }}</p>
+      @foreach ($beritas as $berita)
+    <div class="news-card">
+        <div class="news-image">
+            <img src="{{ Storage::url($berita->gambar) }}" alt="{{ $berita->judul }}">
+            <div class="news-date">{{ \Carbon\Carbon::parse($berita->tanggal)->format('d F Y') }}</div>
+        </div>
+        <div class="news-content">
+            <div class="news-category">{{ $berita->admin->username }}</div>
+            <h3 class="news-title">{{ $berita->judul }}</h3>
+            <p class="news-excerpt">{{ Str::limit($berita->deskripsi, 150) }}</p>
 
-                    {{-- Jika berita punya slug, arahkan ke detail dinamis --}}
-                    @if ($berita->slug)
-                        <a href="{{ route('berita.detail', ['slug' => $berita->slug]) }}" class="read-more">Baca selengkapnya →</a>
-                    @else
-                        {{-- Atau fallback ke static --}}
-                        <a href="{{ route('berita.detail1') }}" class="read-more">Baca selengkapnya →</a>
-                    @endif
-                </div>
-            </div>
-        @endforeach
+            {{-- Jika berita punya slug, arahkan ke detail dinamis --}}
+            @if ($berita->slug)
+                <a href="{{ route('berita.detail', ['slug' => $berita->slug]) }}" class="read-more">Baca selengkapnya →</a>
+            @else
+                {{-- Fallback ke route berbasis id --}}
+                <a href="{{ route('berita.detail1', ['id' => $berita->id]) }}" class="read-more">Baca selengkapnya →</a>
+            @endif
+        </div>
+    </div>
+@endforeach
+
     </div>
             </div>
 
@@ -901,38 +903,28 @@
     </div>
 
             <!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script
     src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"
     async defer
 ></script>
 
-
-
-    <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const swiper = new Swiper(".testimonial-carousel", {
-      slidesPerView: 1,       // Tampilkan 1 ulasan saja
-      spaceBetween: 10,
-      loop: true,
-      grabCursor: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
-
-        document.querySelector('form').addEventListener('submit', function (e) {
-    const lat = document.getElementById('latitude').value;
-    const lng = document.getElementById('longitude').value;
-    if (!lat || !lng) {
-        e.preventDefault();
-        alert('Silakan pilih titik koordinat di peta terlebih dahulu.');
-    }
-});
-
-      },
-      // breakpoints dihapus agar tetap 1 ulasan di semua ukuran layar
+   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Swiper('.testimonial-carousel', {
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            slidesPerView: 1,
+            spaceBetween: 20,
+            autoplay: {
+                delay: 5000,
+            },
+        });
     });
-  });
 </script>
+
 
 

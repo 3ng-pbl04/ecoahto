@@ -32,6 +32,9 @@ class PengaduanResource extends Resource
             TextInput::make('no_telp')
                 ->required()
                 ->maxLength(20),
+            TextInput::make('email')
+                ->required()
+                ->maxLength(20),
             Textarea::make('alamat')
                 ->required(),
             FileUpload::make('foto')
@@ -62,6 +65,7 @@ class PengaduanResource extends Resource
             TextColumn::make('id')->sortable()->searchable(),
             TextColumn::make('nama')->sortable()->searchable(),
             TextColumn::make('no_telp'),
+            TextColumn::make('email'),
             TextColumn::make('alamat')->limit(30),
             Tables\Columns\ImageColumn::make('foto')->label('Gambar')->circular(),
             TextColumn::make('keterangan')->limit(50),
