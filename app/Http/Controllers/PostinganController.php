@@ -7,6 +7,7 @@ use App\Models\Postingan;
 use App\Models\Berita;
 use App\Models\Ulasan;
 use App\Models\PageSetting;
+use App\Models\Mitra;
 
 class PostinganController extends Controller
 {
@@ -16,9 +17,39 @@ class PostinganController extends Controller
         $postingans = Postingan::orderBy('id', 'asc')->take(6)->get();
         $beritas = Berita::orderBy('id', 'desc')->take(3)->get();
         $ulasans = Ulasan::latest()->take(5)->get();
-        $page_settings = PageSetting::first(); // ✅ tambahkan baris ini
+        $page_settings = PageSetting::first();
+        $mitras = Mitra::latest()->take(5)->get();
 
-        return view('welcome', compact('postingans', 'beritas', 'ulasans', 'page_settings'));
+        // ✅ Tambahkan berita terbaru untuk sidebar atau tampilan lainnya
+        $beritaTerbaru = Berita::latest('tanggal')->take(5)->get();
+
+        return view('welcome', compact(
+            'postingans',
+            'beritas',
+            'ulasans',
+            'page_settings',
+            'mitras',
+            'beritaTerbaru'
+        ));
+    }
+
+    // Menampilkan detail berita
+    public function show($id)
+    {
+        $berita = Berita::with('admin')->findOrFail($id);
+        $page_settings = PageSetting::first();
+
+        // ✅ Ambil 5 berita terbaru lainnya, kecuali yang sedang dibuka
+        $beritaTerbaru = Berita::where('id', '!=', $id)
+            ->latest('tanggal')
+            ->take(5)
+            ->get();
+
+        return view('berita.detailberita1', compact(
+            'berita',
+            'page_settings',
+            'beritaTerbaru'
+        ));
     }
 
     // Menyimpan data postingan baru

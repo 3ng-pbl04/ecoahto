@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Form Volunteer</title>
+    <title>Berita</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-B8f6f2vA0ZzcvGLpMnq98zO23NBF7U9Ck2J+BB3OQcrWikDbdAG3WjO4CX84yGB3qABeWwF0LKJpKkI0a43pbg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
@@ -151,10 +151,26 @@
     justify-content: center;
     min-height: 100vh;
 }
-
-
+}
+.divider {
+    border-top: 2px solid #ddd;
+    margin: 15px 0;
 }
 
+.about-img img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.container.berita-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+    .add-comment {
+        margin-top: 20px;
+    }
     </style>
 </head>
 <body>
@@ -162,8 +178,8 @@
 <header>
         <div class="container header-container">
             <div class="logo">
-                   <img src="/images/LOGO.png" alt="TRASH2MOVE Logo">
-                <h1>TRASH2MOVE</h1>
+            <img src="{{ asset('storage/' . $page_settings->company_logo) }}" alt="Hero Image">
+                <h1>{{ $page_settings->company_name ?? 'Judul Default' }}</h1>
             </div>
             <nav>
                 <ul>
@@ -173,153 +189,209 @@
                     <li><a href="#news">Berita</a></li>
                     <li><a href="#testimonials">Ulasan</a></li>
                     <li><a href="#contact">Kontak</a></li>
-                    <li><a href="#login">Login</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-
-<section id="home" class="hero">
+<section id="home" class="hero"
+    style="background-image: url('{{ $page_settings->hero_image ? asset('storage/' . $page_settings->hero_image) : asset('images/sampah.jpg') }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 100px 0;
+    color: white;
+    text-align: center;
+    ">
     <div class="container">
-        <h2 class="display-4 fw-bold">Ubah Sampah Menjadi Solusi</h2>
-        <p class="lead fs-5">Misi kami adalah mendaur ulang limbah menjadi produk berkualitas tinggi yang tidak hanya ramah lingkungan tetapi juga fungsional dan estetis.</p>
-        <div class="cta-buttons">
-        <a href="/" class="btn btn-success btn-lg px-4">Kembali ke Beranda</a>
+        <h2>{{ $page_settings->hero_title ?? 'Judul Default' }}</h2>
+        <p>{{ $page_settings->hero_description ?? 'Deskripsi Default' }}</p>
 
-            <button class="btn btn-outline-light btn-lg px-4">Jadi Volunteer</button>
+        <div class="cta-buttons mt-4">
+            <a href="/">
+                <button class="btn btn-primary" onclick="openModal('location-modal')">
+                    Kembali Ke Beranda
+                </button>
+            </a>
+            <a href="/volunteer/create">
+                <button class="btn btn-info" onclick="openModal('location-modal')">
+                    Jadi Volunteer
+                </button>
+            </a>
         </div>
     </div>
 </section>
 
-<div class="divider"></div>
 
-        <<div class="container d-flex justify-content-center">
-    <div class="row justify-content-center my-5 w-100" style="max-width: 900px;">
-        <div class="col-lg-12">
-            <!-- Artikel Berita -->
+    <div class="divider" style="border: none; background: transparent; height: 1px;"></div>
+
+<div class="container berita-container py-4">
+    <div class="row">
+        <!-- KONTEN BERITA -->
+        <div class="col-lg-8 mb-4">
             <div class="about-right shadow-sm p-4 rounded bg-white">
                 <!-- Gambar -->
-                <div class="about-img text-center mb-4">
-                    <img src="/images/.png" alt="Gambar Berita" class="img-fluid rounded shadow-sm">
+                <div class="about-img mb-6">
+                    <img src="{{ asset('storage/' . $berita->gambar) }}"
+                        alt="Gambar Berita"
+                        class="w-full max-h-[250px] object-cover rounded-xl shadow">
                 </div>
+
 
                 <!-- Judul -->
                 <div class="section-tittle mb-3 text-center">
-                    <h3 class="text-success">Here come the moms in space</h3>
+                    <h3 class="text-success">{{ $berita->judul }}</h3>
                 </div>
+
+                <!-- Tanggal & Admin -->
+                <p class="text-muted text-center mb-4">
+                    {{ \Carbon\Carbon::parse($berita->tanggal)->translatedFormat('d F Y') }}
+                    @if ($berita->admin && isset($berita->admin->username))
+                        · Diposting oleh: {{ $berita->admin->username }}
+                    @endif
+                </p>
 
                 <!-- Konten -->
                 <div class="about-prea mb-4">
-                    <p class="mb-3">Moms are like…buttons? Moms are like glue. Moms are like pizza crusts...</p>
-                    <p class="mb-3">My hero when I was a kid was my mom. Same for everyone I knew...</p>
+                    <p class="mb-3">{{ $berita->deskripsi }}</p>
                 </div>
 
                 <!-- Subjudul -->
-                <div class="section-tittle mb-3">
-                    <h4>Unordered List Style?</h4>
-                </div>
-
-                <div class="about-prea mb-4">
-                    <p class="mb-3">The refractor telescope uses a convex lens to focus the light...</p>
-                </div>
+                @if (!empty($berita->subjudul))
+                    <div class="section-tittle mb-3">
+                        <h4>{{ $berita->subjudul }}</h4>
+                    </div>
+                @endif
 
                 <!-- Bagikan -->
-                <div class="social-share pt-3 border-top">
+                <div class="social-share pt-4 border-top mt-4">
                     <div class="section-tittle mb-2">
-                        <h5>Share:</h5>
+                        <h4>Bagikan:</h4>
                     </div>
                     <ul class="list-inline">
-                        <li class="list-inline-item me-2"><a href="#"><img src="assets/img/news/icon-ins.png" width="32"></a></li>
-                        <li class="list-inline-item me-2"><a href="#"><img src="assets/img/news/icon-fb.png" width="32"></a></li>
-                        <li class="list-inline-item me-2"><a href="#"><img src="assets/img/news/icon-tw.png" width="32"></a></li>
-                        <li class="list-inline-item"><a href="#"><img src="assets/img/news/icon-yo.png" width="32"></a></li>
+                        <li class="list-inline-item me-2">
+                            <a href="#" style="color:#E4405F;"><i class="fab fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item me-2">
+                            <a href="#" style="color:#1877F2;"><i class="fab fa-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item me-2">
+                            <a href="#" style="color:#1DA1F2;"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" style="color:#FF0000;"><i class="fab fa-youtube"></i></a>
+                        </li>
                     </ul>
                 </div>
-            </div>
+                        <div class="add-comment">
+                <h3>Tambahkan Komentar Anda</h3>
+            <form id="comment-form" method="POST" action="{{ route('ulasan.store') }}">
+                    @csrf
+        <div class="form-group">
+            <label for="comment-name">Nama</label>
+            <input type="text" id="comment-name" name="nama" class="form-input" placeholder="Masukkan nama Anda" required>
+        </div>
 
-            <!-- Form Kontak -->
-            <div class="mt-5">
-                <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm">
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <textarea class="form-control" name="message" id="message" rows="5" placeholder="Enter Message"></textarea>
-                        </div>
-                        <div class="col-sm-6">
-                            <input class="form-control" name="name" id="name" type="text" placeholder="Enter your name">
-                        </div>
-                        <div class="col-sm-6">
-                            <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                        </div>
-                        <div class="col-12">
-                            <input class="form-control" name="subject" id="subject" type="text" placeholder="Enter Subject">
-                        </div>
-                        <div class="col-12 mt-3">
-                            <button type="submit" class="btn btn-success px-4">Send</button>
-                        </div>
-                    </div>
-                </form>
+        <div class="form-group">
+            <label for="comment-role">Peran</label>
+            <input type="text" id="comment-role" name="peran" class="form-input" placeholder="Masukkan peran Anda (misalnya, Pelanggan, Volunteer, dll.)" required>
+        </div>
+
+        <div class="form-group">
+            <label for="comment-text">Komentar</label>
+            <textarea id="comment-text" name="deskripsi" class="form-textarea" placeholder="Tulis komentar Anda di sini..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Kirim Komentar</button>
+    </form>
+            </div>
             </div>
         </div>
     </div>
 </div>
 
 
-
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-
 <footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-about">
-                <div class="footer-logo">
-                    <img src="/images/LOGO.png" alt="Trash2Move Logo">
-                    <h2>Trash2Move</h2>
-                </div>
-                <p>Trash2Move adalah perusahaan daur ulang inovatif yang mendedikasikan diri untuk mengubah limbah menjadi produk bernilai tinggi sambil membangun komunitas yang sadar lingkungan.</p>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="{{ asset('storage/' . $page_settings->company_logo) }}" alt="Hero Image">
+                        <h2>Trash2Move</h2>
+                    </div>
+                    <p>
+                        {{ $page_settings->footer_text ?? 'Trash2Move adalah perusahaan daur ulang inovatif yang mendedikasikan diri untuk mengubah limbah menjadi produk bernilai tinggi sambil membangun komunitas yang sadar lingkungan.' }}
+                    </p>
+
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    @if ($page_settings->facebook_link)
+                        <a href="{{ $page_settings->facebook_link }}" class="fb" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    @endif
+
+                    @if ($page_settings->instagram_link)
+                        <a href="{{ $page_settings->instagram_link }}" class="ig" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    @endif
+
+                    @if ($page_settings->twitter_link)
+                        <a href="{{ $page_settings->twitter_link }}" class="tw" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    @endif
+
+                    @if ($page_settings->youtube_link)
+                        <a href="{{ $page_settings->youtube_link }}" class="yt" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    @endif
+
+                    @if ($page_settings->tiktok_link)
+                        <a href="{{ $page_settings->tiktok_link }}" class="tt" target="_blank" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    @endif
+                </div>
+                </div>
+
+                <div class="footer-links-section">
+                    <h3 class="footer-heading">Produk</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Furniture</a></li>
+                        <li><a href="#">Aksesori</a></li>
+                        <li><a href="#">Kemasan</a></li>
+                        <li><a href="#">Dekorasi</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-section">
+                    <h3 class="footer-heading">Perusahaan</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Tim</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-section">
+                    <h3 class="footer-heading">Kontak</h3>
+                    <ul class="footer-links">
+                        <li>Jl. Hijau Lestari No.123</li>
+                        <li>Jakarta Selatan, Indonesia</li>
+                        <li>+62 21 1234 5678</li>
+                        <li>info@ecorecycle.id</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="footer-links-section">
-                <h3 class="footer-heading">Produk</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Furniture</a></li>
-                    <li><a href="#">Aksesori</a></li>
-                    <li><a href="#">Kemasan</a></li>
-                    <li><a href="#">Dekorasi</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links-section">
-                <h3 class="footer-heading">Perusahaan</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Tentang Kami</a></li>
-                    <li><a href="#">Tim</a></li>
-                    <li><a href="#">Karir</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links-section">
-                <h3 class="footer-heading">Kontak</h3>
-                <ul class="footer-links">
-                    <li>Jl. Hijau Lestari No.123</li>
-                    <li>Jakarta Selatan, Indonesia</li>
-                    <li>+62 21 1234 5678</li>
-                    <li>info@trash2move.id</li>
-                </ul>
+            <div class="copyright">
+                &copy; 2025 Zikry. Hak Cipta Dilindungi.
             </div>
         </div>
-        <div class="copyright">
-            &copy; 2025 Trash2Move. Hak Cipta Dilindungi.
-        </div>
-    </div>
-</footer>
+    </footer>
 
 </body>
 </html>

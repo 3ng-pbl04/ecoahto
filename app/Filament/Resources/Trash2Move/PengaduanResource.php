@@ -32,6 +32,9 @@ class PengaduanResource extends Resource
             TextInput::make('no_telp')
                 ->required()
                 ->maxLength(20),
+            TextInput::make('email')
+                ->required()
+                ->maxLength(20),
             Textarea::make('alamat')
                 ->required(),
             FileUpload::make('foto')
@@ -59,9 +62,12 @@ class PengaduanResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
+            TextColumn::make('id')->sortable()->searchable(),
             TextColumn::make('nama')->sortable()->searchable(),
             TextColumn::make('no_telp'),
+            TextColumn::make('email'),
             TextColumn::make('alamat')->limit(30),
+            Tables\Columns\ImageColumn::make('foto')->label('Gambar')->circular(),
             TextColumn::make('keterangan')->limit(50),
             TextColumn::make('titik_koordinat'),
             TextColumn::make('status')
@@ -86,7 +92,6 @@ class PengaduanResource extends Resource
                 ]),
         ])
         ->actions([
-            Tables\Actions\ViewAction::make(),
             Tables\Actions\EditAction::make(),
             Tables\Actions\DeleteAction::make(),
         ])

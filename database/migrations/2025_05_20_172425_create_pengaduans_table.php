@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-      Schema::create('pengaduans', function (Blueprint $table) {
+        Schema::create('pengaduans', function (Blueprint $table) {
     $table->id();
     $table->string('nama');
     $table->string('no_telp');

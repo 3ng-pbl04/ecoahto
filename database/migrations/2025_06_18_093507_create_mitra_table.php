@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->text('alamat');
             $table->enum('status', ['aktif', 'tidak aktif'])->default('aktif');
+            $table->string('logo_mitra')->nullable();
             $table->timestamps();
         });
     }

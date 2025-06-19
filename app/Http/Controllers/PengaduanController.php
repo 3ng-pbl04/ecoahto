@@ -18,6 +18,7 @@ class PengaduanController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'no_telp' => 'required|string|max:20',
+            'email' => 'required|string|max:255',
             'alamat' => 'required|string',
             'keterangan' => 'required|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',

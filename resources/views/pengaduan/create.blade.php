@@ -175,7 +175,7 @@
                 </ul>
             </nav>
         </div>
-    
+
 </header>
 
 <section id="home" class="hero">
@@ -211,6 +211,10 @@
                     <input type="text" name="no_telp" id="no" class="form-control" required>
                 </div>
                 <div class="mb-3">
+                    <label for="no">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
                     <label for="alamat">Alamat</label>
                     <textarea name="alamat" id="alamat" class="form-control" required></textarea>
                 </div>
@@ -223,13 +227,15 @@
                     <input type="text" name="keterangan" id="keterangan" class="form-control" required>
                 </div>
 
-                <div class="mb-3">
-                    <label>Pilih Titik Koordinat</label>
-                    <div id="map"></div>
-                    <input type="hidden" name="titik_koordinat" id="titik_koordinat">
-                    <input type="hidden" name="latitude" id="latitude">
-                    <input type="hidden" name="longitude" id="longitude">
-                </div>
+              <div class="mb-3">
+                <label>Pilih Titik Koordinat</label>
+                <div id="map"></div>
+                <small id="koordinat-terpilih" class="text-muted"></small>
+                <input type="hidden" name="titik_koordinat" id="titik_koordinat">
+                <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
+            </div>
+
 
                 <button type="submit" class="btn btn-success">Kirim Pengaduan</button>
             </form>
@@ -251,13 +257,27 @@
             map.removeLayer(marker);
         }
         marker = L.marker(e.latlng).addTo(map);
+
         const lat = e.latlng.lat.toFixed(6);
         const lng = e.latlng.lng.toFixed(6);
         document.getElementById('latitude').value = lat;
         document.getElementById('longitude').value = lng;
         document.getElementById('titik_koordinat').value = `${lat}, ${lng}`;
+
+        // Ambil nama lokasi dari Nominatim (reverse geocoding)
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+            .then(response => response.json())
+            .then(data => {
+                const displayName = data.display_name || "Lokasi tidak ditemukan";
+                document.getElementById('koordinat-terpilih').innerText = `Lokasi dipilih: ${displayName}`;
+            })
+            .catch(error => {
+                console.error('Gagal mengambil nama lokasi:', error);
+                document.getElementById('koordinat-terpilih').innerText = `Koordinat: ${lat}, ${lng}`;
+            });
     });
 </script>
+
 
 <footer>
     <div class="container">
@@ -311,6 +331,18 @@
         </div>
     </div>
 </footer>
+    <script>
+    fetch('/api/pengaduan-maps')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                L.marker([item.latitude, item.longitude])
+                    .addTo(map)
+                    .bindPopup(`<strong>${item.nama}</strong><br>${item.keterangan}<br><img src="/storage/${item.foto}" width="100">`);
+            });
+        })
+        .catch(error => console.error('Error loading data:', error));
+</script>
 
 </body>
 </html>
