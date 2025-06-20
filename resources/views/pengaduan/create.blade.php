@@ -218,10 +218,34 @@
                     <label for="alamat">Alamat</label>
                     <textarea name="alamat" id="alamat" class="form-control" required></textarea>
                 </div>
-                <div class="mb-3">
+               <div class="mb-3">
                     <label for="foto">Foto</label>
                     <input type="file" name="foto" id="foto" class="form-control" accept="image/*" required>
-                </div>
+                    <div class="mt-3">
+                        <img id="previewFoto" src="#" alt="Preview Foto" style="display: none; max-width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 8px;" />
+                    </div>
+
+                        <script>
+                            const inputFoto = document.getElementById('foto');
+                            const preview = document.getElementById('previewFoto');
+
+                            inputFoto.addEventListener('change', function () {
+                                const file = this.files[0];
+                                if (file) {
+                                    const reader = new FileReader();
+
+                                    reader.addEventListener("load", function () {
+                                        preview.setAttribute("src", this.result);
+                                        preview.style.display = 'block';
+                                    });
+
+                                    reader.readAsDataURL(file);
+                                } else {
+                                    preview.setAttribute("src", "#");
+                                    preview.style.display = 'none';
+                                }
+                            });
+                        </script>
                 <div class="mb-3">
                     <label for="keterangan">Keterangan</label>
                     <input type="text" name="keterangan" id="keterangan" class="form-control" required>

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'rihan2@example.com',
+            'email' => 'icaa2@example.com',
         ]);
         $this->call(PageSettingSeeder::class);
     }

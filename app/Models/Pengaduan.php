@@ -19,4 +19,5 @@ class Pengaduan extends Model
         'titik_koordinat',
         'status',
     ];
+    
 }

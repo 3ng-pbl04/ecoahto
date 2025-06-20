@@ -12,6 +12,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Get;
 use Filament\Forms\Components\Select;
 use App\Filament\Resources\Trash2Move\PengaduanResource\Pages;
 
@@ -37,11 +38,18 @@ class PengaduanResource extends Resource
                 ->maxLength(20),
             Textarea::make('alamat')
                 ->required(),
+
             FileUpload::make('foto')
+                ->label('Foto')
                 ->image()
-                ->directory('pengaduan')
-                ->maxSize(2048)
-                ->nullable(),
+                ->imagePreviewHeight('150')
+                ->disk('public')
+                ->directory('pengaduan_foto')
+                ->preserveFilenames()
+                ->downloadable()
+                ->openable()
+                ->disabled(), // bikin read-only
+
             Textarea::make('keterangan')
                 ->required(),
             TextInput::make('titik_koordinat')
