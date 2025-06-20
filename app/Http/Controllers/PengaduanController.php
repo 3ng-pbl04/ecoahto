@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengaduan;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PengaduanTerkirim;
 
 class PengaduanController extends Controller
 {
@@ -15,29 +16,45 @@ class PengaduanController extends Controller
 
     public function store(Request $request)
     {
+        // 1. Validasi input
         $validatedData = $request->validate([
-            'nama' => 'required|string|max:255',
-            'no_telp' => 'required|string|max:20',
-            'email' => 'required|string|max:255',
-            'alamat' => 'required|string',
+            'nama'       => 'required|string|max:255',
+            'no_telp'    => 'required|string|max:20',
+            'email'      => 'required|email:dns|max:255',
+            'alamat'     => 'required|string',
             'keterangan' => 'required|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'latitude' => 'nullable|numeric',
-            'longitude' => 'nullable|numeric',
+            'foto'       => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'latitude'   => 'nullable|numeric',
+            'longitude'  => 'nullable|numeric',
         ]);
 
-        // Menyimpan file foto ke storage/app/public/pengaduan_foto
+        // 2. Simpan file foto jika ada
         if ($request->hasFile('foto')) {
+            // akan tersimpan di storage/app/public/pengaduan_foto
             $validatedData['foto'] = $request->file('foto')->store('pengaduan_foto', 'public');
         }
 
-        // Menyimpan titik koordinat jika tersedia
+        // 3. Simpan titik koordinat jika tersedia
         if ($request->filled('latitude') && $request->filled('longitude')) {
             $validatedData['titik_koordinat'] = $request->latitude . ',' . $request->longitude;
         }
 
-        Pengaduan::create($validatedData);
+        // 4. Simpan data pengaduan dan tangkap hasilnya ke variabel
+        $pengaduan = Pengaduan::create($validatedData);
 
-        return redirect('/')->with('success', 'Pengaduan berhasil dikirim!');
+        // 5. Kirim email konfirmasi
+        // Pastikan sudah import: use Illuminate\Support\Facades\Mail;
+        // dan class Mailable PengaduanTerkirim sudah ada dan di-import: use App\Mail\PengaduanTerkirim;
+        try {
+            Mail::to($pengaduan->email)
+                ->send(new PengaduanTerkirim($pengaduan));
+        } catch (\Exception $e) {
+            // Log error jika gagal kirim email
+            \Log::error('Gagal mengirim email konfirmasi pengaduan: ' . $e->getMessage());
+            // (Optional) Anda bisa menampilkan pesan khusus atau tetap lanjut tanpa menghentikan proses
+        }
+
+        // 6. Redirect kembali dengan pesan sukses
+        return back()->with('success', 'Pengaduan berhasil dikirim. Silakan cek email Anda.');
     }
 }
