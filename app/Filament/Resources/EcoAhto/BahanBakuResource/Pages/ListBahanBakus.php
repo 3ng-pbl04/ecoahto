@@ -14,7 +14,22 @@ class ListBahanBakus extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label('+ Bahan Baku'), // 👈 Ini dia custom label-nya
+                ->label('Tambah Data')
+                ->icon('heroicon-o-plus'),
+
+            Actions\Action::make('Export Excel')
+                ->label('Export ke Excel')
+                ->icon('heroicon-o-table-cells')
+                ->color('success')
+                ->url(route('export.bahan.excel'))
+                ->openUrlInNewTab(),
+
+            Actions\Action::make('Export PDF')
+                ->label('Export ke PDF')
+                ->icon('heroicon-o-document-text')
+                ->color('danger')
+                ->url(route('export.bahan.pdf'))
+                ->openUrlInNewTab(),
         ];
     }
 }

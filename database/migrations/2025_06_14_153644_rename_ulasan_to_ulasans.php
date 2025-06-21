@@ -19,6 +19,9 @@ return new class extends Migration
     $table->timestamps();
 });
 
+        Schema::table('ulasans', function (Blueprint $table) {
+            Schema::rename('ulasan', 'ulasans');
+        });
     }
 
     /**
@@ -26,6 +29,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ulasans');
+        Schema::table('ulasans', function (Blueprint $table) {
+            Schema::rename('ulasans', 'ulasan');
+        });
     }
 };

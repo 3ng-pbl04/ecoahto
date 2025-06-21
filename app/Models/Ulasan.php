@@ -25,3 +25,4 @@ class Ulasan extends Model
     //     });
     // }
 }
+

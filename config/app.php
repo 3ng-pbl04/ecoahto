@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------
@@ -152,6 +152,9 @@ return [
     Illuminate\Validation\ValidationServiceProvider::class,
     Illuminate\View\ViewServiceProvider::class,
     // Tambahkan ini ↑↑↑ jika belum ada
+
+    App\Providers\AppServiceProvider::class,
+    App\Providers\RouteServiceProvider::class,
 ],
 
 ];

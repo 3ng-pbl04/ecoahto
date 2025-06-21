@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ulasan;
+use Illuminate\Support\Facades\Storage;
 
 class UlasanController extends Controller
 {
@@ -24,5 +25,8 @@ class UlasanController extends Controller
     //return redirect('/')->with('success', 'ulasan berhasil dikirim!');
     //return response('Ulasan berhasil dikirim!', 201);
     return back()->with('success', 'Ulasan berhasil dikirim!');
+    {
+        return view('ulasan.create');
     }
+}
 }

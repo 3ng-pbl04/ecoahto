@@ -16,9 +16,9 @@ return new class extends Migration
     $table->string('nama');
     $table->string('no_telp');
     $table->text('alamat');
-    $table->string('foto');
-    $table->text('keterangan');
-    $table->string('titik_koordinat');
+    $table->text('foto'); // <= ini penting, gunakan string atau text
+    $table->string('keterangan');
+    $table->string('titik_koordinat')->nullable(); // untuk nanti
     $table->enum('status', ['Terkirim', 'Ditolak', 'Diterima', 'Dijadwalkan'])->default('Terkirim');
     $table->timestamps();
 });

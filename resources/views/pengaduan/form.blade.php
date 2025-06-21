@@ -1,6 +1,7 @@
 <form action="{{ route('pengaduan.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
+
     <div class="mb-4">
         <label for="nama" class="block font-semibold">Nama:</label>
         <input type="text" name="nama" id="nama" class="w-full border rounded px-4 py-2" required>
@@ -9,6 +10,12 @@
     <div class="mb-4">
         <label for="no_telp" class="block font-semibold">No. Telepon:</label>
         <input type="text" name="no_telp" id="no_telp" class="w-full border rounded px-4 py-2" required>
+    </div>
+
+    <div class="mb-4">
+        <label for="alamat" class="block font-semibold">Email:</label>
+        <input type="email" name="email" id="email" class="w-full border rounded px-4 py-2" required>
+
     </div>
 
     <div class="mb-4">
