@@ -44,8 +44,11 @@ class PengaduanChart extends ChartWidget
             $cumulativeData[] = $cumulative;
 
             // Hitung total volunteer (termasuk yang sudah dihapus) sampai tanggal ini
-            $total = Volunteer::withTrashed()
-                ->whereDate('created_at', '<=', $date)
+            $total = Volunteer::whereDate('created_at', '<=', $date)
+                ->where(function ($query) use ($date) {
+                    $query->whereNull('deleted_at')
+                          ->orWhereDate('deleted_at', '>', $date);
+                })
                 ->count();
             $totalData[] = $total;
         }
