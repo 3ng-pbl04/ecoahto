@@ -57,4 +57,17 @@ class PengaduanController extends Controller
         // 6. Redirect kembali dengan pesan sukses
         return back()->with('success', 'Pengaduan berhasil dikirim. Silakan cek email Anda.');
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string',
+        ]);
+
+        $pengaduan = Pengaduan::findOrFail($id);
+        $pengaduan->status = $request->status;
+        $pengaduan->save();
+
+        return back()->with('success', 'Status pengaduan berhasil diperbarui.');
+    }
 }

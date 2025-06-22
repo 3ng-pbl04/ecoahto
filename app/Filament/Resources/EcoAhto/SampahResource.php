@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\Ecoahto;
+namespace App\Filament\Resources\EcoAhto;
 
-use App\Filament\Resources\Ecoahto\SampahResource\Pages;
+use App\Filament\Resources\EcoAhto\SampahResource\Pages;
 use App\Models\Sampah;
 use Filament\Forms;
 use Filament\Tables;
