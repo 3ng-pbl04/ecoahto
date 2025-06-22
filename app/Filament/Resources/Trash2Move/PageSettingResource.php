@@ -6,6 +6,10 @@ use App\Models\PageSetting;
 use Filament\Resources\Resource;
 use Filament\Navigation\NavigationItem;
 use App\Filament\Resources\Trash2Move\PageSettingResource\Pages;
+use App\Filament\Resources\Trash2Move\PageSettingResource\Pages\Pages\Pages\HeroPageSetting;
+use App\Filament\Resources\Trash2Move\PageSettingResource\Pages\Pages\Pages\AboutPageSetting;
+use App\Filament\Resources\Trash2Move\PageSettingResource\Pages\Pages\Pages\FooterPageSetting;
+
 
 class PageSettingResource extends Resource
 {

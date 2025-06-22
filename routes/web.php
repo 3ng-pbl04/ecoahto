@@ -59,5 +59,9 @@ Route::get('/export-hasil-olah-pdf', function () {
     return $pdf->download('hasil-olah.pdf');
 })->name('export.hasilolah.pdf');
 
+
+Route::put('/pengaduan/{id}/update-status', [PengaduanController::class, 'updateStatus'])->name('pengaduan.updateStatus');
+
+
 //  Halaman login
 Route::get('/login', fn() => view('login'))->name('login');
