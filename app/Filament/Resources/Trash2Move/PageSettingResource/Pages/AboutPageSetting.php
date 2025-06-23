@@ -12,7 +12,15 @@ use Filament\Forms\Components\FileUpload;
 class AboutPageSetting extends EditRecord
 {
     protected static string $resource = PageSettingResource::class;
-
+    public function getTitle(): string
+    
+    {
+        return 'Konfigurasi Halaman Tentang Kami';
+    }
+    public function getBreadcrumbs(): array
+{
+    return [];
+}
     public function form(Form $form): Form
     {
         return $form->schema([

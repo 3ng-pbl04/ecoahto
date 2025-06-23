@@ -10,7 +10,14 @@ use Filament\Forms\Components\TextInput;
 class FooterPageSetting extends EditRecord
 {
     protected static string $resource = PageSettingResource::class;
-
+    public function getTitle(): string
+    {
+        return 'Konfigurasi Footer';
+    }
+public function getBreadcrumbs(): array
+{
+    return [];
+}
     public function form(Form $form): Form
     {
         return $form->schema([

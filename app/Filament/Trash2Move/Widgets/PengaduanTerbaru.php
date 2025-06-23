@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Widgets;
+namespace App\Filament\Trash2Move\Widgets;
 
 use App\Models\Pengaduan;
 use Filament\Widgets\Widget;
@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 
 class PengaduanTerbaru extends Widget
 {
-    protected static string $view = 'filament.admin.widgets.pengaduan-terbaru';
+    protected static string $view = 'filament.trash2move.widgets.pengaduan-terbaru';
 
     public array $status = [];
 
