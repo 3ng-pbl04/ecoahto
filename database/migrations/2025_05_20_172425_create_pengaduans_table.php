@@ -15,6 +15,7 @@ return new class extends Migration
     $table->id();
     $table->string('nama');
     $table->string('no_telp');
+    $table->string('email');
     $table->text('alamat');
     $table->text('foto'); // <= ini penting, gunakan string atau text
     $table->string('keterangan');

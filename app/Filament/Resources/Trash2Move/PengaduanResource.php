@@ -12,9 +12,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Get;
 use Filament\Forms\Components\Select;
 use App\Filament\Resources\Trash2Move\PengaduanResource\Pages;
+use App\Mail\PengaduanDirespon;
+use Illuminate\Support\Facades\Mail;
 
 class PengaduanResource extends Resource
 {
@@ -34,8 +35,10 @@ class PengaduanResource extends Resource
                 ->required()
                 ->maxLength(20),
             TextInput::make('email')
-                ->required()
+
+                ->required(),
                 ->maxLength(255),
+          
             Textarea::make('alamat')
                 ->required(),
 
@@ -48,13 +51,14 @@ class PengaduanResource extends Resource
                 ->preserveFilenames()
                 ->downloadable()
                 ->openable()
-                ->disabled(), // bikin read-only
+                ->disabled(),
 
             Textarea::make('keterangan')
                 ->required(),
             TextInput::make('titik_koordinat')
                 ->required()
                 ->maxLength(255),
+
             Select::make('status')
                 ->options([
                     'Terkirim' => 'Terkirim',
@@ -63,7 +67,24 @@ class PengaduanResource extends Resource
                     'Dijadwalkan' => 'Dijadwalkan',
                 ])
                 ->default('Terkirim')
-                ->required(),
+                ->required()
+                ->reactive()
+                ->afterStateUpdated(function ($state, $livewire, $set, $get) {
+                    $pengaduan = $livewire->record;
+
+                    if ($state !== 'Terkirim') {
+                        $pengaduan->status = $state;
+                        $pengaduan->catatan_admin = $get('catatan_admin');
+                        $pengaduan->save();
+
+                        Mail::to($pengaduan->email)->send(new PengaduanDirespon($pengaduan));
+                    }
+                }),
+
+            Textarea::make('catatan_admin')
+                ->label('Catatan Admin')
+                ->rows(3)
+                ->nullable(),
         ]);
     }
 
