@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-      Schema::create('pengaduans', function (Blueprint $table) {
+        Schema::create('pengaduans', function (Blueprint $table) {
     $table->id();
     $table->string('nama');
     $table->string('no_telp');
+    $table->string('email');
     $table->text('alamat');
-    $table->string('foto'); // <= ini penting, gunakan string atau text
+    $table->text('foto'); // <= ini penting, gunakan string atau text
     $table->string('keterangan');
     $table->string('titik_koordinat')->nullable(); // untuk nanti
     $table->enum('status', ['Terkirim', 'Ditolak', 'Diterima', 'Dijadwalkan'])->default('Terkirim');

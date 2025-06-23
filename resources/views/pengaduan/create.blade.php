@@ -11,44 +11,76 @@
         #map { height: 300px; }
         .form-container { background-color: #f8f9fa; padding: 20px; border-radius: 8px; }
         .card-header { background-color: #28a745; }
-        .hero {
-            background-image: url('/images/sampah.jpg');
-            background-size: cover;
-            background-position: center;
-            padding: 100px 0;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        .hero .container {
-            position: relative;
-            z-index: 1;
-        }
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .header-container { display: flex; align-items: center; padding: 20px 0; }
-        .logo { display: flex; align-items: center; }
-        .logo img { height: 50px; margin-right: 15px; }
-        .stats-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 30px 0;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+       .hero {
+    background-image: url('../images/sampah.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 100px 0;
+    color: white;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #0078D7;
+    transform: translateY(-2px);
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 30px 0;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
         .stat-item { text-align: center; margin: 10px; padding: 15px; }
         .stat-item h3 { color: #28a745; font-size: 2rem; margin-bottom: 5px; }
         .divider { border-top: 1px solid #dee2e6; margin: 20px 0; }
@@ -143,7 +175,7 @@
                 </ul>
             </nav>
         </div>
-    
+
 </header>
 
 <section id="home" class="hero">
@@ -179,25 +211,55 @@
                     <input type="text" name="no_telp" id="no" class="form-control" required>
                 </div>
                 <div class="mb-3">
+                    <label for="no">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
                     <label for="alamat">Alamat</label>
                     <textarea name="alamat" id="alamat" class="form-control" required></textarea>
                 </div>
-                <div class="mb-3">
+               <div class="mb-3">
                     <label for="foto">Foto</label>
                     <input type="file" name="foto" id="foto" class="form-control" accept="image/*" required>
-                </div>
+                    <div class="mt-3">
+                        <img id="previewFoto" src="#" alt="Preview Foto" style="display: none; max-width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 8px;" />
+                    </div>
+
+                        <script>
+                            const inputFoto = document.getElementById('foto');
+                            const preview = document.getElementById('previewFoto');
+
+                            inputFoto.addEventListener('change', function () {
+                                const file = this.files[0];
+                                if (file) {
+                                    const reader = new FileReader();
+
+                                    reader.addEventListener("load", function () {
+                                        preview.setAttribute("src", this.result);
+                                        preview.style.display = 'block';
+                                    });
+
+                                    reader.readAsDataURL(file);
+                                } else {
+                                    preview.setAttribute("src", "#");
+                                    preview.style.display = 'none';
+                                }
+                            });
+                        </script>
                 <div class="mb-3">
                     <label for="keterangan">Keterangan</label>
                     <input type="text" name="keterangan" id="keterangan" class="form-control" required>
                 </div>
 
-                <div class="mb-3">
-                    <label>Pilih Titik Koordinat</label>
-                    <div id="map"></div>
-                    <input type="hidden" name="titik_koordinat" id="titik_koordinat">
-                    <input type="hidden" name="latitude" id="latitude">
-                    <input type="hidden" name="longitude" id="longitude">
-                </div>
+              <div class="mb-3">
+                <label>Pilih Titik Koordinat</label>
+                <div id="map"></div>
+                <small id="koordinat-terpilih" class="text-muted"></small>
+                <input type="hidden" name="titik_koordinat" id="titik_koordinat">
+                <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
+            </div>
+
 
                 <button type="submit" class="btn btn-success">Kirim Pengaduan</button>
             </form>
@@ -219,13 +281,27 @@
             map.removeLayer(marker);
         }
         marker = L.marker(e.latlng).addTo(map);
+
         const lat = e.latlng.lat.toFixed(6);
         const lng = e.latlng.lng.toFixed(6);
         document.getElementById('latitude').value = lat;
         document.getElementById('longitude').value = lng;
         document.getElementById('titik_koordinat').value = `${lat}, ${lng}`;
+
+        // Ambil nama lokasi dari Nominatim (reverse geocoding)
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+            .then(response => response.json())
+            .then(data => {
+                const displayName = data.display_name || "Lokasi tidak ditemukan";
+                document.getElementById('koordinat-terpilih').innerText = `Lokasi dipilih: ${displayName}`;
+            })
+            .catch(error => {
+                console.error('Gagal mengambil nama lokasi:', error);
+                document.getElementById('koordinat-terpilih').innerText = `Koordinat: ${lat}, ${lng}`;
+            });
     });
 </script>
+
 
 <footer>
     <div class="container">
@@ -279,6 +355,18 @@
         </div>
     </div>
 </footer>
+    <script>
+    fetch('/api/pengaduan-maps')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+                L.marker([item.latitude, item.longitude])
+                    .addTo(map)
+                    .bindPopup(`<strong>${item.nama}</strong><br>${item.keterangan}<br><img src="/storage/${item.foto}" width="100">`);
+            });
+        })
+        .catch(error => console.error('Error loading data:', error));
+</script>
 
 </body>
 </html>

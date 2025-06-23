@@ -24,23 +24,12 @@ class UlasanResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama')
-                    ->required()
-                    ->maxLength(255),
-
-                Forms\Components\Select::make('rating')
-                    ->options([
-                        1 => '★☆☆☆☆',
-                        2 => '★★☆☆☆',
-                        3 => '★★★☆☆',
-                        4 => '★★★★☆',
-                        5 => '★★★★★',
-                    ])
-                    ->required(),
-
-                Forms\Components\Textarea::make('deskripsi')
-                    ->required()
-                    ->rows(4),
+                Forms\Components\TextInput::make('nama')->required(),
+                   // ->maxLength(255),
+                Forms\Components\TextInput::make('peran')->required(),
+                    //->maxLength(255),
+                Forms\Components\Textarea::make('komentar')->required(),
+                    //->rows(4),
             ]);
     }
 
@@ -48,19 +37,20 @@ class UlasanResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('nama')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('rating')->sortable(),
-                Tables\Columns\TextColumn::make('deskripsi')->limit(50),
+                Tables\Columns\TextColumn::make('peran')->sortable(),
+                Tables\Columns\TextColumn::make('komentar')->limit(50),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                // Tables\Actions\EditAction::make(),
+                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                // Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
@@ -68,8 +58,8 @@ class UlasanResource extends Resource
     {
         return [
             'index' => Pages\ListUlasans::route('/'),
-            'create' => Pages\CreateUlasan::route('/create'),
-            'edit' => Pages\EditUlasan::route('/{record}/edit'),
+            //'create' => Pages\CreateUlasan::route('/create'),
+            //'edit' => Pages\EditUlasan::route('/{record}/edit'),
         ];
     }
 }

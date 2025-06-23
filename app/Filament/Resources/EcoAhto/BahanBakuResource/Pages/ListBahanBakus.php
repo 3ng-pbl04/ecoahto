@@ -13,9 +13,7 @@ class ListBahanBakus extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-             ->label('Bahan Baku')
-             ->icon('heroicon-o-plus'),
+            Actions\CreateAction::make(),
         ];
     }
 }

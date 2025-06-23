@@ -1,7 +1,7 @@
 <?php
 namespace App\Filament\Resources\Ecoahto;
 
-use App\Filament\Resources\Ecoahto\BahanBakuResource\Pages;
+use App\Filament\Resources\EcoAhto\BahanBakuResource\Pages;
 use App\Models\BahanBaku;
 use Filament\Forms;
 use Filament\Tables;

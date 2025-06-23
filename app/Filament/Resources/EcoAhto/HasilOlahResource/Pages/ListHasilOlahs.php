@@ -13,9 +13,7 @@ class ListHasilOlahs extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-            ->label('Hasil Olah')
-            ->icon('heroicon-o-plus'),
+            Actions\CreateAction::make(),
         ];
     }
 }

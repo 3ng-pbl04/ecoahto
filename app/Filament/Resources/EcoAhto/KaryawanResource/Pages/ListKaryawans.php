@@ -13,9 +13,7 @@ class ListKaryawans extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-            ->label('Karyawan')
-            ->icon('heroicon-o-plus'),
+            Actions\CreateAction::make(),
         ];
     }
 }

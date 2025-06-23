@@ -14,7 +14,8 @@ class ListAnggotas extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label('+ Anggota'), // 👈 Ini dia custom label-nya
+                ->label('Tambah Data')
+                ->icon('heroicon-o-plus'),
         ];
     }
 }

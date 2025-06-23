@@ -12,10 +12,13 @@ class Pengaduan extends Model
     protected $fillable = [
         'nama',
         'no_telp',
+        'email',
         'alamat',
         'keterangan',
         'foto',
         'titik_koordinat',
         'status',
+        'catatan_admin',
     ];
+    
 }

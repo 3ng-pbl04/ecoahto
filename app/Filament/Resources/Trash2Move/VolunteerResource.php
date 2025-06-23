@@ -33,6 +33,7 @@ class VolunteerResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('nama')->searchable(),
                 Tables\Columns\TextColumn::make('no_telp')->searchable(),
                 Tables\Columns\TextColumn::make('alamat')->searchable(),

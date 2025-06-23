@@ -13,8 +13,9 @@ class ListVolunteers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->label('+ Anggota'), // 👈 Ini dia custom label-nya
+          //  Actions\CreateAction::make()
+                //->label('Tambah Data')
+               // ->icon('heroicon-o-plus'),
         ];
     }
 }
