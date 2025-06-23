@@ -39,8 +39,6 @@ class VolunteerResource extends Resource
                 Tables\Columns\TextColumn::make('status_kesehatan')->searchable(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
