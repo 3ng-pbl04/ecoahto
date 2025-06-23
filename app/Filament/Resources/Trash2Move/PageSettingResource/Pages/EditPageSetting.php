@@ -14,4 +14,10 @@ class EditPageSetting extends EditRecord
         return []; // Hilangkan tombol delete
     }
 
+    public function getBreadcrumbs(): array
+    {
+        return [];
+    }
+
+
 }

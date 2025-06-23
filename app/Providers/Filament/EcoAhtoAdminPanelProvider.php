@@ -33,7 +33,7 @@ class EcoAhtoAdminPanelProvider extends PanelProvider
             ->authGuard('eco')
             ->discoverResources(app_path('Filament/Resources/EcoAhto'), 'App\\Filament\\Resources\\EcoAhto')
             ->discoverPages(app_path('Filament/Pages/EcoAhto'), 'App\\Filament\\Pages\\EcoAhto')
-            ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Admin/Widgets/EcoAhto'), for: 'App\\Filament\\Admin\\Widgets\\EcoAhto')
             ->widgets([
                 // Add your widget classes here, e.g. ExampleWidget::class,
             ])

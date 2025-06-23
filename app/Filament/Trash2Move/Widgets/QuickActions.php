@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Filament\Admin\Widgets;
+namespace App\Filament\Trash2Move\Widgets;
+
 
 use Filament\Widgets\Widget;
 
 class QuickActions extends Widget
 {
-    protected static string $view = 'filament.admin.widgets.quick-actions';
+    protected static string $view = 'filament.trash2move.widgets.quick-actions';
 
     public function getColumnSpan(): int|string|array
     {
