@@ -14,9 +14,21 @@ class HeroPageSetting extends EditRecord
 {
     protected static string $resource = PageSettingResource::class;
 
+    public function getTitle(): string
+    {
+        return 'Konfigurasi Hero';
+    }
+    public function getBreadcrumbs(): array
+{
+    return [];
+}
     public function form(Form $form): Form
     {
         return $form->schema([
+            // Form untuk mengedit pengaturan halaman Hero
+
+            // Judul Halaman
+
 
             // Grid 2 kolom: kiri teks, kanan gambar
             Grid::make(2)->schema([
