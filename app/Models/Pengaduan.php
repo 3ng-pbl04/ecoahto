@@ -18,6 +18,7 @@ class Pengaduan extends Model
         'foto',
         'titik_koordinat',
         'status',
+        'catatan_admin',
     ];
     
 }

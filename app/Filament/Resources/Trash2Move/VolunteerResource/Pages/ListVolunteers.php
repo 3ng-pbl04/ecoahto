@@ -13,9 +13,9 @@ class ListVolunteers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->label('Tambah Data')
-                ->icon('heroicon-o-plus'),
+          //  Actions\CreateAction::make()
+                //->label('Tambah Data')
+               // ->icon('heroicon-o-plus'),
         ];
     }
 }
