@@ -782,7 +782,7 @@
                         <h2>Trash2Move</h2>
                     </div>
                     <p>
-                        {{ $page_settings->footer_text ?? 'Trash2Move adalah perusahaan daur ulang inovatif yang mendedikasikan diri untuk mengubah limbah menjadi produk bernilai tinggi sambil membangun komunitas yang sadar lingkungan.' }}
+                        {{ $page_settings->footer_text ?? '' }}
                     </p>
 
                 <div class="social-links">
@@ -838,15 +838,17 @@
                     </ul>
                 </div>
 
-                <div class="footer-links-section">
-                    <h3 class="footer-heading">Kontak</h3>
-                    <ul class="footer-links">
-                        <li>Jl. Hijau Lestari No.123</li>
-                        <li>Jakarta Selatan, Indonesia</li>
-                        <li>+62 21 1234 5678</li>
-                        <li>info@ecorecycle.id</li>
-                    </ul>
-                </div>
+        <div class="footer-links-section">
+            <h3 class="footer-heading">Kontak</h3>
+            <ul class="footer-links">
+                <li>
+                        {{ $page_settings->alamat ?? 'Informasi kontak belum tersedia' }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
             </div>
 
             <div class="copyright">
