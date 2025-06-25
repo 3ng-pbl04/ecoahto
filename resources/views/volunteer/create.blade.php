@@ -69,7 +69,7 @@
                     Kembali ke Beranda
                 </a>
                 <a href="/pengaduan/create" class="bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white text-white font-bold py-3 px-6 rounded-lg transition-colors shadow-md">
-                    Ajukan Aksi
+                      <i class="fas fa-hands"></i> Ajukan Aksi
                 </a>
             </div>
         </div>
