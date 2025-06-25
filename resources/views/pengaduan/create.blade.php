@@ -2,279 +2,272 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Pengaduan</title>
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-B8f6f2vA0ZzcvGLpMnq98zO23NBF7U9Ck2J+BB3OQcrWikDbdAG3WjO4CX84yGB3qABeWwF0LKJpKkI0a43pbg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
     <style>
         #map { height: 300px; }
-        .form-container { background-color: #f8f9fa; padding: 20px; border-radius: 8px; }
-        .card-header { background-color: #28a745; }
-       .hero {
-    background-image: url('../images/sampah.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 100px 0;
-    color: white;
-    text-align: center;
-}
 
-.hero h2 {
-    font-size: 48px;
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-.hero p {
-    font-size: 18px;
-    max-width: 700px;
-    margin: 0 auto 30px;
-}
-
-.cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
-}
-
-.btn {
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s;
-    cursor: pointer;
-    border: none;
-    font-size: 16px;
-}
-
-.btn-primary {
-    background-color: var(--primary);
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    background-color: var(--secondary);
-    color: white;
-}
-
-.btn-secondary:hover {
-    background-color: #0078D7;
-    transform: translateY(-2px);
-}
-
-.stats-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin: 30px 0;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-        .stat-item { text-align: center; margin: 10px; padding: 15px; }
-        .stat-item h3 { color: #28a745; font-size: 2rem; margin-bottom: 5px; }
-        .divider { border-top: 1px solid #dee2e6; margin: 20px 0; }
-
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 50px 0 20px;
-            margin-top: 50px;
+        /* Custom styles for hero section */
+        .hero {
+            background-image: url('../images/sampah.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+        /* Animation for file upload preview */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .footer-about { padding-right: 20px; }
-        .footer-logo { display: flex; align-items: center; margin-bottom: 20px; }
-        .footer-logo img { height: 40px; margin-right: 15px; }
-        .footer-logo h2 { color: white; font-size: 1.5rem; margin: 0; }
-        .footer-about p { margin-bottom: 20px; line-height: 1.6; }
-
-        .social-links { display: flex; gap: 15px; }
-        .social-links a {
-            display: inline-block;
-            width: 36px;
-            height: 36px;
-            background-color: #34495e;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 36px;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: #28a745;
-            transform: translateY(-3px);
-        }
-
-        .footer-heading {
-            color: #28a745;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-heading::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 2px;
-            background-color: #28a745;
-        }
-
-        .footer-links { list-style: none; padding: 0; margin: 0; }
-        .footer-links li { margin-bottom: 10px; }
-        .footer-links a { color: #ecf0f1; text-decoration: none; transition: color 0.3s ease; }
-        .footer-links a:hover { color: #28a745; }
-        .footer-links li:not(a) { color: #bdc3c7; }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #34495e;
-            color: #bdc3c7;
-            font-size: 0.9rem;
+        #previewFoto {
+            animation: fadeIn 0.5s ease-in;
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 font-sans">
 
-<div class="container header-container">
-            <div class="logo">
-                   <img src="/images/LOGO.png" alt="TRASH2MOVE Logo">
-                <h1>TRASH2MOVE</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Beranda</a></li>
-                    <li><a href="#company">Tentang Kami</a></li>
-                    <li><a href="#products">Produk</a></li>
-                    <li><a href="#news">Berita</a></li>
-                    <li><a href="#testimonials">Ulasan</a></li>
-                    <li><a href="#contact">Kontak</a></li>
-                    <li><a href="#login">Login</a></li>
-                </ul>
-            </nav>
+<!-- Header -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="logo flex items-center">
+            <img src="/images/LOGO.png" alt="TRASH2MOVE Logo" class="h-10 w-10 mr-3">
+            <h1 class="text-xl font-bold text-green-700">TRASH2MOVE</h1>
         </div>
 
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:block">
+            <ul class="flex space-x-6">
+                <li><a href="#home" class="hover:text-green-600 transition">Beranda</a></li>
+                <li><a href="#company" class="hover:text-green-600 transition">Tentang Kami</a></li>
+                <li><a href="#products" class="hover:text-green-600 transition">Produk</a></li>
+                <li><a href="#news" class="hover:text-green-600 transition">Berita</a></li>
+                <li><a href="#testimonials" class="hover:text-green-600 transition">Ulasan</a></li>
+                <li><a href="#contact" class="hover:text-green-600 transition">Kontak</a></li>
+                <li><a href="#login" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white">
+        <ul class="px-4 py-2 space-y-2">
+            <li><a href="#home" class="block py-2 hover:text-green-600">Beranda</a></li>
+            <li><a href="#company" class="block py-2 hover:text-green-600">Tentang Kami</a></li>
+            <li><a href="#products" class="block py-2 hover:text-green-600">Produk</a></li>
+            <li><a href="#news" class="block py-2 hover:text-green-600">Berita</a></li>
+            <li><a href="#testimonials" class="block py-2 hover:text-green-600">Ulasan</a></li>
+            <li><a href="#contact" class="block py-2 hover:text-green-600">Kontak</a></li>
+            <li><a href="#login" class="block bg-green-600 text-white px-4 py-2 rounded text-center hover:bg-green-700">Login</a></li>
+        </ul>
+    </div>
 </header>
 
-<section id="home" class="hero">
-    <div class="container">
-        <h2 class="display-4 fw-bold">Ubah Sampah Menjadi Solusi</h2>
-        <p class="lead fs-5">Misi kami adalah mendaur ulang limbah menjadi produk berkualitas tinggi yang tidak hanya ramah lingkungan tetapi juga fungsional dan estetis.</p>
-        <div class="cta-buttons">
-        <a href="/" class="btn btn-success btn-lg px-4">Kembali ke Beranda</a>
-
-            <button class="btn btn-outline-light btn-lg px-4">Jadi Volunteer</button>
+<!-- Hero Section -->
+<section id="home" class="hero min-h-[50vh] flex items-center justify-center text-white relative">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="container mx-auto px-4 text-center relative z-10">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Ubah Sampah Menjadi Solusi</h2>
+        <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">Misi kami adalah mendaur ulang limbah menjadi produk berkualitas tinggi yang tidak hanya ramah lingkungan tetapi juga fungsional dan estetis.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="/" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition">
+                Kembali ke Beranda
+            </a>
+                <a href="{{ route('volunteer.create') }}" class="bg-transparent border-2 border-white hover:bg-white hover:text-green-700 text-white font-bold py-3 px-6 rounded-lg transition">
+            Jadi Volunteer
+        </a>
         </div>
     </div>
 </section>
 
-<div class="divider"></div>
+<!-- Divider -->
+<div class="border-t border-gray-200 my-6"></div>
 
-
-<div class="container mt-5">
-    <div class="card shadow">
-        <div class="card-header bg-success text-white">
-            <h4>Form Layanan Pengaduan</h4>
+<!-- Main Form Container -->
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- Card Header -->
+        <div class="bg-green-600 text-white px-6 py-4">
+            <h4 class="text-xl font-bold">Form Layanan Pengaduan</h4>
         </div>
-        <div class="card-body form-container">
-          <form action="{{ route('pengaduan.store') }}" method="POST" enctype="multipart/form-data">
 
-             @csrf
-                <div class="mb-3">
-                    <label for="nama">Nama</label>
-                    <input type="text" name="nama" id="nama" class="form-control" required>
+        <!-- Card Body -->
+        <div class="p-6 md:p-8">
+            <form action="{{ route('pengaduan.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                @csrf
+
+                <!-- Nama Field -->
+                <div>
+                    <label for="nama" class="block text-gray-700 font-medium mb-2">Nama</label>
+                    <input type="text" name="nama" id="nama"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                           required>
                 </div>
-                <div class="mb-3">
-                    <label for="no">No Telepon</label>
-                    <input type="text" name="no_telp" id="no" class="form-control" required>
+
+                <!-- No Telepon Field -->
+                <div>
+                    <label for="no" class="block text-gray-700 font-medium mb-2">No Telepon</label>
+                    <input type="text" name="no_telp" id="no"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                           required>
                 </div>
-                <div class="mb-3">
-                    <label for="no">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" required>
+
+                <!-- Email Field -->
+                <div>
+                    <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                    <input type="email" name="email" id="email"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                           required>
                 </div>
-                <div class="mb-3">
-                    <label for="alamat">Alamat</label>
-                    <textarea name="alamat" id="alamat" class="form-control" required></textarea>
+
+                <!-- Alamat Field -->
+                <div>
+                    <label for="alamat" class="block text-gray-700 font-medium mb-2">Alamat</label>
+                    <textarea name="alamat" id="alamat" rows="3"
+                              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                              required></textarea>
                 </div>
-               <div class="mb-3">
-                    <label for="foto">Foto</label>
-                    <input type="file" name="foto" id="foto" class="form-control" accept="image/*" required>
+
+                <!-- Foto Field -->
+                <div>
+                    <label for="foto" class="block text-gray-700 font-medium mb-2">Foto</label>
+                    <input type="file" name="foto" id="foto"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                           accept="image/*" required>
                     <div class="mt-3">
-                        <img id="previewFoto" src="#" alt="Preview Foto" style="display: none; max-width: 300px; border: 1px solid #ccc; padding: 5px; border-radius: 8px;" />
+                        <img id="previewFoto" src="#" alt="Preview Foto"
+                             class="hidden max-w-full md:max-w-[300px] border border-gray-300 p-1 rounded-lg" />
                     </div>
-
-                        <script>
-                            const inputFoto = document.getElementById('foto');
-                            const preview = document.getElementById('previewFoto');
-
-                            inputFoto.addEventListener('change', function () {
-                                const file = this.files[0];
-                                if (file) {
-                                    const reader = new FileReader();
-
-                                    reader.addEventListener("load", function () {
-                                        preview.setAttribute("src", this.result);
-                                        preview.style.display = 'block';
-                                    });
-
-                                    reader.readAsDataURL(file);
-                                } else {
-                                    preview.setAttribute("src", "#");
-                                    preview.style.display = 'none';
-                                }
-                            });
-                        </script>
-                <div class="mb-3">
-                    <label for="keterangan">Keterangan</label>
-                    <input type="text" name="keterangan" id="keterangan" class="form-control" required>
                 </div>
 
-              <div class="mb-3">
-                <label>Pilih Titik Koordinat</label>
-                <div id="map"></div>
-                <small id="koordinat-terpilih" class="text-muted"></small>
-                <input type="hidden" name="titik_koordinat" id="titik_koordinat">
-                <input type="hidden" name="latitude" id="latitude">
-                <input type="hidden" name="longitude" id="longitude">
-            </div>
+                <!-- Keterangan Field -->
+                <div>
+                    <label for="keterangan" class="block text-gray-700 font-medium mb-2">Keterangan</label>
+                    <input type="text" name="keterangan" id="keterangan"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                           required>
+                </div>
 
+                <!-- Map Field -->
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Pilih Titik Koordinat</label>
+                    <div id="map" class="rounded-lg border border-gray-300"></div>
+                    <small id="koordinat-terpilih" class="text-gray-500 mt-1 block"></small>
+                    <input type="hidden" name="titik_koordinat" id="titik_koordinat">
+                    <input type="hidden" name="latitude" id="latitude">
+                    <input type="hidden" name="longitude" id="longitude">
+                </div>
 
-                <button type="submit" class="btn btn-success">Kirim Pengaduan</button>
+                <!-- Submit Button -->
+                <div class="pt-4">
+                    <button type="submit"
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition">
+                        Kirim Pengaduan
+                    </button>
+                </div>
             </form>
         </div>
     </div>
 </div>
 
+<!-- Footer -->
+<footer class="bg-gray-800 text-white pt-12 pb-6 mt-12">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <!-- About Section -->
+            <div class="footer-about">
+                <div class="footer-logo flex items-center mb-4">
+                    <img src="/images/LOGO.png" alt="Trash2Move Logo" class="h-10 w-10 mr-3">
+                    <h2 class="text-xl font-bold">Trash2Move</h2>
+                </div>
+                <p class="text-gray-400 mb-4">Trash2Move adalah perusahaan daur ulang inovatif yang mendedikasikan diri untuk mengubah limbah menjadi produk bernilai tinggi sambil membangun komunitas yang sadar lingkungan.</p>
+                <div class="social-links flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Products Section -->
+            <div class="footer-links-section">
+                <h3 class="text-lg font-semibold text-green-500 mb-4 border-b border-green-500 pb-2">Produk</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Furniture</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Aksesori</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Kemasan</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Dekorasi</a></li>
+                </ul>
+            </div>
+
+            <!-- Company Section -->
+            <div class="footer-links-section">
+                <h3 class="text-lg font-semibold text-green-500 mb-4 border-b border-green-500 pb-2">Perusahaan</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Tentang Kami</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Tim</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Karir</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="footer-links-section">
+                <h3 class="text-lg font-semibold text-green-500 mb-4 border-b border-green-500 pb-2">Kontak</h3>
+                <ul class="space-y-2 text-gray-400">
+                    <li>Jl. Hijau Lestari No.123</li>
+                    <li>Jakarta Selatan, Indonesia</li>
+                    <li>+62 21 1234 5678</li>
+                    <li>info@trash2move.id</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center text-gray-400 pt-6 border-t border-gray-700">
+            &copy; 2025 Trash2Move. Hak Cipta Dilindungi.
+        </div>
+    </div>
+</footer>
+
+<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 <script>
+    // Initialize map
     var map = L.map('map').setView([-0.9472, 100.3544], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap',
         maxZoom: 18,
     }).addTo(map);
 
+    // Handle map click
     var marker;
     map.on('click', function (e) {
         if (marker) {
@@ -288,7 +281,7 @@
         document.getElementById('longitude').value = lng;
         document.getElementById('titik_koordinat').value = `${lat}, ${lng}`;
 
-        // Ambil nama lokasi dari Nominatim (reverse geocoding)
+        // Get location name from Nominatim (reverse geocoding)
         fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
             .then(response => response.json())
             .then(data => {
@@ -300,62 +293,8 @@
                 document.getElementById('koordinat-terpilih').innerText = `Koordinat: ${lat}, ${lng}`;
             });
     });
-</script>
 
-
-<footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-about">
-                <div class="footer-logo">
-                    <img src="/images/LOGO.png" alt="Trash2Move Logo">
-                    <h2>Trash2Move</h2>
-                </div>
-                <p>Trash2Move adalah perusahaan daur ulang inovatif yang mendedikasikan diri untuk mengubah limbah menjadi produk bernilai tinggi sambil membangun komunitas yang sadar lingkungan.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-
-            <div class="footer-links-section">
-                <h3 class="footer-heading">Produk</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Furniture</a></li>
-                    <li><a href="#">Aksesori</a></li>
-                    <li><a href="#">Kemasan</a></li>
-                    <li><a href="#">Dekorasi</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links-section">
-                <h3 class="footer-heading">Perusahaan</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Tentang Kami</a></li>
-                    <li><a href="#">Tim</a></li>
-                    <li><a href="#">Karir</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links-section">
-                <h3 class="footer-heading">Kontak</h3>
-                <ul class="footer-links">
-                    <li>Jl. Hijau Lestari No.123</li>
-                    <li>Jakarta Selatan, Indonesia</li>
-                    <li>+62 21 1234 5678</li>
-                    <li>info@trash2move.id</li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            &copy; 2025 Trash2Move. Hak Cipta Dilindungi.
-        </div>
-    </div>
-</footer>
-    <script>
+    // Load existing reports on map
     fetch('/api/pengaduan-maps')
         .then(response => response.json())
         .then(data => {
@@ -366,7 +305,36 @@
             });
         })
         .catch(error => console.error('Error loading data:', error));
+
+    // Preview image when file is selected
+    const inputFoto = document.getElementById('foto');
+    const preview = document.getElementById('previewFoto');
+
+    inputFoto.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                preview.setAttribute("src", this.result);
+                preview.classList.remove('hidden');
+            });
+
+            reader.readAsDataURL(file);
+        } else {
+            preview.setAttribute("src", "#");
+            preview.classList.add('hidden');
+        }
+    });
+
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    });
 </script>
+
+
 
 </body>
 </html>
