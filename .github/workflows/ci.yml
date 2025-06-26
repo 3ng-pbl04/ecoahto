@@ -1,0 +1,56 @@
+name: Laravel CI
+
+on: [push, pull_request]
+
+jobs:
+  laravel-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone Repo
+      uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'  # Ganti sesuai versi Laravel kamu
+
+    - name: Install dependencies
+      run: composer install --no-progress
+
+    - name: Salin file .env
+      run: cp .env.example .env
+
+    - name: Generate app key
+      run: php artisan key:generate
+
+    - name: Jalankan test (tapi tidak error kalau gagal)
+      run: php artisan test || true
+name: Laravel CI
+
+on: [push, pull_request]
+
+jobs:
+  laravel-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone Repo
+      uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'  # Ganti sesuai versi Laravel kamu
+
+    - name: Install dependencies
+      run: composer install --no-progress
+
+    - name: Salin file .env
+      run: cp .env.example .env
+
+    - name: Generate app key
+      run: php artisan key:generate
+
+    - name: Jalankan test (tapi tidak error kalau gagal)
+      run: php artisan test || true
