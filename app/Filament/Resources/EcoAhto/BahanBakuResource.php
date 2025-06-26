@@ -56,11 +56,20 @@ class BahanBakuResource extends Resource
                 Tables\Columns\TextColumn::make('warna'),
                 Tables\Columns\TextColumn::make('asal'),
                 Tables\Columns\TextColumn::make('tanggal_olah')->date(),
-                Tables\Columns\BadgeColumn::make('status')->colors([
-                    'warning' => 'Mentah',
-                    'info' => 'Diolah',
-                    'success' => 'Jadi',
-                ]),
+                // Tables\Columns\BadgeColumn::make('status')->colors([
+                //     'warning' => 'Mentah',
+                //     'info' => 'Diolah',
+                //     'success' => 'Jadi',
+                // ]),
+                Tables\Columns\SelectColumn::make('status')
+                ->label('Status')
+                ->options([
+                    'Mentah' => 'Mentah',
+                    'Diolah' => 'Diolah',
+                    'Jadi' => 'Jadi',
+                ])
+                ->sortable(),
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
