@@ -27,17 +27,18 @@ class PostinganResource extends Resource
                     ->label('Nama Produk')
                     ->maxLength(255),
 
-
-
-
-
                 Forms\Components\TextInput::make('harga')
+                    ->prefix('Rp')
                     ->label('Harga')
                     ->maxLength(100),
 
                 Forms\Components\TextInput::make('rating')
+                    ->numeric()          
+                    ->minValue(1)        
+                    ->maxValue(5)        
+                    ->step(0.1)          
                     ->label('Rating')
-                    ->maxLength(10),
+                    ->required(),
 
                 Forms\Components\TextInput::make('link')
                     ->label('Link Beli')
@@ -67,12 +68,30 @@ class PostinganResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('nama')->sortable()->searchable(),
-                Tables\Columns\ImageColumn::make('gambar')->label('Gambar')->circular(),
-                Tables\Columns\TextColumn::make('harga')->sortable()->label('Harga'),
-                Tables\Columns\TextColumn::make('rating')->label('Rating'),
-                Tables\Columns\TextColumn::make('created_at')->label('Dibuat')->dateTime(),
+                Tables\Columns\TextColumn::make('id')
+                    ->sortable()   
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('nama')
+                    ->sortable()
+                    ->searchable(),
+
+                Tables\Columns\ImageColumn::make('gambar')
+                    ->label('Gambar')
+                    ->circular(),
+
+                Tables\Columns\TextColumn::make('harga')
+                    ->sortable()
+                    ->formatStateUsing(fn ($state) => 'Rp' . number_format($state, 0,',','.'))
+                    ->label('Harga'),
+
+                Tables\Columns\TextColumn::make('rating')
+                    ->sortable()
+                    ->label('Rating'),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
+                    ->dateTime(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
