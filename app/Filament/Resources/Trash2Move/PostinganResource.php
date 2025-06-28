@@ -23,24 +23,28 @@ class PostinganResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextArea::make('nama')
+                    ->placeholder('Masukkan Nama Produk')
                     ->required()
                     ->label('Nama Produk')
                     ->maxLength(255),
 
                 Forms\Components\TextInput::make('harga')
+                    ->placeholder('Masukkan Harga Produk')
                     ->prefix('Rp')
                     ->label('Harga')
                     ->maxLength(100),
 
                 Forms\Components\TextInput::make('rating')
+                    ->placeholder('Masukkan Rating Produk(1-5)')
                     ->numeric()          
                     ->minValue(1)        
                     ->maxValue(5)        
-                    ->step(0.1)          
+                    ->step(0.5)          
                     ->label('Rating')
                     ->required(),
 
                 Forms\Components\TextInput::make('link')
+                    ->placeholder('Masukkan Link Produk')
                     ->label('Link Beli')
                     ->url()
                     ->maxLength(255),
@@ -57,6 +61,7 @@ class PostinganResource extends Resource
                     ->visibility('public'),
 
                  Forms\Components\Textarea::make('deskripsi')
+                    ->placeholder('Masukkan Deskripsi Produk')
                     ->required()
                     ->label('Deskripsi')
                     ->rows(5),
