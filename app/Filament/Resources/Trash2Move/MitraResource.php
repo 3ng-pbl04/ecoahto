@@ -40,7 +40,7 @@ class MitraResource extends Resource
                 ->maxLength(255),
 
             TextInput::make('email')
-                ->placeholder('Masukkan Nomor Email Mitra')
+                ->placeholder('Masukkan Email Mitra')
                 ->required()
                 ->email()
                 ->maxLength(255),
