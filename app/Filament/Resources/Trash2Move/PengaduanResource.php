@@ -35,6 +35,8 @@ class PengaduanResource extends Resource
             TextInput::make('no_telp')
                 ->required()
                 ->maxLength(255),
+            TextInput::make('email')
+                ->required(),
 
             Textarea::make('alamat')
                 ->required(),
