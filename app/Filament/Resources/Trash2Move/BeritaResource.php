@@ -55,15 +55,29 @@ class BeritaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('judul')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('tanggal')->date(),
-                Tables\Columns\ImageColumn::make('gambar')->label('Gambar')->circular(),
-                 Tables\Columns\TextColumn::make('admin.name')  // ini yang tampilkan username admin
-                ->label('Admin Pembuat')
-                ->sortable()
-                ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')->since()->label('Diposting'),
+                Tables\Columns\TextColumn::make('id')
+                    ->sortable()
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('judul')
+                    ->searchable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('tanggal')
+                    ->date(),
+
+                Tables\Columns\ImageColumn::make('gambar')
+                    ->label('Gambar')
+                    ->circular(),
+
+                 Tables\Columns\TextColumn::make('admin.name')
+                    ->label('Admin Pembuat')
+                    ->sortable()
+                    ->searchable(),
+                    
+                Tables\Columns\TextColumn::make('created_at')
+                    ->since()
+                    ->label('Diposting'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
