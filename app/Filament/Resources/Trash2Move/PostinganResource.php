@@ -37,12 +37,22 @@ class PostinganResource extends Resource
 
                 Forms\Components\TextInput::make('rating')
                     ->placeholder('Masukkan Rating Produk(1-5)')
-                    ->numeric()          
-                    ->minValue(1)        
-                    ->maxValue(5)        
-                    ->step(0.5)          
+                    ->numeric()
+                    ->minValue(1)
+                    ->maxValue(5)
+                    ->step(0.5)
                     ->label('Rating')
                     ->required(),
+
+                Forms\Components\Select::make('kategori')
+                    ->label('Kategori')
+                    ->required()
+                    ->options([
+                        'kursi' => 'Kursi',
+                        'ganci' => 'Ganci',
+                    ])
+                    ->native(false)
+                    ->searchable(),
 
                 Forms\Components\TextInput::make('link')
                     ->placeholder('Masukkan Link Produk')
@@ -50,7 +60,7 @@ class PostinganResource extends Resource
                     ->url()
                     ->maxLength(255),
 
-                  Forms\Components\FileUpload::make('gambar')
+                Forms\Components\FileUpload::make('gambar')
                     ->label('Gambar Produk')
                     ->directory('postingans')
                     ->disk('public')
@@ -61,12 +71,11 @@ class PostinganResource extends Resource
                     ->preserveFilenames()
                     ->visibility('public'),
 
-                 Forms\Components\Textarea::make('deskripsi')
+                Forms\Components\Textarea::make('deskripsi')
                     ->placeholder('Masukkan Deskripsi Produk')
                     ->required()
                     ->label('Deskripsi')
                     ->rows(5),
-
             ]);
     }
 
@@ -84,8 +93,12 @@ class PostinganResource extends Resource
 
                 Tables\Columns\TextColumn::make('harga')
                     ->sortable()
-                    ->formatStateUsing(fn ($state) => 'Rp' . number_format($state, 0,',','.'))
+                    ->formatStateUsing(fn ($state) => 'Rp' . number_format($state, 0, ',', '.'))
                     ->label('Harga'),
+
+                Tables\Columns\TextColumn::make('kategori')
+                    ->sortable()
+                    ->label('Kategori'),
 
                 Tables\Columns\TextColumn::make('rating')
                     ->sortable()
