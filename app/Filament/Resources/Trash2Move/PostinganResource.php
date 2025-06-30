@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources\Trash2Move;
 
-use App\Filament\Resources\Trash2Move\PostinganResource\Pages;
-use App\Models\Postingan;
 use Filament\Forms;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Postingan;
+use Filament\Facades\Filament;
+use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\Trash2Move\PostinganResource\Pages;
 
 class PostinganResource extends Resource
 {
@@ -23,18 +24,25 @@ class PostinganResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextArea::make('nama')
+                    ->placeholder('Masukkan Nama Produk')
                     ->required()
                     ->label('Nama Produk')
                     ->maxLength(255),
 
-
                 Forms\Components\TextInput::make('harga')
+                    ->placeholder('Masukkan Harga Produk')
+                    ->prefix('Rp')
                     ->label('Harga')
                     ->maxLength(100),
 
                 Forms\Components\TextInput::make('rating')
+                    ->placeholder('Masukkan Rating Produk(1-5)')
+                    ->numeric()
+                    ->minValue(1)
+                    ->maxValue(5)
+                    ->step(0.5)
                     ->label('Rating')
-                    ->maxLength(10),
+                    ->required(),
 
                 Forms\Components\Select::make('kategori')
                     ->label('Kategori')
@@ -46,8 +54,8 @@ class PostinganResource extends Resource
                     ->native(false)
                     ->searchable(),
 
-
                 Forms\Components\TextInput::make('link')
+                    ->placeholder('Masukkan Link Produk')
                     ->label('Link Beli')
                     ->url()
                     ->maxLength(255),
@@ -64,10 +72,10 @@ class PostinganResource extends Resource
                     ->visibility('public'),
 
                 Forms\Components\Textarea::make('deskripsi')
+                    ->placeholder('Masukkan Deskripsi Produk')
                     ->required()
                     ->label('Deskripsi')
                     ->rows(5),
-
             ]);
     }
 
@@ -75,13 +83,30 @@ class PostinganResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('nama')->sortable()->searchable(),
-                Tables\Columns\ImageColumn::make('gambar')->label('Gambar')->circular(),
-                Tables\Columns\TextColumn::make('harga')->sortable()->label('Harga'),
-                Tables\Columns\TextColumn::make('kategori')->sortable()->label('Kategori'),
-                Tables\Columns\TextColumn::make('rating')->label('Rating'),
-                Tables\Columns\TextColumn::make('created_at')->label('Dibuat')->dateTime(),
+                Tables\Columns\TextColumn::make('nama')
+                    ->sortable()
+                    ->searchable(),
+
+                Tables\Columns\ImageColumn::make('gambar')
+                    ->label('Gambar')
+                    ->circular(),
+
+                Tables\Columns\TextColumn::make('harga')
+                    ->sortable()
+                    ->formatStateUsing(fn ($state) => 'Rp' . number_format($state, 0, ',', '.'))
+                    ->label('Harga'),
+
+                Tables\Columns\TextColumn::make('kategori')
+                    ->sortable()
+                    ->label('Kategori'),
+
+                Tables\Columns\TextColumn::make('rating')
+                    ->sortable()
+                    ->label('Rating'),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
+                    ->dateTime(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -105,5 +130,10 @@ class PostinganResource extends Resource
             'create' => Pages\CreatePostingan::route('/create'),
             'edit' => Pages\EditPostingan::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return Filament::auth()->user()?->role === 'trash2move';
     }
 }

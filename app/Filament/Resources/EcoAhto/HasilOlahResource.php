@@ -2,31 +2,41 @@
 
 namespace App\Filament\Resources\EcoAhto;
 
-use App\Filament\Resources\EcoAhto\HasilOlahResource\Pages;
-use App\Filament\Resources\EcoAhto\HasilOlahResource\RelationManagers;
-use App\Models\HasilOlah;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\HasilOlah;
 use Filament\Tables\Table;
+use Filament\Facades\Filament;
+use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\EcoAhto\HasilOlahResource\Pages;
+use App\Filament\Resources\EcoAhto\HasilOlahResource\RelationManagers;
 
 class HasilOlahResource extends Resource
 {
     protected static ?string $model = HasilOlah::class;
     protected static ?string $navigationGroup = 'Manajemen';
     protected static ?string $navigationLabel = 'Hasil Olah';
+    protected static ?string $pluralModelLabel = 'Hasil Olah';
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-              Forms\Components\TextInput::make('nama')->required(),
-                 Forms\Components\TextInput::make('bahan')->required(),
-                  Forms\Components\TextInput::make('warna')->required(),
+              Forms\Components\TextInput::make('nama')
+                ->placeholder('Masukkan Nama Hasil Olah')
+                ->required(),
+
+              Forms\Components\TextInput::make('bahan')
+                ->placeholder('Masukkan Bahan Hasil Olah')
+                ->required(),
+
+              Forms\Components\TextInput::make('warna')
+                ->placeholder('Masukkan Warna Hasil Olah')
+                ->required(),
             ]);
     }
 
@@ -34,11 +44,16 @@ class HasilOlahResource extends Resource
     {
         return $table
             ->columns([
-
-            Tables\Columns\TextColumn::make('id'),
-            Tables\Columns\TextColumn::make('nama'),
-            Tables\Columns\TextColumn::make('bahan'),
-            Tables\Columns\TextColumn::make('warna'),
+            Tables\Columns\TextColumn::make('nama')
+                ->sortable()
+                ->searchable(),
+                
+            Tables\Columns\TextColumn::make('bahan')
+                ->searchable(),
+                
+            Tables\Columns\TextColumn::make('warna')
+                ->searchable(),
+                
             ])
             ->filters([
                 //
@@ -68,5 +83,9 @@ class HasilOlahResource extends Resource
             'create' => Pages\CreateHasilOlah::route('/create'),
             'edit' => Pages\EditHasilOlah::route('/{record}/edit'),
         ];
+    }
+    public static function canAccess(): bool
+    {
+        return Filament::auth()->user()?->role === 'ecoahto';
     }
 }

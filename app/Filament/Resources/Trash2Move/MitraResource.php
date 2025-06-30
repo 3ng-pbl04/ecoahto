@@ -2,19 +2,21 @@
 
 namespace App\Filament\Resources\Trash2Move;
 
-use App\Filament\Resources\Trash2Move\MitraResource\Pages;
 use App\Models\Mitra;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Facades\Filament;
 use Filament\Resources\Resource;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BadgeColumn;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
+use App\Filament\Resources\Trash2Move\MitraResource\Pages;
 
 class MitraResource extends Resource
 {
@@ -29,19 +31,24 @@ class MitraResource extends Resource
     {
         return $form->schema([
             TextInput::make('nama')
+                ->placeholder('Masukkan Nama Mitra')
                 ->required()
                 ->maxLength(255),
 
             TextInput::make('kontak')
+                ->tel()
+                ->placeholder('Masukkan Kontak Mitra')
                 ->required()
                 ->maxLength(255),
 
             TextInput::make('email')
+                ->placeholder('Masukkan Email Mitra')
                 ->required()
                 ->email()
                 ->maxLength(255),
 
             Textarea::make('alamat')
+                ->placeholder('Masukkan Alamat Mitra')
                 ->required()
                 ->maxLength(500),
 
@@ -67,17 +74,14 @@ class MitraResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')
-                    ->searchable()
-                    ->sortable(),
-
                 TextColumn::make('nama')
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('kontak'),
 
-                TextColumn::make('email'),
+                TextColumn::make('email')
+                    ->searchable(),
 
                 TextColumn::make('alamat')
                     ->limit(30),
@@ -100,6 +104,7 @@ class MitraResource extends Resource
             ])
             ->defaultSort('id', 'desc')
             ->actions([
+                ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
             ])
@@ -120,5 +125,10 @@ class MitraResource extends Resource
             'create' => Pages\CreateMitra::route('/create'),
             'edit' => Pages\EditMitra::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return Filament::auth()->user()?->role === 'trash2move';
     }
 }

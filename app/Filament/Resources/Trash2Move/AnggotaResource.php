@@ -1,12 +1,13 @@
 <?php
 namespace App\Filament\Resources\Trash2Move;
 
-use App\Filament\Resources\Trash2Move\AnggotaResource\Pages;
-use App\Models\Anggota;
 use Filament\Forms;
 use Filament\Tables;
-use Filament\Tables\Actions\CreateAction;
+use App\Models\Anggota;
+use Filament\Facades\Filament;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\CreateAction;
+use App\Filament\Resources\Trash2Move\AnggotaResource\Pages;
 
 class AnggotaResource extends Resource
 {
@@ -20,20 +21,29 @@ class AnggotaResource extends Resource
     {
         return $form->schema([
             Forms\Components\TextInput::make('nama')
+                ->placeholder('Masukkan Nama Anggota')
                 ->required()
                 ->maxLength(255),
+
             Forms\Components\TextInput::make('email')
+                ->placeholder('Masukkan Email Anggota')
                 ->required()
                 ->email()
                 ->maxLength(255),
+
             Forms\Components\TextInput::make('no_telp')
-                ->label('No. Telepon')
+                ->tel()
+                ->placeholder('Masukkan Nomor Telepon Anggota')
+                ->label('Nomor Telepon')
                 ->required()
                 ->maxLength(20),
+
             Forms\Components\DatePicker::make('tanggal_bergabung')
                 ->required()
                 ->label('Tanggal Bergabung'),
+
             Forms\Components\Textarea::make('alamat')
+                ->placeholder('Masukkan Alamat Anggota')
                 ->required()
                 ->rows(3),
         ]);
@@ -43,11 +53,20 @@ class AnggotaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('nama')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('no_telp')->label('Telepon'),
-                Tables\Columns\TextColumn::make('tanggal_bergabung')->date()->label('Bergabung'),
+                Tables\Columns\TextColumn::make('nama')
+                    ->sortable()
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('no_telp')
+                    ->searchable()
+                    ->label('Nomor Telepon'),
+
+                Tables\Columns\TextColumn::make('tanggal_bergabung')   
+                    ->date()
+                    ->label('Tanggal Bergabung'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -75,5 +94,10 @@ class AnggotaResource extends Resource
                     redirect(static::getUrl('index'))->send();
                 }),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return Filament::auth()->user()?->role === 'trash2move';
     }
 }

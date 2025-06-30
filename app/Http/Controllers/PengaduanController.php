@@ -43,6 +43,7 @@ class PengaduanController extends Controller
         // 4. Simpan data pengaduan dan tangkap hasilnya ke variabel
         $pengaduan = Pengaduan::create($validatedData);
 
+        // 5. Kirim email konfirmasi
         Mail::to($validatedData['email'])->send(new PengaduanTerkirim($pengaduan));
 
         // 6. Redirect kembali dengan pesan sukses

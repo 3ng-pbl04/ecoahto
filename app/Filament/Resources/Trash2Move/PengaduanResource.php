@@ -2,20 +2,21 @@
 
 namespace App\Filament\Resources\Trash2Move;
 
-use App\Models\Pengaduan;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
+use App\Models\Pengaduan;
 use Filament\Tables\Table;
+use Filament\Facades\Filament;
+use App\Mail\PengaduanDirespon;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Mail;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
 use App\Filament\Resources\Trash2Move\PengaduanResource\Pages;
-use App\Mail\PengaduanDirespon;
-use Illuminate\Support\Facades\Mail;
 
 class PengaduanResource extends Resource
 {
@@ -33,8 +34,15 @@ class PengaduanResource extends Resource
                 ->maxLength(255),
 
             TextInput::make('no_telp')
+                ->tel()
+                ->required()
+                ->maxLength(20),
+            TextInput::make('email')
+
                 ->required()
                 ->maxLength(255),
+            TextInput::make('email')
+                ->required(),
 
             TextInput::make('email')
                 ->required()
@@ -93,14 +101,27 @@ class PengaduanResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
-            TextColumn::make('id')->sortable()->searchable(),
-            TextColumn::make('nama')->sortable()->searchable(),
-            TextColumn::make('no_telp'),
-            TextColumn::make('email'),
-            TextColumn::make('alamat')->limit(30),
-            Tables\Columns\ImageColumn::make('foto')->label('Gambar')->circular(),
+            TextColumn::make('nama')
+                ->sortable()    
+                ->searchable(),
+                
+            TextColumn::make('no_telp')
+                ->searchable(),
+
+            TextColumn::make('email')
+                ->searchable(),
+
+            TextColumn::make('alamat')
+                ->limit(30),
+
+            Tables\Columns\ImageColumn::make('foto')
+                ->label('Gambar')
+                ->circular(),
+
             TextColumn::make('keterangan')->limit(50),
+            
             TextColumn::make('titik_koordinat'),
+
             TextColumn::make('status')
                 ->badge()
                 ->colors([
@@ -109,6 +130,7 @@ class PengaduanResource extends Resource
                     'success' => 'Diterima',
                     'primary' => 'Dijadwalkan',
                 ]),
+
             TextColumn::make('created_at')
                 ->dateTime('d/m/Y H:i')
                 ->label('Dibuat'),
@@ -123,8 +145,10 @@ class PengaduanResource extends Resource
                 ]),
         ])
         ->actions([
+            Tables\Actions\ViewAction::make(),
             Tables\Actions\EditAction::make(),
             Tables\Actions\DeleteAction::make(),
+            
         ])
         ->bulkActions([
             Tables\Actions\DeleteBulkAction::make(),
@@ -138,5 +162,10 @@ class PengaduanResource extends Resource
             'create' => Pages\CreatePengaduan::route('/create'),
             'edit' => Pages\EditPengaduan::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return Filament::auth()->user()?->role === 'trash2move';
     }
 }
