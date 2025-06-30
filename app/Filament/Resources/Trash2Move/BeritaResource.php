@@ -77,6 +77,7 @@ class BeritaResource extends Resource
                     ->label('Diposting'),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
