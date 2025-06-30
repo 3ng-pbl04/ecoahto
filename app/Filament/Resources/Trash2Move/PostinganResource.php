@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources\Trash2Move;
 
-use App\Filament\Resources\Trash2Move\PostinganResource\Pages;
-use App\Models\Postingan;
 use Filament\Forms;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Postingan;
+use Filament\Facades\Filament;
+use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\Trash2Move\PostinganResource\Pages;
 
 class PostinganResource extends Resource
 {
@@ -73,10 +74,6 @@ class PostinganResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->sortable()   
-                    ->searchable(),
-
                 Tables\Columns\TextColumn::make('nama')
                     ->sortable()
                     ->searchable(),
@@ -120,5 +117,10 @@ class PostinganResource extends Resource
             'create' => Pages\CreatePostingan::route('/create'),
             'edit' => Pages\EditPostingan::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return Filament::auth()->user()?->role === 'trash2move';
     }
 }
