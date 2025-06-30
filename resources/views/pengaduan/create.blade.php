@@ -68,46 +68,9 @@
 </head>
 <body class="bg-gray-50 font-sans antialiased">
 
-<!-- Header -->
-<header class="bg-white shadow-sm sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-            <img src="/images/LOGO.png" alt="TRASH2MOVE Logo" class="h-10 w-10">
-            <span class="text-xl font-bold text-primary-700">TRASH2MOVE</span>
-        </div>
+@include('tampilan.header')
 
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-button" class="md:hidden text-gray-700">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:block">
-            <ul class="flex space-x-6 items-center">
-                <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Beranda</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Tentang Kami</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Produk</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Berita</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Kontak</a></li>
-                <li><a href="#" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition">Login</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-        <div class="container mx-auto px-4 py-3 space-y-3">
-            <a href="#" class="block py-2 text-gray-600 hover:text-primary-600">Beranda</a>
-            <a href="#" class="block py-2 text-gray-600 hover:text-primary-600">Tentang Kami</a>
-            <a href="#" class="block py-2 text-gray-600 hover:text-primary-600">Produk</a>
-            <a href="#" class="block py-2 text-gray-600 hover:text-primary-600">Berita</a>
-            <a href="#" class="block py-2 text-gray-600 hover:text-primary-600">Kontak</a>
-            <a href="#" class="block bg-primary-600 text-white px-4 py-2 rounded-lg text-center">Login</a>
-        </div>
-    </div>
-</header>
 
 <!-- Hero Section -->
 <section class="hero-bg min-h-[40vh] flex items-center justify-center text-white">
@@ -339,95 +302,22 @@
     </div>
 </main>
 
-<!-- Footer -->
-<footer class="bg-gray-800 text-white pt-12 pb-6">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-            <!-- About Section -->
-            <div>
-                <div class="flex items-center gap-3 mb-4">
-                    <img src="/images/LOGO.png" alt="Trash2Move Logo" class="h-10 w-10">
-                    <h3 class="text-xl font-bold">Trash2Move</h3>
-                </div>
-                <p class="text-gray-400 mb-4">Mengubah limbah menjadi produk bernilai tinggi sambil membangun komunitas yang sadar lingkungan.</p>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-facebook-f text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-instagram text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-youtube text-xl"></i>
-                    </a>
-                </div>
-            </div>
+@include('tampilan.footer', ['page_settings' => $page_settings])
 
-            <!-- Quick Links -->
-            <div>
-                <h4 class="text-lg font-semibold mb-4 border-b border-primary-500 pb-2">Tautan Cepat</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-400 hover:text-white transition">Beranda</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition">Tentang Kami</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition">Produk</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition">Layanan</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white transition">Kontak</a></li>
-                </ul>
-            </div>
 
-            <!-- Contact Info -->
-            <div>
-                <h4 class="text-lg font-semibold mb-4 border-b border-primary-500 pb-2">Hubungi Kami</h4>
-                <ul class="space-y-3 text-gray-400">
-                    <li class="flex items-start gap-3">
-                        <i class="fas fa-map-marker-alt mt-1 text-primary-400"></i>
-                        <span>Jl. Hijau Lestari No.123, Jakarta Selatan</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-phone text-primary-400"></i>
-                        <span>+62 21 1234 5678</span>
-                    </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-envelope text-primary-400"></i>
-                        <span>info@trash2move.id</span>
-                    </li>
 
-                </ul>
-            </div>
-
-            <!-- Newsletter -->
-            <div>
-                <h4 class="text-lg font-semibold mb-4 border-b border-primary-500 pb-2">Newsletter</h4>
-                <p class="text-gray-400 mb-3">Berlangganan untuk mendapatkan informasi terbaru tentang program kami.</p>
-                <form class="flex">
-                    <input type="email" placeholder="Email Anda" class="px-4 py-2 rounded-l-lg focus:outline-none text-gray-800 w-full">
-                    <button type="submit" class="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded-r-lg">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Copyright -->
-        <div class="pt-6 border-t border-gray-700 text-center text-gray-400">
-            <p>&copy; 2025 Trash2Move. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
     // Initialize map
-    var map = L.map('map').setView([-6.2088, 106.8456], 13);
+    var map = L.map('map').setView([-0.9472, 100.3544], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap',
         maxZoom: 18,
     }).addTo(map);
+
 
     // Handle map click
     var marker;
@@ -541,6 +431,7 @@
     });
 </script>
 
+    <!--API PENGADUAN MAPS-->
 <script>
     fetch('/api/pengaduan-maps')
         .then(response => response.json())

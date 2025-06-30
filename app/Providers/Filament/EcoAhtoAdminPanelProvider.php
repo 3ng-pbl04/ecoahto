@@ -7,8 +7,8 @@ use App\Filament\Admin\Widgets\FilamentInfoWidget;
 use App\Filament\EcoAhto\Widgets\EcoAhtoOverview;
 use App\Filament\EcoAhto\Widgets\RecentSampahTable;
 use App\Filament\EcoAhto\Widgets\SampahMasukChart;
-use App\Filament\Pages\Trash2Move\Auth\LoginCustom;
-use App\Filament\Pages\Trash2Move\Auth\LoginCustomeco;
+
+use App\Filament\Pages\EcoAhto\Auth\LoginCustomeco;
 use App\Models\Admin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;

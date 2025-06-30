@@ -36,6 +36,10 @@ class PengaduanResource extends Resource
                 ->required()
                 ->maxLength(255),
 
+            TextInput::make('email')
+                ->required()
+                ->maxLength(255),
+
             Textarea::make('alamat')
                 ->required(),
 

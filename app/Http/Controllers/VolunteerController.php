@@ -3,23 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\Volunteer;
 
 class VolunteerController extends Controller
 {
     public function create()
-{
-    return view('volunteer.create');
-}
+    {
+        return view('volunteer.create');
+    }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
-            'no_telp' => 'required|string|max:20',
+            'no_telp' => 'required|string|regex:/^[0-9]{1,12}$/',
             'alamat' => 'required|string',
-            'status_kesehatan' => 'required|string',
-            'penjelasan' => 'required|string',
+            'status_kesehatan' => ['required', Rule::in(['ya', 'tidak'])],
+            'penjelasan' => [
+                'nullable',
+                'string',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->status_kesehatan === 'ya';
+                }),
+            ],
         ]);
 
         if ($request->hasFile('foto')) {
@@ -29,9 +36,8 @@ class VolunteerController extends Controller
             $validatedData['foto'] = 'foto_volunteer/' . $fotoName;
         }
 
-        volunteer::create($validatedData);
+        Volunteer::create($validatedData);
 
-        // Arahkan kembali ke halaman utama
-        return redirect('/')->with('success', 'volunteer berhasil dikirim!');
+        return redirect('/')->with('success', 'Volunteer berhasil dikirim!');
     }
 }

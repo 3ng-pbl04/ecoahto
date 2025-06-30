@@ -28,9 +28,6 @@ class PostinganResource extends Resource
                     ->maxLength(255),
 
 
-
-
-
                 Forms\Components\TextInput::make('harga')
                     ->label('Harga')
                     ->maxLength(100),
@@ -39,12 +36,23 @@ class PostinganResource extends Resource
                     ->label('Rating')
                     ->maxLength(10),
 
+                Forms\Components\Select::make('kategori')
+                    ->label('Kategori')
+                    ->required()
+                    ->options([
+                        'kursi' => 'Kursi',
+                        'ganci' => 'Ganci',
+                    ])
+                    ->native(false)
+                    ->searchable(),
+
+
                 Forms\Components\TextInput::make('link')
                     ->label('Link Beli')
                     ->url()
                     ->maxLength(255),
 
-                  Forms\Components\FileUpload::make('gambar')
+                Forms\Components\FileUpload::make('gambar')
                     ->label('Gambar Produk')
                     ->directory('postingans')
                     ->disk('public')
@@ -55,7 +63,7 @@ class PostinganResource extends Resource
                     ->preserveFilenames()
                     ->visibility('public'),
 
-                 Forms\Components\Textarea::make('deskripsi')
+                Forms\Components\Textarea::make('deskripsi')
                     ->required()
                     ->label('Deskripsi')
                     ->rows(5),
@@ -71,6 +79,7 @@ class PostinganResource extends Resource
                 Tables\Columns\TextColumn::make('nama')->sortable()->searchable(),
                 Tables\Columns\ImageColumn::make('gambar')->label('Gambar')->circular(),
                 Tables\Columns\TextColumn::make('harga')->sortable()->label('Harga'),
+                Tables\Columns\TextColumn::make('kategori')->sortable()->label('Kategori'),
                 Tables\Columns\TextColumn::make('rating')->label('Rating'),
                 Tables\Columns\TextColumn::make('created_at')->label('Dibuat')->dateTime(),
             ])
