@@ -91,24 +91,43 @@
             </div>
 
             <!-- Contact Info -->
-            <div>
-                <h4 class="text-lg font-semibold mb-4 border-b border-primary-500 pb-2">Hubungi Kami</h4>
-                <ul class="space-y-3 text-gray-400">
+        <div>
+            <h4 class="text-lg font-semibold mb-4 border-b border-primary-500 pb-2">Hubungi Kami</h4>
+            <ul class="space-y-3 text-gray-400">
+                    @if($page_settings?->alamat)
                     <li class="flex items-start gap-3">
                         <i class="fas fa-map-marker-alt mt-1 text-primary-400"></i>
-                        <span>Jl. Hijau Lestari No.123, Jakarta Selatan</span>
+                        <a href="https://www.google.com/maps/search/{{ urlencode($page_settings->alamat) }}"
+                        class="hover:text-primary-500 transition"
+                        target="_blank" rel="noopener noreferrer">
+                        {{ collect(explode(',', $page_settings->alamat))->take(5)->implode(',') }}
+                        </a>
                     </li>
+                    @endif
+
+                    @if($page_settings?->telepon)
                     <li class="flex items-center gap-3">
                         <i class="fas fa-phone text-primary-400"></i>
-                        <span>+62 21 1234 5678</span>
+                        <a href="tel:{{ preg_replace('/[^0-9+]/', '', $page_settings->telepon) }}"
+                        class="hover:text-primary-500 transition">
+                            {{ $page_settings->telepon }}
+                        </a>
                     </li>
+                    @endif
+
+                    @if($page_settings?->email)
                     <li class="flex items-center gap-3">
                         <i class="fas fa-envelope text-primary-400"></i>
-                        <span>info@trash2move.id</span>
+                        <a href="mailto:{{ $page_settings->email }}"
+                        class="hover:text-primary-500 transition">
+                            {{ $page_settings->email }}
+                        </a>
                     </li>
-
+                    @endif
                 </ul>
-            </div>
+        </div>
+
+
 
 
         </div>

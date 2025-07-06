@@ -24,33 +24,41 @@
     <section class="stats bg-gray-100 py-12">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div class="stat-item bg-white p-6 rounded-lg shadow-md">
-                <div class="stat-number text-3xl font-bold text-green-600 mb-2">
+            <!-- Sampah Didaur Ulang -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="text-3xl font-bold text-green-600 mb-2">
                     {{ $jumlahSampah }}
                 </div>
-                <div class="stat-label text-gray-600">Sampah Didaur Ulang</div>
+                <div class="text-gray-600">Sampah Didaur Ulang</div>
             </div>
-            <div class="stat-item bg-white p-6 rounded-lg shadow-md">
-                <div class="stat-number text-3xl font-bold text-green-600 mb-2">
+
+            <!-- Produk Inovatif -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="text-3xl font-bold text-green-600 mb-2">
                     {{ number_format($jumlahProduk) }}+
                 </div>
-                <div class="stat-label text-gray-600">Produk Inovatif</div>
+                <div class="text-gray-600">Produk Inovatif</div>
             </div>
-            <div class="stat-item bg-white p-6 rounded-lg shadow-md">
-                <div class="stat-number text-3xl font-bold text-green-600 mb-2">
+
+            <!-- Komunitas Terlibat -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="text-3xl font-bold text-green-600 mb-2">
                     {{ number_format($jumlahKomunitas) }}+
                 </div>
-                <div class="stat-label text-gray-600">Komunitas Terlibat</div>
+                <div class="text-gray-600">Komunitas Terlibat</div>
             </div>
-            <div class="stat-item bg-white p-6 rounded-lg shadow-md">
-                <div class="stat-number text-3xl font-bold text-green-600 mb-2">
-                    {{ number_format($jumlahKomunitas) }}+
+
+            <!-- Kategori Postingan -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="text-3xl font-bold text-green-600 mb-2">
+                    {{ number_format($jumlahKategori) }}+
                 </div>
-                <div class="stat-label text-gray-600">Pohon Ditanam</div>
+                <div class="text-gray-600">Kategori Postingan</div>
             </div>
         </div>
     </div>
 </section>
+
 
 
     <!-- Company Profile Section -->
@@ -289,20 +297,5 @@
         </div>
     </section>
 
-    <!-- Call to Action Section -->
-    <section class="cta-section py-16 bg-green-700 text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Bergabunglah Dengan Gerakan Daur Ulang</h2>
-            <p class="text-xl mb-8 max-w-3xl mx-auto">Bersama kita bisa menciptakan masa depan yang lebih berkelanjutan. Daftarkan diri Anda sebagai volunteer atau ajukan lokasi daur ulang hari ini!</p>
-            <div class="cta-buttons flex flex-col sm:flex-row justify-center gap-4">
-                <button class="btn-white bg-white text-green-700 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg transition">
-                    Ajukan Lokasi Aksi
-                </button>
-                <button class="btn-white bg-transparent border-2 border-white hover:bg-white hover:text-green-700 font-bold py-3 px-6 rounded-lg transition">
-                    Jadi Volunteer
-                </button>
-            </div>
-        </div>
-    </section>
 
  @include('tampilan.footer')

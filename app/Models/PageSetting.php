@@ -33,5 +33,7 @@ class PageSetting extends Model
         'youtube_link',
         'tiktok_link',
         'alamat',
+        'telepon',
+        'email',
     ];
 }

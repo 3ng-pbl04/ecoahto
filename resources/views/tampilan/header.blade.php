@@ -112,9 +112,6 @@
                     <a href="{{ url('/#testimonials') }}" class="hover:text-green-600 transition">Ulasan</a>
                 </li>
                 <li>
-                    <a href="#contact" class="hover:text-green-600 transition">Kontak</a>
-                </li>
-                <li>
                     <a href="{{ route('login') }}"
                     class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
                         Login

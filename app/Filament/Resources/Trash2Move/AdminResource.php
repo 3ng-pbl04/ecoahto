@@ -47,20 +47,20 @@ class AdminResource extends Resource
 
                 Forms\Components\TextInput::make('password')
                     ->label('Password')
-                    ->placeholder('Masukkan Password Admin')
                     ->password()
-                    ->required(fn ($livewire) => $livewire instanceof \Filament\Resources\Pages\CreateRecord)
+                    ->placeholder('*****') // tampilkan bintang saat field kosong
                     ->maxLength(255)
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                    ->dehydrated(fn ($state) => filled($state)) 
-                    ->autocomplete('new-password'),
+                    ->dehydrated(fn ($state) => filled($state)) // hanya simpan jika ada isinya
+                    ->autocomplete('new-password')
+                    ->helperText('Kosongkan jika tidak ingin mengubah password'),
 
                 Select::make('role')
                     ->label('Role')
                     ->options(fn () => Admin::query()
-                        ->where('role', 'trash2move')        // ambil role tras2hmove   
+                        ->where('role', 'trash2move')        // ambil role tras2hmove
                         ->distinct()
-                        ->pluck('role', 'role')              
+                        ->pluck('role', 'role')
                         ->toArray())
                     ->searchable()
                     ->native(false)
@@ -98,7 +98,7 @@ class AdminResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
