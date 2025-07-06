@@ -56,6 +56,16 @@ public function getBreadcrumbs(): array
                 ->rows(3)
                 ->nullable(),
 
+                TextInput::make('telepon')
+                ->label('Telepon')
+                ->tel()
+                ->nullable(),
+
+            TextInput::make('email')
+                ->label('Email')
+                ->email()
+                ->nullable(),
+
         ]);
     }
 }

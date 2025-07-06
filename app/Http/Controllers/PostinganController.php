@@ -22,15 +22,17 @@ class PostinganController extends Controller
         $mitras = Mitra::latest()->take(5)->get();
 
         // Hitung total berat sampah
-        $totalBeratKg = Sampah::sum('berat'); // Pastikan kolom 'berat' dalam kg
+        $totalBeratKg = Sampah::sum('berat');
         $jumlahSampah = $totalBeratKg >= 1000
             ? number_format($totalBeratKg / 1000, 1) . ' Ton'
             : number_format($totalBeratKg, 0) . ' Kg';
 
-        // Hitung total produk dan komunitas
+        // Hitung total produk
         $jumlahProduk = Postingan::count();
         $jumlahKomunitas = Mitra::count();
-        $jumlahPohon = 10000; // statis
+
+        // Hitung total kategori unik dari tabel postingan
+        $jumlahKategori = Postingan::distinct('kategori')->count('kategori');
 
         return view('welcome', compact(
             'postingans',
@@ -41,7 +43,7 @@ class PostinganController extends Controller
             'jumlahSampah',
             'jumlahProduk',
             'jumlahKomunitas',
-            'jumlahPohon'
+            'jumlahKategori',
         ));
     }
 
