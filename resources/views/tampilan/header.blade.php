@@ -137,7 +137,6 @@
             <li><a href="#products" class="block py-2 hover:text-green-600">Produk</a></li>
             <li><a href="#news" class="block py-2 hover:text-green-600">Berita</a></li>
             <li><a href="#testimonials" class="block py-2 hover:text-green-600">Ulasan</a></li>
-            <li><a href="#contact" class="block py-2 hover:text-green-600">Kontak</a></li>
             <li><a href="{{ route('login') }}" class="block bg-green-600 text-white px-4 py-2 rounded text-center hover:bg-green-700">Login</a></li>
         </ul>
     </div>
