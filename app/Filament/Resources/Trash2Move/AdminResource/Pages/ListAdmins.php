@@ -23,6 +23,7 @@ class ListAdmins extends ListRecords
     protected function getTableQuery(): Builder
     {
         return parent::getTableQuery()
-            ->where('role', 'trash2move');
+            ->whereIn('role', ['trash2move', 'ceoT2m']);
     }
+
 }
