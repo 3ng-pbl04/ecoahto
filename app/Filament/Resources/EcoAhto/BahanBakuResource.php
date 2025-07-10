@@ -1,14 +1,13 @@
 <?php
 namespace App\Filament\Resources\Ecoahto;
 
-use Filament\Forms;
-use Filament\Tables;
-use App\Models\BahanBaku;
-use Filament\Facades\Filament;
-use Filament\Resources\Resource;
-use Filament\Tables\Columns\SelectColumn;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\EcoAhto\BahanBakuResource\Pages;
+use App\Models\BahanBaku;
+use Filament\Forms;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Builder;
 
 class BahanBakuResource extends Resource
 {
@@ -23,32 +22,21 @@ class BahanBakuResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('kode')
-                    ->placeholder('Masukkan Kode Bahan Baku')
                     ->required()
                     ->unique(ignoreRecord: true),
-
                 Forms\Components\TextInput::make('nama_bahan_baku')
-                    ->placeholder('Masukkan Nama Bahan Baku')
-                    ->label('Nama')
+                    ->label('Nama Bahan Baku')
                     ->required(),
-
                 Forms\Components\TextInput::make('jumlah')
-                    ->placeholder('Masukkan Jumlah Bahan Baku')
                     ->numeric()
                     ->required(),
-
                 Forms\Components\TextInput::make('warna')
-                    ->placeholder('Masukkan Warna Bahan Baku')
                     ->required(),
-
                 Forms\Components\TextInput::make('asal')
-                    ->placeholder('Masukkan Asal Bahan Baku')
                     ->required(),
-
                 Forms\Components\DatePicker::make('tanggal_olah')
-                    ->label('Tanggal Diolah')
+                    ->label('Tanggal Olah')
                     ->required(),
-                    
                 Forms\Components\Select::make('status')
                     ->options([
                         'Mentah' => 'Mentah',
@@ -63,29 +51,20 @@ class BahanBakuResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('kode')
-                    ->sortable()
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('nama_bahan_baku')
-                    ->label('Nama'),
-
-                Tables\Columns\TextColumn::make('jumlah')
-                    ->sortable(),
-
+                Tables\Columns\TextColumn::make('kode')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('nama_bahan_baku')->label('Nama'),
+                Tables\Columns\TextColumn::make('jumlah'),
                 Tables\Columns\TextColumn::make('warna'),
-
                 Tables\Columns\TextColumn::make('asal'),
-                
-                Tables\Columns\TextColumn::make('tanggal_olah')
-                    ->date(),
-                Tables\Columns\BadgeColumn::make('status')->colors([
-                    'warning' => 'Mentah',
-                    'info' => 'Diolah',
-                    'success' => 'Jadi',
-                ])
-                ->sortable(),
-
+                Tables\Columns\TextColumn::make('tanggal_olah')->date(),
+                TextColumn::make('status')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'Mentah' => 'warning',
+                    'Diolah' => 'info',
+                    'Jadi' => 'success',
+                    default => 'gray',
+                }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -103,9 +82,5 @@ class BahanBakuResource extends Resource
             'create' => Pages\CreateBahanBaku::route('/create'),
             'edit' => Pages\EditBahanBaku::route('/{record}/edit'),
         ];
-    }
-    public static function canAccess(): bool
-    {
-        return Filament::auth()->user()?->role === 'ecoahto';
     }
 }

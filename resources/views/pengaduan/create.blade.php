@@ -101,8 +101,8 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans antialiased">
 
+<body class="bg-gray-50 font-sans antialiased">
 @include('tampilan.header')
 
 <!-- Hero Section -->
@@ -344,7 +344,6 @@
 
 @include('tampilan.footer', ['page_settings' => $page_settings])
 
-
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -466,7 +465,6 @@
         });
     });
 </script>
-
 
 <script>
     fetch('/api/pengaduan-maps')
