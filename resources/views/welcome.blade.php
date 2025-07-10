@@ -57,9 +57,7 @@
             </div>
         </div>
     </div>
-</section>
-
-
+    </section>
 
     <!-- Company Profile Section -->
     <section id="company" class="company-profile py-16 bg-white">
@@ -148,15 +146,15 @@
         </div>
     </div>
     @endforeach
-</div>
-
-
     </div>
-</section>
+
+
+        </div>
+    </section>
 
 
     <!-- Mitra Section -->
-   <section id="mitra" class="mitra py-16 bg-white relative overflow-hidden">
+    <section id="mitra" class="mitra py-16 bg-white relative overflow-hidden">
     <div class="container mx-auto px-4">
         <div class="section-title text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-800">Mitra Kami</h2>
@@ -178,11 +176,11 @@
             </div>
         </div>
     </div>
-</section>
+    </section>
 
 
     <!-- News Section -->
-   <section id="news" class="news py-16 bg-gray-50">
+    <section id="news" class="news py-16 bg-gray-50">
     <div class="container mx-auto px-4">
         <div class="section-title text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-800">Berita Terkini</h2>
@@ -227,7 +225,7 @@
             </a>
         </div>
     </div>
-</section>
+    </section>
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials py-16 bg-white">
