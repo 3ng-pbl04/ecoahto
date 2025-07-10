@@ -20,9 +20,9 @@ class ListAdmins extends ListRecords
 
         ];
     }
-    protected function getTableQuery(): Builder
+     protected function getTableQuery(): Builder
     {
         return parent::getTableQuery()
-            ->where('role', 'ecoahto');
+            ->whereIn('role', ['ecoahto', 'ceoEco']);
     }
 }

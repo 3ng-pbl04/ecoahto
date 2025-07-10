@@ -59,11 +59,10 @@ class AdminResource extends Resource
 
                 Select::make('role')
                     ->label('Role')
-                    ->options(fn () => Admin::query()
-                        ->where('role', 'ecoahto')           // ambil role ecoahto
-                        ->distinct()
-                        ->pluck('role', 'role')              
-                        ->toArray())
+                    ->options([
+                        'ecoahto' => 'Ecoahto',
+                        'ceoEco' => 'CEO Ecoahto',
+                    ])
                     ->searchable()
                     ->native(false)
                     ->required()
@@ -87,7 +86,13 @@ class AdminResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('role')
-                    ->sortable(),
+                    ->label('Peran')
+                    ->sortable()
+                    ->formatStateUsing(fn (string $state) => match ($state) {
+                        'ecoahto' => 'Ecoahto',
+                        'ceoEco' => 'CEO Ecoahto',
+                        default => $state,
+                    }),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
