@@ -1,13 +1,14 @@
 <?php
 namespace App\Filament\Resources\Ecoahto;
 
-use App\Filament\Resources\EcoAhto\BahanBakuResource\Pages;
-use App\Models\BahanBaku;
 use Filament\Forms;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\BahanBaku;
+use Filament\Facades\Filament;
+use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\EcoAhto\BahanBakuResource\Pages;
 
 class BahanBakuResource extends Resource
 {
@@ -82,5 +83,9 @@ class BahanBakuResource extends Resource
             'create' => Pages\CreateBahanBaku::route('/create'),
             'edit' => Pages\EditBahanBaku::route('/{record}/edit'),
         ];
+    }
+    public static function canAccess(): bool
+    {
+        return Filament::auth()->user()?->role === 'ecoahto';
     }
 }
