@@ -24,16 +24,21 @@ class BahanBakuResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('kode')
                     ->required()
+                    ->placeholder('Masukkan Kode Bahan Baku')
                     ->unique(ignoreRecord: true),
                 Forms\Components\TextInput::make('nama_bahan_baku')
                     ->label('Nama Bahan Baku')
+                    ->placeholder('Masukkan Nama Bahan Baku')
                     ->required(),
                 Forms\Components\TextInput::make('jumlah')
                     ->numeric()
+                    ->placeholder('Masukkan Jumlah Bahan Baku')
                     ->required(),
                 Forms\Components\TextInput::make('warna')
+                    ->placeholder('Masukkan Warna Bahan Baku')
                     ->required(),
                 Forms\Components\TextInput::make('asal')
+                    ->placeholder('Masukkan Asal Bahan Baku')
                     ->required(),
                 Forms\Components\DatePicker::make('tanggal_olah')
                     ->label('Tanggal Olah')
