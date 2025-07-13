@@ -94,7 +94,7 @@
    <section class="hero-bg min-h-[40vh] flex items-center justify-center text-white">
     <div class="container mx-auto px-4 text-center">
         <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Formulir Volunteer</h1>
-        <p class="text-lg max-w-2xl mx-auto mb-6">Laporkan masalah lingkungan di sekitar Anda dan bantu kami menciptakan lingkungan yang lebih bersih dan sehat.</p>
+        <p class="text-lg max-w-2xl mx-auto mb-6">Setiap aksi kecil bisa membawa perubahan besar. Jadi relawan Trash2Move hari ini dan jadilah pahlawan lingkungan di komunitasmu</p>
         <div class="flex flex-wrap justify-center gap-3">
             <a href="/" class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-5 rounded-lg transition">
                 <i class="fas fa-arrow-left"></i> Kembali ke Beranda
@@ -204,94 +204,112 @@
     <!-- Footer -->
     @include('tampilan.footer')
 
-    <script>
-         // Mobile menu toggle (optional)
-        document.getElementById('mobile-menu-button')?.addEventListener('click', () => {
-        document.getElementById('mobile-menu')?.classList.toggle('open');
-        });
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Toggle mobile menu
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-        document.getElementById('mobile-menu')?.classList.remove('open');
-        });
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('open');
+            });
+
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                });
+            });
+        }
 
         // Toggle penjelasan penyakit field based on radio selection
         const statusYa = document.getElementById('status_ya');
         const statusTidak = document.getElementById('status_tidak');
         const penjelasanContainer = document.getElementById('penjelasan-container');
+        const penjelasanField = document.getElementById('penjelasan');
 
         function togglePenjelasanField() {
-            if (statusYa.checked) {
-                penjelasanContainer.classList.remove('hidden');
-                document.getElementById('penjelasan').required = true;
+            if (statusYa?.checked) {
+                penjelasanContainer?.classList.remove('hidden');
+                if (penjelasanField) penjelasanField.required = true;
             } else {
-                penjelasanContainer.classList.add('hidden');
-                document.getElementById('penjelasan').required = false;
+                penjelasanContainer?.classList.add('hidden');
+                if (penjelasanField) penjelasanField.required = false;
             }
         }
 
-        statusYa.addEventListener('change', togglePenjelasanField);
-        statusTidak.addEventListener('change', togglePenjelasanField);
+        if (statusYa && statusTidak) {
+            statusYa.addEventListener('change', togglePenjelasanField);
+            statusTidak.addEventListener('change', togglePenjelasanField);
+        }
 
-        // Initialize based on default selection
+        // Initialize field on page load
         togglePenjelasanField();
-    </script>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-    const input  = document.getElementById('no_telp');
-    const error  = document.getElementById('no_telp_error');
-    const regex  = /^(?:\+628\d{9,12}|08\d{9,12})$/;  // 12–15 digit & prefix 08 / +628
-
-    /**
-     * Tampilkan atau sembunyikan pesan error.
-     * @param {string|null} message
-     */
-    function showError(message = null) {
-        if (message) {
-            error.textContent = message;
-            error.classList.remove('hidden');
-            input.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
-        } else {
-            error.textContent = '';
-            error.classList.add('hidden');
-            input.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
-        }
-    }
-
-    /**
-     * Validasi telepon: panjang 12–15 digit & pola 08 / +628.
-     * @returns {boolean}
-     */
-    function isValidPhone(value) {
-        return regex.test(value);
-    }
-
-    // Validasi saat pengguna mengetik & saat keluar dari field
-    ['input', 'blur'].forEach(evt =>
-        input.addEventListener(evt, () => {
-            if (!input.value) {
-                showError(null);          // kosong = tidak ada pesan
-            } else if (!isValidPhone(input.value)) {
-                showError('Nomor harus 12–15 digit dan diawali 08 atau +628');
-            } else {
-                showError(null);          // valid
-            }
-        })
-    );
-
-    // (Opsional) validasi ulang sebelum submit form
-    const form = input.closest('form');
-    if (form) {
-        form.addEventListener('submit', e => {
-            if (!isValidPhone(input.value)) {
-                e.preventDefault();       // cegah submit
-                showError('Nomor harus 12–15 digit dan diawali 08 atau +628');
-                input.focus();
-            }
-        });
-    }
-});
+    });
 </script>
+
+
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const input  = document.getElementById('no_telp');
+        const error  = document.getElementById('no_telp_error');
+        const regex  = /^(?:\+628\d{9,12}|08\d{9,12})$/; // 12–15 digit & prefix 08 / +628
+
+        /**
+         * Tampilkan atau sembunyikan pesan error.
+         * @param {string|null} message
+         */
+        function showError(message = null) {
+            if (message) {
+                error.textContent = message;
+                error.classList.remove('hidden');
+                input.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+            } else {
+                error.textContent = '';
+                error.classList.add('hidden');
+                input.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+            }
+        }
+
+        /**
+         * Validasi telepon: panjang 12–15 digit & pola 08 / +628.
+         * @param {string} value
+         * @returns {boolean}
+         */
+        function isValidPhone(value) {
+            return regex.test(value);
+        }
+
+        // Validasi saat pengguna mengetik & saat keluar dari field
+        ['input', 'blur'].forEach(eventType => {
+            input.addEventListener(eventType, () => {
+                const value = input.value.trim();
+
+                if (!value) {
+                    showError(null); // kosong = tidak ada pesan
+                } else if (!isValidPhone(value)) {
+                    showError('Nomor harus 12–15 digit dan diawali 08 atau +628');
+                } else {
+                    showError(null); // valid
+                }
+            });
+        });
+
+        // Validasi ulang sebelum submit form
+        const form = input.closest('form');
+        if (form) {
+            form.addEventListener('submit', e => {
+                const value = input.value.trim();
+
+                if (!isValidPhone(value)) {
+                    e.preventDefault(); // cegah submit
+                    showError('Nomor harus 12–15 digit dan diawali 08 atau +628');
+                    input.focus();
+                }
+            });
+        }
+    });
+</script>
+
 </body>
 </html>

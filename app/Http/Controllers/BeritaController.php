@@ -24,7 +24,7 @@ class BeritaController extends Controller
 
         $jumlahProduk = Postingan::count();
         $jumlahKomunitas = Mitra::count();
-        $jumlahPohon = 10000;
+        $jumlahKategori = Postingan::distinct('kategori')->count('kategori');
 
         return view('berita.index', compact(
             'beritas',
@@ -32,7 +32,7 @@ class BeritaController extends Controller
             'jumlahSampah',
             'jumlahProduk',
             'jumlahKomunitas',
-            'jumlahPohon'
+            'jumlahKategori'
         ));
     }
 
@@ -54,7 +54,7 @@ class BeritaController extends Controller
 
         $jumlahProduk = Postingan::count();
         $jumlahKomunitas = Mitra::count();
-        $jumlahPohon = 10000;
+        $jumlahKategori = Postingan::distinct('kategori')->count('kategori');
 
         return view('berita.detailberita1', compact(
             'berita',
@@ -63,7 +63,7 @@ class BeritaController extends Controller
             'jumlahSampah',
             'jumlahProduk',
             'jumlahKomunitas',
-            'jumlahPohon'
+            'jumlahKategori'
         ));
     }
 }

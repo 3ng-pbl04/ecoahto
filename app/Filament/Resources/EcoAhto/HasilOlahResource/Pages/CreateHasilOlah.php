@@ -9,4 +9,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateHasilOlah extends CreateRecord
 {
     protected static string $resource = HasilOlahResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

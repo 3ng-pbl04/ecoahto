@@ -8,6 +8,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class BahanBakuResource extends Resource
 {
@@ -75,7 +76,7 @@ class BahanBakuResource extends Resource
             ]);
     }
 
-    public static function getPages(): array
+        public static function getPages(): array
     {
         return [
             'index' => Pages\ListBahanBakus::route('/'),
@@ -83,4 +84,13 @@ class BahanBakuResource extends Resource
             'edit' => Pages\EditBahanBaku::route('/{record}/edit'),
         ];
     }
+    public static function shouldRegisterNavigation(): bool
+    {
+    $user = Auth::user();
+
+    return $user && $user->role !== 'ceoEco';
+    }
 }
+
+
+
