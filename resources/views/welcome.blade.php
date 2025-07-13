@@ -1,6 +1,5 @@
 @include('tampilan.header')
 
-
     <!-- Hero Section -->
     <section id="home" class="hero min-h-[70vh] flex items-center justify-center text-white relative"
         style="background-image: url('{{ $page_settings->hero_image ? asset('storage/' . $page_settings->hero_image) : asset('images/sampah.jpg') }}')">
@@ -105,8 +104,9 @@
             <!-- Filter Produk -->
             <div class="product-filters flex flex-wrap justify-center gap-3 mb-8">
                 <button class="filter-btn bg-green-600 text-white px-4 py-2 rounded-full" data-filter="semua">Semua</button>
-                <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full transition" data-filter="kursi">Kursi</button>
-                <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full transition" data-filter="ganci">Ganci</button>
+                <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full transition" data-filter="furnitur">Furnitur</button>
+                <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full transition" data-filter="gantungan_kunci">Gantungan Kunci</button>
+                <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full transition" data-filter="dekorasi_rumah">Dekorasi Rumah</button>
             </div>
 
             <!-- Grid Produk -->
@@ -116,10 +116,10 @@
                         data-kategori="{{ strtolower($post->kategori) }}">
 
                         <!-- Gambar -->
-                        <div class="product-image h-48 overflow-hidden">
+                        <div class="product-image h-60 bg-white flex items-center justify-center overflow-hidden group">
                             <img src="{{ Storage::url($post->gambar) }}"
                                 alt="{{ $post->judul }}"
-                                class="w-full h-full object-cover">
+                                class="max-h-full max-w-full object-contain transition-transform duration-300 ease-in-out group-hover:scale-110">
                         </div>
 
                         <!-- Info Produk -->

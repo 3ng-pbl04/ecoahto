@@ -83,10 +83,9 @@
             <div>
                 <h4 class="text-lg font-semibold mb-4 border-b border-primary-500 pb-2">Produk</h4>
                     <ul class="space-y-2">
-                    <li><a href="#products" class="text-gray-400 hover:text-white transition" data-filter="kursi">Kursi</a></li>
-                    <li><a href="#products" class="text-gray-400 hover:text-white transition" data-filter="kursi">Meja</a></li>
+                    <li><a href="#products" class="text-gray-400 hover:text-white transition" data-filter="furnitur">Furnitur</a></li>
                     <li><a href="#products" class="text-gray-400 hover:text-white transition" data-filter="ganci">Ganci</a></li>
-                    <li><a href="#products" class="text-gray-400 hover:text-white transition" data-filter="kursi">Aksesoris</a></li>
+                    <li><a href="#products" class="text-gray-400 hover:text-white transition" data-filter="dekorasi_rumah">Dekorasi Rumah</a></li>
                 </ul>
             </div>
 
