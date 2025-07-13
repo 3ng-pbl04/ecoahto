@@ -130,7 +130,7 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu md:hidden bg-white">
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-white z-50">
         <ul class="px-4 py-2 space-y-2">
             <li><a href="#home" class="block py-2 hover:text-green-600">Beranda</a></li>
             <li><a href="#company" class="block py-2 hover:text-green-600">Tentang Kami</a></li>

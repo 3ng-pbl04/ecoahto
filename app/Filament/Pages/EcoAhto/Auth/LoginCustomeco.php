@@ -17,7 +17,6 @@ class LoginCustomeco extends Login
                     ->schema([
                         $this->getLoginFormComponent(),
                         $this->getPasswordFormComponent(),
-                        $this->getRememberFormComponent(),
                     ])
                     ->statePath('data'),
             ),
