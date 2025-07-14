@@ -1,39 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Pengaduan | TRASH2MOVE</title>
 
-        <!-- Favicon -->
     <link rel="icon" href="{{ asset('images/LOGO.png') }}" type="image/png">
-    <!-- Auto-refresh CSRF token script -->
-    <script>
-        function refreshCsrfToken() {
-            fetch('/refresh-csrf')
-                .then(response => response.json())
-                .then(data => {
-                    document.querySelectorAll('input[name="_token"]').forEach(input => {
-                        input.value = data.token;
-                    });
-                })
-                .catch(error => console.error('Error refreshing CSRF token:', error));
-        }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            refreshCsrfToken();
-            setInterval(refreshCsrfToken, 1800000);
-        });
-    </script>
-
-    <!-- Tailwind CSS v4 -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Swiper CSS (optional jika tidak digunakan di halaman ini) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <style>
+        .leaflet-container {
+        z-index: 1 !important;
+            }
+
+            .mobile-menu {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+            }
+
+            .mobile-menu.open {
+                max-height: 500px;
+            }
+
+            .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/sampah.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .dropzone {
+            border: 2px dashed #d1d5db;
+            transition: all 0.3s ease;
+        }
+
+        .dropzone.active {
+            border-color: #22c55e;
+            background-color: #f0fdf4;
+        }
+
+        html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        }
+
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            btn?.addEventListener('click', () => menu?.classList.toggle('open'));
+
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => menu.classList.remove('open'));
+            });
+        });
+    </script>
 
     <script>
         tailwind.config = {
@@ -61,49 +96,62 @@
             }
         }
     </script>
-
-    <style>
-        #map { height: 300px; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/sampah.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .dropzone {
-            border: 2px dashed #d1d5db;
-            transition: all 0.3s ease;
-        }
-
-        .dropzone.active {
-            border-color: #22c55e;
-            background-color: #f0fdf4;
-        }
-
-        html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        }
-
-        #map {
-            z-index: 0 !important;
-        }
-
-        .leaflet-container {
-            z-index: 0 !important;
-        }
-    </style>
 </head>
 
 <body class="bg-gray-50 font-sans antialiased">
-@include('tampilan.header')
+
+<!-- Header -->
+<!-- Header -->
+<header class="sticky top-0 z-[9999] bg-white/95 backdrop-blur-sm shadow-md transition-all">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="logo flex items-center">
+            <img src="{{ asset('storage/' . $page_settings->company_logo) }}"
+                 alt="Logo"
+                 class="h-10 w-10 object-contain mr-3">
+            <h1 class="text-xl font-bold text-green-700">{{ $page_settings->company_name ?? 'Trash2Move' }}</h1>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:block">
+            <ul class="flex space-x-6">
+                <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'text-green-600 font-semibold' : 'hover:text-green-600' }} transition">Beranda</a></li>
+                <li><a href="{{ url('/#company') }}" class="hover:text-green-600 transition">Tentang Kami</a></li>
+                <li><a href="{{ url('/#products') }}" class="hover:text-green-600 transition">Produk</a></li>
+                <li><a href="{{ url('/#news') }}" class="hover:text-green-600 transition">Berita</a></li>
+                <li><a href="{{ url('/#testimonials') }}" class="hover:text-green-600 transition">Ulasan</a></li>
+                <li>
+                    <a href="{{ route('login') }}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+                        Login
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Mobile Hamburger Menu -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-white/95 backdrop-blur-sm z-40">
+        <ul class="px-4 py-2 space-y-2">
+            <li><a href="{{ url('/') }}" class="block py-2 hover:text-green-600">Beranda</a></li>
+            <li><a href="{{ url('/#company') }}" class="block py-2 hover:text-green-600">Tentang Kami</a></li>
+            <li><a href="{{ url('/#products') }}" class="block py-2 hover:text-green-600">Produk</a></li>
+            <li><a href="{{ url('/#news') }}" class="block py-2 hover:text-green-600">Berita</a></li>
+            <li><a href="{{ url('/#testimonials') }}" class="block py-2 hover:text-green-600">Ulasan</a></li>
+            <li>
+                <a href="{{ route('login') }}" class="block bg-green-600 text-white px-4 py-2 rounded text-center hover:bg-green-700">
+                    Login
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>
 
 <!-- Hero Section -->
 <section class="hero-bg min-h-[40vh] flex items-center justify-center text-white">
@@ -154,7 +202,7 @@
 </div>
 
 <!-- Main Form -->
-<main class="container mx-auto px-4 py-8 md:py-12">
+<main class="container mx-auto px-4 py-8 md:py-12 relative z-10">
     <div class="max-w-4xl mx-auto">
         <div class="bg-white rounded-xl shadow-md overflow-hidden">
             <!-- Form Header -->
@@ -196,7 +244,7 @@
                     <!-- Contact Info Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Phone Field -->
-                                                <div>
+                        <div>
                             <label for="no_telp" class="block text-sm font-medium text-gray-700 mb-1">
                                 Nomor Telepon <span class="text-red-500">*</span>
                             </label>
@@ -210,6 +258,8 @@
                                     oninput="this.setCustomValidity('')"
                                     class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                     placeholder="Contoh: 08123456789 atau +628123456789">
+
+                                    <p id="no_telp_error" class="mt-1 text-sm text-red-600 hidden"></p>
                             </div>
                         </div>
 
@@ -223,7 +273,7 @@
                                 </div>
                                 <input type="email" name="email" id="email" required
                                        class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                                       placeholder="Contoh: email@domain.com">
+                                       placeholder="Contoh: example@gmail.com">
                             </div>
                         </div>
                     </div>
@@ -461,9 +511,15 @@
 
         // Mobile menu toggle (optional)
         document.getElementById('mobile-menu-button')?.addEventListener('click', () => {
-            document.getElementById('mobile-menu')?.classList.toggle('hidden');
+        document.getElementById('mobile-menu')?.classList.toggle('open');
         });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('mobile-menu')?.classList.remove('open');
     });
+});
+});
 </script>
 
 <script>
@@ -477,6 +533,63 @@
             });
         })
         .catch(error => console.error('Error loading data:', error));
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const input  = document.getElementById('no_telp');
+    const error  = document.getElementById('no_telp_error');
+    const regex  = /^(?:\+628\d{9,12}|08\d{9,12})$/;  // 12–15 digit & prefix 08 / +628
+
+    /**
+     * Tampilkan atau sembunyikan pesan error.
+     * @param {string|null} message
+     */
+    function showError(message = null) {
+        if (message) {
+            error.textContent = message;
+            error.classList.remove('hidden');
+            input.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+        } else {
+            error.textContent = '';
+            error.classList.add('hidden');
+            input.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+        }
+    }
+
+    /**
+     * Validasi telepon: panjang 12–15 digit & pola 08 / +628.
+     * @returns {boolean}
+     */
+    function isValidPhone(value) {
+        return regex.test(value);
+    }
+
+    // Validasi saat pengguna mengetik & saat keluar dari field
+    ['input', 'blur'].forEach(evt =>
+        input.addEventListener(evt, () => {
+            if (!input.value) {
+                showError(null);          // kosong = tidak ada pesan
+            } else if (!isValidPhone(input.value)) {
+                showError('Nomor harus 12–15 digit dan diawali 08 atau +628');
+            } else {
+                showError(null);          // valid
+            }
+        })
+    );
+
+    // (Opsional) validasi ulang sebelum submit form
+    const form = input.closest('form');
+    if (form) {
+        form.addEventListener('submit', e => {
+            if (!isValidPhone(input.value)) {
+                e.preventDefault();       // cegah submit
+                showError('Nomor harus 12–15 digit dan diawali 08 atau +628');
+                input.focus();
+            }
+        });
+    }
+});
 </script>
 
 </body>

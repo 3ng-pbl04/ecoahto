@@ -16,7 +16,6 @@ class LoginCustom extends Login
                     ->schema([
                         $this->getLoginFormComponent(),
                         $this->getPasswordFormComponent(),
-                        $this->getRememberFormComponent(),
                     ])
                     ->statePath('data'),
             ),

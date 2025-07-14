@@ -22,9 +22,7 @@ class UlasanController extends Controller
 
     Ulasan::create($validatedData);
 
-    //return redirect('/')->with('success', 'ulasan berhasil dikirim!');
-    //return response('Ulasan berhasil dikirim!', 201);
-    return back()->with('success', 'Ulasan berhasil dikirim!');
+    return redirect('/')->with('success', 'Ulasan berhasil dikirim!');
     {
         return view('ulasan.create');
     }

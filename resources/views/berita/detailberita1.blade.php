@@ -6,6 +6,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <link rel="icon" href="{{ asset('images/LOGO.png') }}" type="image/png">
+
     <script>
         tailwind.config = {
             theme: {
@@ -31,6 +34,7 @@
             }
         }
     </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -90,22 +94,38 @@
                                 </span>
                             </div>
                             <div class="flex items-center space-x-2">
-                                <span class="text-sm text-gray-500">Bagikan:</span>
-                                <div class="flex space-x-2">
-                                    <a href="#" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-primary-100 text-gray-600 hover:text-primary-600 flex items-center justify-center transition">
-                                        <i class="fab fa-facebook-f text-sm"></i>
-                                    </a>
-                                    <a href="#" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-primary-100 text-gray-600 hover:text-primary-600 flex items-center justify-center transition">
-                                        <i class="fab fa-twitter text-sm"></i>
-                                    </a>
-                                    <a href="#" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-primary-100 text-gray-600 hover:text-primary-600 flex items-center justify-center transition">
-                                        <i class="fab fa-instagram text-sm"></i>
-                                    </a>
-                                    <a href="#" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-primary-100 text-gray-600 hover:text-primary-600 flex items-center justify-center transition">
-                                        <i class="fab fa-whatsapp text-sm"></i>
-                                    </a>
-                                </div>
+                            <span class="text-sm text-gray-500">Bagikan:</span>
+                            <div class="flex space-x-2">
+                                <!-- Facebook -->
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->fullUrl()) }}"
+                                target="_blank"
+                                class="w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center transition">
+                                    <i class="fab fa-facebook-f text-sm"></i>
+                                </a>
+
+                                <!-- Twitter (X) -->
+                                <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}"
+                                target="_blank"
+                                class="w-8 h-8 rounded-full bg-sky-500 hover:bg-sky-600 text-white flex items-center justify-center transition">
+                                    <i class="fab fa-twitter text-sm"></i>
+                                </a>
+
+                                <!-- Instagram (tidak support direct share, redirect ke profil) -->
+                                <a href="https://www.instagram.com/trash2move"
+                                target="_blank"
+                                class="w-8 h-8 rounded-full bg-pink-500 hover:bg-pink-600 text-white flex items-center justify-center transition">
+                                    <i class="fab fa-instagram text-sm"></i>
+                                </a>
+
+                                <!-- WhatsApp -->
+                                <a href="https://api.whatsapp.com/send?text={{ urlencode(request()->fullUrl()) }}"
+                                target="_blank"
+                                class="w-8 h-8 rounded-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center transition">
+                                    <i class="fab fa-whatsapp text-sm"></i>
+                                </a>
                             </div>
+                        </div>
+
                         </div>
 
                         <!-- Article Title -->
@@ -123,45 +143,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Comments Section -->
-                <div class="mt-12 bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="p-6 md:p-8">
-                        <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
-                            <i class="far fa-comments mr-2 text-primary-600"></i>
-                            Tambahkan Komentar Anda
-                        </h3>
-
-                        <form id="comment-form" method="POST" action="{{ route('ulasan.store') }}" class="space-y-4">
-                            @csrf
-                            <div>
-                                <label for="comment-name" class="block text-sm font-medium text-gray-700 mb-1">Nama</label>
-                                <input type="text" id="comment-name" name="nama"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
-                                    placeholder="Masukkan nama Anda" required>
-                            </div>
-
-                            <div>
-                                <label for="comment-role" class="block text-sm font-medium text-gray-700 mb-1">Peran</label>
-                                <input type="text" id="comment-role" name="peran"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
-                                    placeholder="Masukkan peran Anda (misalnya, Pelanggan, Volunteer, dll.)" required>
-                            </div>
-
-                            <div>
-                                <label for="comment-text" class="block text-sm font-medium text-gray-700 mb-1">Komentar</label>
-                                <textarea id="comment-text" name="deskripsi" rows="4"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition"
-                                    placeholder="Tulis komentar Anda di sini..." required></textarea>
-                            </div>
-
-                            <button type="submit"
-                                class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition duration-300">
-                                Kirim Komentar
-                            </button>
-                        </form>
-                    </div>
-                </div>
             </article>
 
             <!-- Sidebar -->
@@ -176,7 +157,7 @@
                         <p class="text-gray-600 mb-4">
                             {{ $page_settings->company_description ?? 'Trash2Move adalah perusahaan daur ulang inovatif yang mendedikasikan diri untuk mengubah limbah menjadi produk bernilai tinggi.' }}
                         </p>
-                        <a href="#company" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium">
+                        <a href="{{ url('/#company') }}" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium">
                             Selengkapnya
                             <i class="fas fa-arrow-right ml-2"></i>
                         </a>
@@ -243,8 +224,8 @@
                             <div class="text-sm text-gray-600 mt-1">Komunitas Terlibat</div>
                         </div>
                         <div class="bg-purple-50 p-4 rounded-lg">
-                            <div class="text-3xl font-bold text-purple-600">{{ number_format($jumlahKomunitas) }}+</div>
-                            <div class="text-sm text-gray-600 mt-1">Pohon Ditanam</div>
+                            <div class="text-3xl font-bold text-purple-600">{{ number_format($jumlahKategori) }}+</div>
+                            <div class="text-sm text-gray-600 mt-1">Kategori Postingan</div>
                         </div>
                     </div>
                 </div>

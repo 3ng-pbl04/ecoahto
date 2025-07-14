@@ -12,7 +12,7 @@ class Ulasan extends Model
     protected $fillable = [
         'nama',
         'peran',
-        'komentar' 
+        'komentar'
     ];
 
     // Validasi peran jika dibutuhkan dalam model
