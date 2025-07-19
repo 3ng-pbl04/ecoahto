@@ -48,7 +48,7 @@ class PostinganResource extends Resource
                     ->label('Kategori')
                     ->required()
                     ->options([
-                        'furnitur' => 'Furnitur',
+                        'furnitur' => 'Furniture',
                         'gantungan_kunci' => 'Gantungan Kunci',
                         'dekorasi_rumah' => 'Dekorasi Rumah',
                     ])

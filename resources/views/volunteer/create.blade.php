@@ -184,7 +184,7 @@
                         <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat Lengkap</label>
                         <textarea id="alamat" name="alamat" rows="3" required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                            placeholder="Tulis alamat lengkap termasuk RT/RW, Kecamatan, dan Kota"></textarea>
+                            placeholder="Tulis alamat lengkap"></textarea>
                     </div>
 
                     <!-- Submit Buttons -->
