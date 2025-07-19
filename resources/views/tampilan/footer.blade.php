@@ -76,6 +76,7 @@
                     <li><a href="{{ url('/#company') }}" class="text-gray-400 hover:text-white transition">Tentang Kami</a></li>
                     <li><a href="{{ url('/#products') }}" class="text-gray-400 hover:text-white transition">Produk</a></li>
                     <li><a href="{{ url('/#news') }}" class="text-gray-400 hover:text-white transition">Berita</a></li>
+                    <li><a href="{{ url('/#testimonials') }}" class="text-gray-400 hover:text-white transition">Ulasan</a></li>
                 </ul>
             </div>
 
@@ -83,7 +84,7 @@
             <div>
                 <h4 class="text-lg font-semibold mb-4 border-b border-primary-500 pb-2">Produk</h4>
                     <ul class="space-y-2">
-                    <li><a href="#products" class="text-gray-400 hover:text-white transition" data-filter="furnitur">Furnitur</a></li>
+                    <li><a href="#products" class="text-gray-400 hover:text-white transition" data-filter="furnitur">Furniture</a></li>
                     <li><a href="#products" class="text-gray-400 hover:text-white transition" data-filter="ganci">Ganci</a></li>
                     <li><a href="#products" class="text-gray-400 hover:text-white transition" data-filter="dekorasi_rumah">Dekorasi Rumah</a></li>
                 </ul>
@@ -133,7 +134,7 @@
 
         <!-- Copyright -->
         <div class="pt-6 border-t border-gray-700 text-center text-gray-400">
-            <p>&copy; 2025 WasteWork . Inovasi untuk masa depan berkelanjutan</p>
+            <p>&copy; 2025 WasteWork — Bersama Kita Ubah Sampah Jadi Harapan</p>
         </div>
     </div>
 </footer>

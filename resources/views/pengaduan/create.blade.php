@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Pengaduan | TRASH2MOVE</title>
+    <title>Form Pengaduan</title>
 
     <link rel="icon" href="{{ asset('images/LOGO.png') }}" type="image/png">
 
@@ -287,7 +287,7 @@
                             </div>
                             <textarea name="alamat" id="alamat" rows="3" required
                                       class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                                      placeholder="Masukkan alamat lengkap termasuk RT/RW"></textarea>
+                                      placeholder="Masukkan alamat lengkap"></textarea>
                         </div>
                     </div>
                 </div>

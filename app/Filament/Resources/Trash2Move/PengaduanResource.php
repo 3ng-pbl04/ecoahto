@@ -37,12 +37,6 @@ class PengaduanResource extends Resource
                 ->tel()
                 ->required()
                 ->maxLength(20),
-            TextInput::make('email')
-
-                ->required()
-                ->maxLength(255),
-            TextInput::make('email')
-                ->required(),
 
             TextInput::make('email')
                 ->required()
@@ -102,9 +96,9 @@ class PengaduanResource extends Resource
     {
         return $table->columns([
             TextColumn::make('nama')
-                ->sortable()    
+                ->sortable()
                 ->searchable(),
-                
+
             TextColumn::make('no_telp')
                 ->searchable(),
 
@@ -119,7 +113,7 @@ class PengaduanResource extends Resource
                 ->circular(),
 
             TextColumn::make('keterangan')->limit(50),
-            
+
             TextColumn::make('titik_koordinat'),
 
             TextColumn::make('status')
@@ -148,7 +142,7 @@ class PengaduanResource extends Resource
             Tables\Actions\ViewAction::make(),
             Tables\Actions\EditAction::make(),
             Tables\Actions\DeleteAction::make(),
-            
+
         ])
         ->bulkActions([
             Tables\Actions\DeleteBulkAction::make(),
