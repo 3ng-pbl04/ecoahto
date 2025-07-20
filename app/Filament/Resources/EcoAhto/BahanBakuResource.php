@@ -5,18 +5,11 @@ use Filament\Forms;
 use Filament\Tables;
 use App\Models\BahanBaku;
 use Filament\Facades\Filament;
-use Filament\Actions\EditAction;
 use Filament\Resources\Resource;
-use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Pages\Actions\DeleteAction;
-use Filament\Forms\Components\DatePicker;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Actions\DeleteBulkAction;
-use App\Filament\Resources\EcoAhto\BahanBakuResource\Pages\EditBahanBaku;
-use App\Filament\Resources\EcoAhto\BahanBakuResource\Pages\ListBahanBakus;
-use App\Filament\Resources\EcoAhto\BahanBakuResource\Pages\CreateBahanBaku;
+use App\Filament\Resources\EcoAhto\BahanBakuResource\Pages;
+
 
 class BahanBakuResource extends Resource
 {
@@ -97,4 +90,11 @@ class BahanBakuResource extends Resource
             'edit' => Pages\EditBahanBaku::route('/{record}/edit'),
         ];
     }
+    public static function canAccess(): bool
+    {
+        return Filament::auth()->user()?->role === 'ecoahto';
+    }
 }
+
+
+
