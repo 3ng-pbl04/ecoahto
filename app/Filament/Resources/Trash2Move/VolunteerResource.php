@@ -51,6 +51,7 @@ class VolunteerResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('status_kesehatan')
+                    ->label('Riwayat Kesehatan')
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('penjelasan')

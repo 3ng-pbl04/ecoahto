@@ -104,7 +104,7 @@
             <!-- Filter Produk -->
             <div class="product-filters flex flex-wrap justify-center gap-3 mb-8">
                 <button class="filter-btn bg-green-600 text-white px-4 py-2 rounded-full" data-filter="semua">Semua</button>
-                <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full transition" data-filter="furnitur">Furnitur</button>
+                <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full transition" data-filter="furnitur">Furniture</button>
                 <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full transition" data-filter="gantungan_kunci">Gantungan Kunci</button>
                 <button class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-full transition" data-filter="dekorasi_rumah">Dekorasi Rumah</button>
             </div>
