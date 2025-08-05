@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('karyawans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('email');
             $table->string('notelp', '12');
-            $table->string('alamat');
+            $table->string('identitas');
             $table->timestamps();
         });
     }

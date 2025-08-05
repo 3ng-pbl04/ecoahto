@@ -18,8 +18,8 @@ return new class extends Migration
     $table->integer('jumlah');
     $table->string('warna');
     $table->string('asal');
-    $table->date('tanggal_olah');
-    $table->enum('status', ['Mentah', 'Diolah', 'Jadi'])->default('Mentah');
+    $table->dateTime('tanggal_masuk');
+    $table->enum('status', ['Belum Disortir','Sudah Disortir'])->default('Belum Disortir');
     $table->timestamps();
 });
 

@@ -32,10 +32,6 @@ class KaryawanResource extends Resource
                     ->placeholder('Masukkan Nama Karyawan')
                     ->required(),
 
-                Forms\Components\TextInput::make('email')
-                    ->placeholder('Masukkan Email Karyawan')
-                    ->required(),
-
                 Forms\Components\TextInput::make('notelp')
                     ->tel()
                     ->placeholder('Masukkan Nomor Telepon Karyawan')
@@ -45,6 +41,17 @@ class KaryawanResource extends Resource
                 Forms\Components\TextArea::make('alamat')
                     ->placeholder('Masukkan Alamat Karyawan')
                     ->required(),
+                
+                Forms\Components\FileUpload::make('identitas')
+                    ->label('Foto Identitas')
+                    ->directory('karyawans')
+                    ->disk('public')
+                    ->image()
+                    ->imagePreviewHeight('150')
+                    ->downloadable()
+                    ->openable()
+                    ->preserveFilenames()
+                    ->visibility('public'),    
             ]);
     }
 
@@ -56,14 +63,16 @@ class KaryawanResource extends Resource
                 ->sortable()
                 ->searchable(),
 
-            Tables\Columns\TextColumn::make('email')
-                ->searchable(),
-
             Tables\Columns\TextColumn::make('notelp')
+                ->label("Nomor Telepon")
                 ->searchable(),
 
             Tables\Columns\TextColumn::make('alamat')
                 ->searchable(),
+
+            Tables\Columns\ImageColumn::make('identitas')
+                    ->label('Foto Identitas')
+                    ->circular(),
             ])
             ->filters([
                 //

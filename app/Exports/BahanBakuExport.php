@@ -10,11 +10,11 @@ class BahanBakuExport implements FromCollection, WithHeadings
 {
     public function collection()
     {
-        return BahanBaku::select('kode', 'nama_bahan_baku', 'jumlah', 'warna', 'asal', 'tanggal_olah', 'status')->get();
+        return BahanBaku::select('kode', 'nama_bahan_baku', 'jumlah', 'warna', 'asal', 'tanggal_masuk', 'status')->get();
     }
 
     public function headings(): array
     {
-        return ['Kode', 'Nama Bahan Baku', 'Jumlah', 'Warna', 'Asal', 'Tanggal Olah', 'Status'];
+        return ['Kode', 'Nama Bahan Baku', 'Jumlah', 'Warna', 'Asal', 'Tanggal Masuk', 'Status'];
     }
 }

@@ -34,21 +34,23 @@ class BahanBakuResource extends Resource
                 Forms\Components\TextInput::make('jumlah')
                     ->numeric()
                     ->placeholder('Masukkan Jumlah Bahan Baku')
-                    ->required(),
+                    ->required()
+                    ->suffix(' Kg'),
                 Forms\Components\TextInput::make('warna')
                     ->placeholder('Masukkan Warna Bahan Baku')
                     ->required(),
                 Forms\Components\TextInput::make('asal')
                     ->placeholder('Masukkan Asal Bahan Baku')
                     ->required(),
-                Forms\Components\DatePicker::make('tanggal_olah')
-                    ->label('Tanggal Olah')
-                    ->required(),
+                Forms\Components\DateTimePicker::make('tanggal_masuk')
+                    ->label('Tanggal & Jam Masuk')
+                    ->required()
+                    ->default(now()),
+
                 Forms\Components\Select::make('status')
                     ->options([
-                        'Mentah' => 'Mentah',
-                        'Diolah' => 'Diolah',
-                        'Jadi' => 'Jadi',
+                        'Belum Disortir' => 'Belum Disortir',
+                        'Sudah Disortir' => 'Sudah Disortir',
                     ])
                     ->required(),
             ]);
@@ -58,20 +60,40 @@ class BahanBakuResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('kode')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('nama_bahan_baku')->label('Nama'),
-                Tables\Columns\TextColumn::make('jumlah'),
-                Tables\Columns\TextColumn::make('warna'),
-                Tables\Columns\TextColumn::make('asal'),
-                Tables\Columns\TextColumn::make('tanggal_olah')->date(),
+                Tables\Columns\TextColumn::make('kode')
+                    ->sortable()
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('nama_bahan_baku')
+                    ->searchable()
+                    ->label('Nama'),
+
+                Tables\Columns\TextColumn::make('jumlah')
+                    ->sortable()
+                    ->suffix(' Kg'),
+
+                Tables\Columns\TextColumn::make('warna')
+                    ->searchable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('asal')
+                    ->searchable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('tanggal_masuk')
+                    ->dateTime()
+                    ->sortable()
+                    ->label("Tanggal Masuk"),
+
                 TextColumn::make('status')
-                ->badge()
-                ->color(fn (string $state): string => match ($state) {
-                    'Mentah' => 'warning',
-                    'Diolah' => 'info',
-                    'Jadi' => 'success',
-                    default => 'gray',
-                }),
+                    ->searchable()
+                    ->sortable()
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Belum Disortir' => 'warning',
+                        'Sudah Disortir' => 'success',
+                        default => 'gray',
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

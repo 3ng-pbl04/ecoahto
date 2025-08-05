@@ -22,7 +22,7 @@ class SampahResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('jenis_sampah')
-                    ->placeholder("Masukkan Jenis sampah")
+                    ->placeholder("Masukkan Sampah")
                     ->required(),
 
                 Forms\Components\TextInput::make('warna')
@@ -36,6 +36,7 @@ class SampahResource extends Resource
                     ->suffix('kg'),
 
                 Forms\Components\DatePicker::make('tanggal_masuk')
+                    ->label("Tanggal Timbang")
                     ->required(),
 
                 Forms\Components\TextInput::make('sumber')
@@ -60,6 +61,7 @@ class SampahResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('jenis_sampah')
+                    ->label("Sampah")
                     ->sortable()
                     ->searchable(),
 
@@ -70,6 +72,7 @@ class SampahResource extends Resource
                     ->suffix(' kg'),
 
                 Tables\Columns\TextColumn::make('tanggal_masuk')
+                    ->label("Tanggal Timbang")
                     ->date(),
 
                 Tables\Columns\TextColumn::make('sumber'),

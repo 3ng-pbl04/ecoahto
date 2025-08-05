@@ -14,7 +14,7 @@ class BahanBaku extends Model
         'jumlah',
         'warna',
         'asal',
-        'tanggal_olah',
+        'tanggal_masuk',
         'status',
     ];
 }
