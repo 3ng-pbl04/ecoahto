@@ -10,10 +10,11 @@ class Sampah extends Model
     use HasFactory;
 
     protected $fillable = [
+        'nama_sampah',
         'jenis_sampah',
-        'warna',
+        'nama_karyawan',
         'berat',
-        'tanggal_masuk',
+        'tanggal_timbang',
         'sumber',
         'status',
     ];

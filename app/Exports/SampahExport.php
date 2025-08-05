@@ -9,11 +9,11 @@ class SampahExport implements FromCollection, WithHeadings
 {
     public function collection()
     {
-        return Sampah::select('jenis_sampah', 'warna', 'berat', 'tanggal_masuk', 'sumber', 'status')->get();
+        return Sampah::select('nama_sampah','jenis_sampah', 'nama_karyawan', 'berat', 'tanggal_timbang', 'sumber', 'status')->get();
     }
 
     public function headings(): array
     {
-        return ['Jenis Sampah', 'Warna', 'Berat (kg)', 'Tanggal Masuk', 'Sumber', 'Status'];
+        return ['nama_sampah','jenis_sampah', 'nama_karyawan', 'berat', 'tanggal_timbang', 'sumber', 'status'];
     }
 }

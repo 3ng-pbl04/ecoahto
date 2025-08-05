@@ -35,10 +35,11 @@
     <table>
         <thead>
             <tr>
+                <th>Sampah</th>
                 <th>Jenis Sampah</th>
-                <th>Warna</th>
-                <th>Berat (kg)</th>
-                <th>Tanggal Masuk</th>
+                <th>Pekerja</th>
+                <th>Berat (Kg)</th>
+                <th>Tanggal Timbang</th>
                 <th>Sumber</th>
                 <th>Status</th>
             </tr>
@@ -46,10 +47,11 @@
         <tbody>
             @foreach ($sampahs as $s)
                 <tr>
+                    <td>{{ $s->nama_sampah }}</td>
                     <td>{{ $s->jenis_sampah }}</td>
-                    <td>{{ $s->warna }}</td>
+                    <td>{{ $s->nama_karyawan }}</td>
                     <td>{{ $s->berat }}</td>
-                    <td>{{ $s->tanggal_masuk }}</td>
+                    <td>{{ $s->tanggal_timbang }}</td>
                     <td>{{ $s->sumber }}</td>
                     <td>{{ $s->status }}</td>
                 </tr>
