@@ -21,23 +21,27 @@ class SampahResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('jenis_sampah')
+                Forms\Components\TextInput::make('nama_sampah')
                     ->placeholder("Masukkan Sampah")
                     ->required(),
 
-                Forms\Components\TextInput::make('warna')
-                    ->placeholder("Masukkan Warna sampah")
+                Forms\Components\TextInput::make('jenis_sampah')
+                    ->placeholder("Masukkan Jenis Sampah")
+                    ->required(),
+
+                Forms\Components\TextInput::make('nama_karyawan')
+                    ->placeholder("Masukkan Nama Pekerja/Karyawan")
                     ->required(),
 
                 Forms\Components\TextInput::make('berat')
                     ->placeholder("Masukkan Berat sampah")
                     ->numeric()
                     ->required()
-                    ->suffix('kg'),
+                    ->suffix(' Kg'),
 
-                Forms\Components\DatePicker::make('tanggal_masuk')
-                    ->label("Tanggal Timbang")
-                    ->required(),
+                Forms\Components\DateTimePicker::make('tanggal_timbang')
+                    ->required()
+                    ->default(now()),
 
                 Forms\Components\TextInput::make('sumber')
                     ->placeholder("Masukkan Asal/Sumber sampah")
@@ -46,12 +50,8 @@ class SampahResource extends Resource
                 Forms\Components\Select::make('status')
                     ->required()
                     ->options([
-                        'Masuk' => 'Masuk',
-                        'Disortir' => 'Disortir',
-                        'Dicacah' => 'Dicacah',
-                        'Dikeringkan' => 'Dikeringkan',
-                        'Dipilah' => 'Dipilah',
-                        'Selesai' => 'Selesai',
+                        'Masih Digudang' => 'Masih Digudang',
+                        'Sudah Diangkut' => 'Sudah Diangkut',
                     ]),
             ]);
     }
@@ -60,33 +60,36 @@ class SampahResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('jenis_sampah')
+                Tables\Columns\TextColumn::make('nama_sampah')
                     ->label("Sampah")
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('warna'),
+                Tables\Columns\TextColumn::make('jenis_sampah')
+                    ->label("Jenis")
+                    ->sortable()
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('nama_karyawan')
+                    ->label("Pekerja")
+                    ->sortable()
+                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('berat')
                     ->sortable()
-                    ->suffix(' kg'),
+                    ->suffix(' Kg'),
 
-                Tables\Columns\TextColumn::make('tanggal_masuk')
+                Tables\Columns\TextColumn::make('tanggal_timbang')
                     ->label("Tanggal Timbang")
-                    ->date(),
+                    ->dateTime(),
 
                 Tables\Columns\TextColumn::make('sumber'),
                 
                 Tables\Columns\TextColumn::make('status')
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {
-                    'Masuk' => 'primary',
-                    'Disortir' => 'warning',
-                    'Dicacah' => 'info',
-                    'Dikeringkan' => 'yellow',
-                    'Dipilah' => 'purple',
-                    'Selesai' => 'success',
-                    default => 'secondary',
+                    'Masih Digudang' => 'primary',
+                    'Sudah Diangkut' => 'warning',
                 })
 
             ])

@@ -72,7 +72,7 @@ class KaryawanResource extends Resource
 
             Tables\Columns\ImageColumn::make('identitas')
                     ->label('Foto Identitas')
-                    ->circular(),
+                     ->size(75),
             ])
             ->filters([
                 //
