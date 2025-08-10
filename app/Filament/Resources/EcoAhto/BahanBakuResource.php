@@ -27,21 +27,26 @@ class BahanBakuResource extends Resource
                     ->required()
                     ->placeholder('Masukkan Kode Bahan Baku')
                     ->unique(ignoreRecord: true),
+                    
                 Forms\Components\TextInput::make('nama_bahan_baku')
                     ->label('Nama Bahan Baku')
                     ->placeholder('Masukkan Nama Bahan Baku')
                     ->required(),
+
+                Forms\Components\TextInput::make('warna')
+                    ->placeholder('Masukkan Warna Bahan Baku')
+                    ->required(),
+
                 Forms\Components\TextInput::make('jumlah')
                     ->numeric()
                     ->placeholder('Masukkan Jumlah Bahan Baku')
                     ->required()
                     ->suffix(' Kg'),
-                Forms\Components\TextInput::make('warna')
-                    ->placeholder('Masukkan Warna Bahan Baku')
-                    ->required(),
+
                 Forms\Components\TextInput::make('asal')
                     ->placeholder('Masukkan Asal Bahan Baku')
                     ->required(),
+
                 Forms\Components\DateTimePicker::make('tanggal_masuk')
                     ->label('Tanggal & Jam Masuk')
                     ->required()
@@ -68,14 +73,15 @@ class BahanBakuResource extends Resource
                     ->searchable()
                     ->label('Nama'),
 
-                Tables\Columns\TextColumn::make('jumlah')
-                    ->sortable()
-                    ->suffix(' Kg'),
-
                 Tables\Columns\TextColumn::make('warna')
                     ->searchable()
                     ->sortable(),
 
+                    
+                Tables\Columns\TextColumn::make('jumlah')
+                    ->sortable()
+                    ->suffix(' Kg'),
+                
                 Tables\Columns\TextColumn::make('asal')
                     ->searchable()
                     ->sortable(),
@@ -94,6 +100,12 @@ class BahanBakuResource extends Resource
                         'Sudah Disortir' => 'success',
                         default => 'gray',
                     }),
+                    
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal Update Data')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

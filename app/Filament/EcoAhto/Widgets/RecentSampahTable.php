@@ -21,7 +21,7 @@ class RecentSampahTable extends BaseWidget
         return [
             TextColumn::make('jenis_sampah'),
             TextColumn::make('berat')->suffix(' kg'),
-            TextColumn::make('tanggal_masuk')->date(),
+            TextColumn::make('tanggal_timbang')->date(),
            Tables\Columns\SelectColumn::make('status')
     ->options([
         'Masuk' => 'Masuk',

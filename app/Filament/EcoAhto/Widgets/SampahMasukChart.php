@@ -13,7 +13,7 @@ class SampahMasukChart extends ChartWidget
     protected function getData(): array
     {
         // Ambil data jumlah sampah per tanggal masuk
-        $data = Sampah::select(DB::raw('DATE(tanggal_masuk) as date'), DB::raw('COUNT(*) as total'))
+        $data = Sampah::select(DB::raw('DATE(tanggal_timbang) as date'), DB::raw('COUNT(*) as total'))
             ->groupBy('date')
             ->orderBy('date')
             ->get();

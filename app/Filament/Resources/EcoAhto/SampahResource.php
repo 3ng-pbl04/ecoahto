@@ -22,24 +22,29 @@ class SampahResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nama_sampah')
+                    ->label('Sampah')
                     ->placeholder("Masukkan Sampah")
                     ->required(),
 
                 Forms\Components\TextInput::make('jenis_sampah')
+                    ->label('Jenis Sampah')
                     ->placeholder("Masukkan Jenis Sampah")
                     ->required(),
 
                 Forms\Components\TextInput::make('nama_karyawan')
-                    ->placeholder("Masukkan Nama Pekerja/Karyawan")
+                    ->label('Nama Karyawan')
+                    ->placeholder("Masukkan Nama Karyawan")
                     ->required(),
 
                 Forms\Components\TextInput::make('berat')
+                    ->label('Berat Sampah')
                     ->placeholder("Masukkan Berat sampah")
                     ->numeric()
                     ->required()
                     ->suffix(' Kg'),
 
                 Forms\Components\DateTimePicker::make('tanggal_timbang')
+                    ->label('Tanggal Timbang')
                     ->required()
                     ->default(now()),
 
@@ -71,7 +76,7 @@ class SampahResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('nama_karyawan')
-                    ->label("Pekerja")
+                    ->label("Nama Karyawan")
                     ->sortable()
                     ->searchable(),
 
@@ -83,14 +88,23 @@ class SampahResource extends Resource
                     ->label("Tanggal Timbang")
                     ->dateTime(),
 
-                Tables\Columns\TextColumn::make('sumber'),
+                Tables\Columns\TextColumn::make('sumber')
+                    ->sortable()
+                    ->searchable(),
+                
                 
                 Tables\Columns\TextColumn::make('status')
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {
                     'Masih Digudang' => 'primary',
                     'Sudah Diangkut' => 'warning',
-                })
+                }),
+
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal Update Data')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
             ])
             ->actions([

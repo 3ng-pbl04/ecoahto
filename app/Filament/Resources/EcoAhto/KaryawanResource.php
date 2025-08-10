@@ -20,7 +20,7 @@ class KaryawanResource extends Resource
      
      
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
-    protected static ?string $navigationGroup = 'Manajemen';
+    protected static ?string $navigationGroup = 'SDM & Operasional';
     protected static ?string $navigationLabel = 'Karyawan';
     protected static ?string $pluralModelLabel = 'Karyawan';
 
@@ -73,6 +73,12 @@ class KaryawanResource extends Resource
             Tables\Columns\ImageColumn::make('identitas')
                     ->label('Foto Identitas')
                      ->size(75),
+            
+            Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Tanggal Update Data')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
