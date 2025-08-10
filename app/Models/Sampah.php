@@ -18,4 +18,9 @@ class Sampah extends Model
         'sumber',
         'status',
     ];
+
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class);
+    }
 }

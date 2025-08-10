@@ -43,6 +43,7 @@ class KaryawanResource extends Resource
                     ->required(),
                 
                 Forms\Components\FileUpload::make('identitas')
+                    ->required()
                     ->label('Foto Identitas')
                     ->directory('karyawans')
                     ->disk('public')

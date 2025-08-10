@@ -39,12 +39,14 @@ class BahanJadiResource extends Resource
                     ->required(),
                     
                 Forms\Components\TextInput::make('jumlah_timbangan')
+                    ->label('Jumlah Timbangan')
                     ->numeric()
                     ->placeholder('Masukkan Jumlah Timbangan Bahan Jadi')
                     ->required()
                     ->suffix(' Kg'),
 
                 Forms\Components\DateTimePicker::make('tanggal_pengarungan')
+                    ->label('Tanggal Pengarungan')
                     ->required()
                     ->default(now()),
 
@@ -93,7 +95,7 @@ class BahanJadiResource extends Resource
                         'Sudah Dikirim' => 'success',
                         default => 'gray',
                     }),
-                    
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Tanggal Update Data')
                     ->dateTime()

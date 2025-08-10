@@ -8,6 +8,7 @@ use App\Models\Sampah;
 use Filament\Facades\Filament;
 use Filament\Resources\Resource;
 use App\Filament\Resources\EcoAhto\SampahResource\Pages;
+use App\Models\Karyawan;
 
 class SampahResource extends Resource
 {
@@ -31,9 +32,10 @@ class SampahResource extends Resource
                     ->placeholder("Masukkan Jenis Sampah")
                     ->required(),
 
-                Forms\Components\TextInput::make('nama_karyawan')
+               Forms\Components\Select::make('karyawan_id')
                     ->label('Nama Karyawan')
-                    ->placeholder("Masukkan Nama Karyawan")
+                    ->relationship('karyawan', 'nama')
+                    ->preload() 
                     ->required(),
 
                 Forms\Components\TextInput::make('berat')
@@ -75,8 +77,8 @@ class SampahResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('nama_karyawan')
-                    ->label("Nama Karyawan")
+                Tables\Columns\TextColumn::make('karyawan.nama')
+                    ->label('Nama Karyawan')
                     ->sortable()
                     ->searchable(),
 

@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Models\Karyawan;
 
 class BahanSortirResource extends Resource
 {
@@ -31,21 +32,25 @@ class BahanSortirResource extends Resource
                     ->placeholder('Masukkan Kode Bahan Sortir')
                     ->unique(ignoreRecord: true),
 
-                Forms\Components\TextInput::make('nama_karyawan')
-                    ->required()
-                    ->placeholder('Masukkan Nama Karyawan'),
+                Forms\Components\Select::make('karyawan_id')
+                    ->label('Nama Karyawan')
+                    ->relationship('karyawan', 'nama')
+                    ->preload() 
+                    ->required(),
 
                 Forms\Components\TextInput::make('jenis')
                     ->required()
                     ->placeholder('Masukkan Jenis Bahan Sortir'),
                     
                 Forms\Components\TextInput::make('jumlah_timbangan')
+                    ->label('Jumlah Timbangan')  
                     ->numeric()
                     ->placeholder('Masukkan Jumlah Timbangan Bahan Sortir')
                     ->required()
                     ->suffix(' Kg'),
 
                 Forms\Components\DateTimePicker::make('tanggal_penyortiran')
+                    ->label('Tanggal Penyortiran')
                     ->required()
                     ->default(now()),
 
@@ -66,9 +71,11 @@ class BahanSortirResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('nama_karyawan')
+                Tables\Columns\TextColumn::make('karyawan.nama')
+                    ->label('Nama Karyawan')
                     ->sortable()
                     ->searchable(),
+
 
                 Tables\Columns\TextColumn::make('jenis')
                     ->sortable()
