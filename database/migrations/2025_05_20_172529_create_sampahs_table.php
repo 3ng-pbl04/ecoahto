@@ -17,7 +17,7 @@ return new class extends Migration
     $table->string('jenis_sampah'); // FK ke bahan_bakus.nama_bahan_baku (relasi manual)
     $table->string('nama_karyawan');
     $table->float('berat');
-    $table->date('tanggal_timbang');
+    $table->datetime('tanggal_timbang');
     $table->string('sumber'); // FK ke bahan_bakus.asal (relasi manual)
     $table->enum('status', ['Masih Digudang', 'Sudah Disortir'])->default('Masih Digudang');
     $table->timestamps();

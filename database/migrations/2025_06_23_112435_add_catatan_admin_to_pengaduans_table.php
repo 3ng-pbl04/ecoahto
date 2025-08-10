@@ -6,20 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-   public function up(): void
-        {
+    public function up(): void
+    {
         Schema::table('pengaduans', function (Blueprint $table) {
-        $table->text('catatan_admin')->nullable()->after('status');
+            if (!Schema::hasColumn('pengaduans', 'catatan_admin')) {
+                $table->text('catatan_admin')->nullable();
+            }
         });
-        }
+    }
 
     public function down(): void
-        {
+    {
         Schema::table('pengaduans', function (Blueprint $table) {
-        $table->dropColumn('catatan_admin');
+            if (Schema::hasColumn('pengaduans', 'catatan_admin')) {
+                $table->dropColumn('catatan_admin');
+            }
         });
-        }
+    }
 };
