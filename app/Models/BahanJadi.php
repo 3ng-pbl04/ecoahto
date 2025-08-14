@@ -14,6 +14,7 @@ class BahanJadi extends Model
         'warna',
         'jenis',
         'jumlah_timbangan',
+        'jumlah_karung',
         'tanggal_pengarungan',
         'status',
     ];

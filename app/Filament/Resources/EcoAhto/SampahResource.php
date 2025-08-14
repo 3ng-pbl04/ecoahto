@@ -17,6 +17,7 @@ class SampahResource extends Resource
     protected static ?string $navigationLabel = 'Sampah';
     protected static ?string $navigationIcon = 'heroicon-o-trash';
     protected static ?string $pluralModelLabel = 'Sampah';
+    protected static ?int $navigationSort = 4;
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -98,8 +99,8 @@ class SampahResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {
-                    'Masih Digudang' => 'primary',
-                    'Sudah Diangkut' => 'warning',
+                    'Masih Digudang' => 'warning',
+                    'Sudah Diangkut' => 'success',
                 }),
 
                 Tables\Columns\TextColumn::make('updated_at')

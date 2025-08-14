@@ -12,12 +12,13 @@ class BahanSortir extends Model
     protected $fillable = [
         'kode',
         'karyawan_id',
-        'nama_karyawan',
         'jenis',
+        'warna',
         'jumlah_timbangan',
         'tanggal_penyortiran',
         'status',
     ];
+
     public function karyawan()
     {
         return $this->belongsTo(Karyawan::class);

@@ -12,7 +12,7 @@ class Sampah extends Model
     protected $fillable = [
         'nama_sampah',
         'jenis_sampah',
-        'nama_karyawan',
+        'karyawan_id',
         'berat',
         'tanggal_timbang',
         'sumber',

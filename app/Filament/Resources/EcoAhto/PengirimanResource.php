@@ -21,6 +21,7 @@ class PengirimanResource extends Resource
     protected static ?string $navigationLabel = 'Pengiriman';
     protected static ?string $navigationIcon = 'iconoir-send-solid';
     protected static ?string $pluralModelLabel = 'Pengiriman';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -30,6 +31,11 @@ class PengirimanResource extends Resource
                     ->label('Nama Pembeli')
                     ->required()
                     ->placeholder('Masukkan Nama Pembeli'),
+                
+                Forms\Components\TextInput::make('alamat')
+                    ->label('Alamat Pembeli')
+                    ->required()
+                    ->placeholder('Masukkan Alamat Pembeli'),
 
                 Forms\Components\TextInput::make('jumlah_timbangan')
                     ->label('Jumlah Timbangan')
@@ -37,6 +43,13 @@ class PengirimanResource extends Resource
                     ->numeric()
                     ->suffix(' Kg')
                     ->placeholder('Masukkan Jumlah Timbangan'),
+                
+                Forms\Components\TextInput::make('jumlah_karung')
+                    ->label('Jumlah Karung')
+                    ->required()
+                    ->numeric()
+                    ->suffix(' Karung')
+                    ->placeholder('Masukkan Jumlah Karung'),
 
                 Forms\Components\DateTimePicker::make('tanggal_kirim')
                     ->label('Tanggal Kirim')
@@ -64,14 +77,25 @@ class PengirimanResource extends Resource
                     ->sortable()
                     ->searchable(),
 
+                Tables\Columns\TextColumn::make('alamat')
+                    ->label('Alamat Pembeli')
+                    ->sortable()
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('jumlah_timbangan')
                     ->label('Jumlah Timbangan')
                     ->numeric()
                     ->sortable()
                     ->suffix(' Kg'),
 
+                Tables\Columns\TextColumn::make('jumlah_karung')
+                    ->label('Jumlah Karung')
+                    ->numeric()
+                    ->sortable()
+                    ->suffix(' Karung'),
+
                 Tables\Columns\TextColumn::make('tanggal_kirim')
-                    ->label('Nama Pembeli')
+                    ->label('Tanggal Kirim')
                     ->dateTime()
                     ->sortable(),
 
@@ -83,12 +107,6 @@ class PengirimanResource extends Resource
                     ->label('Nama Sopir')
                     ->sortable()
                     ->searchable(),
-
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Tanggal Update Data')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Tanggal Update Data')

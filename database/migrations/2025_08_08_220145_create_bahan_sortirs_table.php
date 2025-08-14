@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('kode');
             $table->string('nama_karyawan');
             $table->string('jenis');
+            $table->string('warna');
             $table->integer('jumlah_timbangan');
             $table->dateTime('tanggal_penyortiran');
             $table->enum('status', ['Belum Digiling','Sudah Digiling'])->default('Belum Digiling');

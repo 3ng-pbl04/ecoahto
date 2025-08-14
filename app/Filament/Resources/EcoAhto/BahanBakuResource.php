@@ -18,6 +18,7 @@ class BahanBakuResource extends Resource
     protected static ?string $navigationLabel = 'Bahan Baku';
     protected static ?string $navigationIcon = 'heroicon-o-archive-box';
     protected static ?string $pluralModelLabel = 'Bahan Baku';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -37,11 +38,17 @@ class BahanBakuResource extends Resource
                     ->placeholder('Masukkan Warna Bahan Baku')
                     ->required(),
 
-                Forms\Components\TextInput::make('jumlah')
+                Forms\Components\TextInput::make('jumlah_timbangan')
                     ->numeric()
-                    ->placeholder('Masukkan Jumlah Bahan Baku')
+                    ->placeholder('Masukkan Jumlah Timbangan Bahan Baku')
                     ->required()
                     ->suffix(' Kg'),
+                
+                Forms\Components\TextInput::make('jumlah_karung')
+                    ->numeric()
+                    ->placeholder('Masukkan Jumlah Karung Bahan Baku')
+                    ->required()
+                    ->suffix(' Karung'),
 
                 Forms\Components\TextInput::make('asal')
                     ->placeholder('Masukkan Asal Bahan Baku')
@@ -78,9 +85,15 @@ class BahanBakuResource extends Resource
                     ->sortable(),
 
                     
-                Tables\Columns\TextColumn::make('jumlah')
+                Tables\Columns\TextColumn::make('jumlah_timbangan')
+                    ->label('Jumlah Timbangan')
                     ->sortable()
                     ->suffix(' Kg'),
+
+                Tables\Columns\TextColumn::make('jumlah_karung')
+                    ->label('Jumlah Karung')
+                    ->sortable()
+                    ->suffix(' Karung'),
                 
                 Tables\Columns\TextColumn::make('asal')
                     ->searchable()

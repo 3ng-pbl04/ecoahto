@@ -11,7 +11,8 @@ class BahanBaku extends Model
     protected $fillable = [
         'kode',
         'nama_bahan_baku',
-        'jumlah',
+        'jumlah_timbangan',
+        'jumlah_karung',
         'warna',
         'asal',
         'tanggal_masuk',

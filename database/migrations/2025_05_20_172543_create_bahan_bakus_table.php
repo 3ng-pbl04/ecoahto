@@ -15,7 +15,8 @@ return new class extends Migration
     $table->id();
     $table->string('kode');
     $table->string('nama_bahan_baku');
-    $table->integer('jumlah');
+    $table->integer('jumlah_timbangan');
+    $table->integer('jumlah_karung');
     $table->string('warna');
     $table->string('asal');
     $table->dateTime('tanggal_masuk');

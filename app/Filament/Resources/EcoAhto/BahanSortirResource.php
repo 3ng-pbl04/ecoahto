@@ -21,6 +21,7 @@ class BahanSortirResource extends Resource
     protected static ?string $navigationLabel = 'Bahan Sortir';
     protected static ?string $navigationIcon = 'iconoir-sort';
     protected static ?string $pluralModelLabel = 'Bahan Sortir';
+    protected static ?int $navigationSort = 2;
 
 
     public static function form(Form $form): Form
@@ -41,6 +42,10 @@ class BahanSortirResource extends Resource
                 Forms\Components\TextInput::make('jenis')
                     ->required()
                     ->placeholder('Masukkan Jenis Bahan Sortir'),
+
+                Forms\Components\TextInput::make('warna')
+                    ->required()
+                    ->placeholder('Masukkan Warna Bahan Sortir'),
                     
                 Forms\Components\TextInput::make('jumlah_timbangan')
                     ->label('Jumlah Timbangan')  
@@ -78,6 +83,10 @@ class BahanSortirResource extends Resource
 
 
                 Tables\Columns\TextColumn::make('jenis')
+                    ->sortable()
+                    ->searchable(),
+                
+                Tables\Columns\TextColumn::make('warna')
                     ->sortable()
                     ->searchable(),
 

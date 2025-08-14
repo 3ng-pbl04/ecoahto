@@ -23,6 +23,7 @@ class KaryawanResource extends Resource
     protected static ?string $navigationGroup = 'SDM & Operasional';
     protected static ?string $navigationLabel = 'Karyawan';
     protected static ?string $pluralModelLabel = 'Karyawan';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

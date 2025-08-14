@@ -11,7 +11,9 @@ class Pengiriman extends Model
     protected $table = 'pengirimans'; 
     protected $fillable = [
         'nama_buyer',
+        'alamat',
         'jumlah_timbangan',
+        'jumlah_karung',
         'tanggal_kirim',
         'plat',
         'nama_sopir',

@@ -20,6 +20,7 @@ class BahanJadiResource extends Resource
     protected static ?string $navigationLabel = 'Bahan Jadi';
     protected static ?string $navigationIcon = 'iconoir-table';
     protected static ?string $pluralModelLabel = 'Bahan Jadi';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -44,6 +45,13 @@ class BahanJadiResource extends Resource
                     ->placeholder('Masukkan Jumlah Timbangan Bahan Jadi')
                     ->required()
                     ->suffix(' Kg'),
+                
+                Forms\Components\TextInput::make('jumlah_karung')
+                    ->label('Jumlah Timbangan')
+                    ->numeric()
+                    ->placeholder('Masukkan Jumlah Karung Bahan Jadi')
+                    ->required()
+                    ->suffix(' Karung'),
 
                 Forms\Components\DateTimePicker::make('tanggal_pengarungan')
                     ->label('Tanggal Pengarungan')
@@ -79,6 +87,12 @@ class BahanJadiResource extends Resource
                     ->label('Jumlah Timbangan')
                     ->searchable()
                     ->suffix(' Kg')
+                    ->sortable(),
+                
+                Tables\Columns\TextColumn::make('jumlah_karung')
+                    ->label('Jumlah Karung')
+                    ->searchable()
+                    ->suffix(' Karung')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('tanggal_pengarungan')
